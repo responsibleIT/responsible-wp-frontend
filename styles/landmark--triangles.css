@@ -2,7 +2,7 @@
 .triangles {
   grid-column:full;
 
-  height:3em;
+  height:20em;
   margin-bottom:1em;
 
   background-color:#0001;
@@ -18,7 +18,6 @@
 
 .triangles {
   height:auto;
-  aspect-ratio:calc(0.866 * 8) / calc(1 * 1.5);
   margin-bottom:clamp(1em, 4vw, 2em);
 }
 
@@ -31,6 +30,9 @@
     }
   }
 }
+
+
+
 
 
 /********************/
@@ -112,6 +114,13 @@
 /*********************/
 
 .triangles {
+  --wdth-triangle: calc( 100vw / 8 );
+  --hght-triangle: calc( var(--wdth-triangle) / .866 );
+
+  --wdth-triangle--l: calc( var(--wdth-triangle) * 2 );
+  --hgth-triangle--l: calc( var(--hght-triangle) * 2 );
+
+  aspect-ratio:calc(0.866 * 8) / calc(1 * 1.5);
 
   background:
     /* top left */
@@ -207,28 +216,28 @@
   
   background-size:
     /* top left */
-      12.5vw calc(12.5vw / .866),
-      12.5vw calc(12.5vw / .866),
-      12.5vw calc(12.5vw / .866),
-      12.5vw calc(12.5vw / .866),
+      var(--wdth-triangle) var(--hght-triangle),
+      var(--wdth-triangle) var(--hght-triangle),
+      var(--wdth-triangle) var(--hght-triangle),
+      var(--wdth-triangle) var(--hght-triangle),
 
     /* top right */
-      12.5vw calc(12.5vw / .866),
-      12.5vw calc(12.5vw / .866),
-      12.5vw calc(12.5vw / .866),
-      12.5vw calc(12.5vw / .866),
+      var(--wdth-triangle) var(--hght-triangle),
+      var(--wdth-triangle) var(--hght-triangle),
+      var(--wdth-triangle) var(--hght-triangle),
+      var(--wdth-triangle) var(--hght-triangle),
 
     /* bottom left */
-      25vw calc(25vw / .866),
-      25vw calc(25vw / .866),
-      25vw calc(25vw / .866),
-      25vw calc(25vw / .866),
+      var(--wdth-triangle--l) var(--hgth-triangle--l),
+      var(--wdth-triangle--l) var(--hgth-triangle--l),
+      var(--wdth-triangle--l) var(--hgth-triangle--l),
+      var(--wdth-triangle--l) var(--hgth-triangle--l),
 
     /* bottom right */
-      25vw calc(25vw / .866),
-      25vw calc(25vw / .866),
-      25vw calc(25vw / .866),
-      25vw calc(25vw / .866);
+      var(--wdth-triangle--l) var(--hgth-triangle--l),
+      var(--wdth-triangle--l) var(--hgth-triangle--l),
+      var(--wdth-triangle--l) var(--hgth-triangle--l),
+      var(--wdth-triangle--l) var(--hgth-triangle--l);
 
   background-position:
     /* top left */
@@ -256,4 +265,3 @@
       calc(50vw - .25px) bottom;
 
   background-repeat:no-repeat;
-}
