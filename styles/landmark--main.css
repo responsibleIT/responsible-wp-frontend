@@ -16,6 +16,18 @@ main {
   grid-column:small;
 }
 
+.section--content__block--inset {
+  grid-column:inset;
+}
+
 .section--content__block--medium {
+  grid-column:medium;
+}
+
+.section--content__block--large {
+  grid-column:medium;
+}
+
+.section--content__block--xlarge {
   grid-column:medium;
 }
