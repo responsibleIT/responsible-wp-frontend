@@ -1,0 +1,259 @@
+/* FALLBACK */
+.triangles {
+  grid-column:full;
+
+  height:3em;
+  margin-bottom:1em;
+
+  background-color:#0001;
+}
+
+
+
+
+
+/***********************/
+/* TRIANGLES CONTAINER */
+/***********************/
+
+.triangles {
+  height:auto;
+  aspect-ratio:calc(0.866 * 8) / calc(1 * 1.5);
+  margin-bottom:clamp(1em, 4vw, 2em);
+}
+
+
+@container --container--body (width > 43em) {
+  @media (height > 24em) {
+    .triangles {
+      position:sticky;
+      top:0;
+    }
+  }
+}
+
+
+/********************/
+/* TRIANGLES COLORS */
+/********************/
+
+/* DEFAULT COLORS */
+
+.triangles {
+  --triangle-color-left:var(--triangle-color-left-lottery, var(--orange));
+  --triangle-color-right:var(--triangle-color-right-lottery, var(--orange));
+}
+
+/* LOTTERY COLORS */
+
+:root[data-triangle-color-left-lottery="1"] .triangles {
+  --triangle-color-left-lottery:var(--orange);
+}
+:root[data-triangle-color-right-lottery="1"] .triangles {
+  --triangle-color-right-lottery:var(--orange);
+}
+
+:root[data-triangle-color-left-lottery="2"] .triangles {
+  --triangle-color-left-lottery:var(--blue);
+}
+:root[data-triangle-color-right-lottery="2"] .triangles {
+  --triangle-color-right-lottery:var(--blue);
+}
+
+:root[data-triangle-color-left-lottery="3"] .triangles {
+  --triangle-color-left-lottery:var(--pink);
+}
+:root[data-triangle-color-right-lottery="3"] .triangles {
+  --triangle-color-right-lottery:var(--pink);
+}
+
+:root[data-triangle-color-left-lottery="4"] .triangles {
+  --triangle-color-left-lottery:var(--yellow);
+}
+:root[data-triangle-color-right-lottery="4"] .triangles {
+  --triangle-color-right-lottery:var(--yellow);
+}
+
+:root[data-triangle-color-left-lottery="5"] .triangles {
+  --triangle-color-left-lottery:var(--green);
+}
+:root[data-triangle-color-right-lottery="5"] .triangles {
+  --triangle-color-right-lottery:var(--green);
+}
+
+
+/* LIGHT - GREY */
+
+:root[data-setting--grey="true"] .triangles {
+  --triangle-color-left:var(--grey--80);
+  --triangle-color-right:var(--grey--80);
+}
+
+/* DARK - GREY */
+
+:root[data-color-scheme="dark"][data-setting--grey="true"] .triangles {
+  --triangle-color-left:var(--grey--50);
+  --triangle-color-right:var(--grey--50);
+}
+
+
+/* NO IMAGES */
+
+:root[data-setting--no-images="true"] .triangles {
+  display:none;
+}
+
+
+
+
+
+/*********************/
+/* TRIANGLES PATTERN */
+/*********************/
+
+.triangles {
+
+  background:
+    /* top left */
+      conic-gradient(
+        from -60deg at right center,
+        transparent 0 300deg,
+        color-mix(in srgb, var(--triangle-color-left), black 60%) 0
+      ),
+      conic-gradient(
+        from -60deg at right center,
+        transparent 0 300deg,
+        color-mix(in srgb, var(--triangle-color-left), black 40%) 0
+      ),
+      conic-gradient(
+        from -60deg at right center,
+        transparent 0 300deg,
+        color-mix(in srgb, var(--triangle-color-left), black 20%) 0
+      ),
+      conic-gradient(
+        from -60deg at right center,
+        transparent 0 300deg,
+        var(--triangle-color-left) 0
+      ),
+    
+
+    /* top right - reverse */
+      conic-gradient(
+        from 60deg at left center,
+        color-mix(in srgb, var(--triangle-color-right), black 60%) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+          from 60deg at left center,
+          color-mix(in srgb, var(--triangle-color-right), black 40%) 0 60deg,
+          transparent 0
+        ),
+      conic-gradient(
+        from 60deg at left center,
+        color-mix(in srgb, var(--triangle-color-right), black 20%) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+          from 60deg at left center,
+          var(--triangle-color-right) 0 60deg,
+          transparent 0
+        ),
+      
+
+    /* bottom left */
+      conic-gradient(
+        from 60deg at left center,
+        color-mix(in srgb, var(--triangle-color-left), black 40%) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg at left center,
+        color-mix(in srgb, var(--triangle-color-left), black 20%) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg at left center,
+        var(--triangle-color-left) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg at left center,
+        color-mix(in srgb, var(--triangle-color-left), white 20%) 0 60deg,
+        transparent 0
+      ),
+    
+
+    /* bottom right - reverse */
+      conic-gradient(
+        from -60deg at right center,
+        transparent 0 300deg,
+        color-mix(in srgb, var(--triangle-color-right), black 40%) 0
+      ),
+      conic-gradient(
+        from -60deg at right center,
+        transparent 0 300deg,
+        color-mix(in srgb, var(--triangle-color-right), black 20%) 0
+      ),
+      conic-gradient(
+        from -60deg at right center,
+        transparent 0 300deg,
+        var(--triangle-color-right) 0
+      ),
+      conic-gradient(
+        from -60deg at right center,
+        transparent 0 300deg,
+        color-mix(in srgb, var(--triangle-color-right), white 20%) 0
+      );
+  
+  background-size:
+    /* top left */
+      12.5vw calc(12.5vw / .866),
+      12.5vw calc(12.5vw / .866),
+      12.5vw calc(12.5vw / .866),
+      12.5vw calc(12.5vw / .866),
+
+    /* top right */
+      12.5vw calc(12.5vw / .866),
+      12.5vw calc(12.5vw / .866),
+      12.5vw calc(12.5vw / .866),
+      12.5vw calc(12.5vw / .866),
+
+    /* bottom left */
+      25vw calc(25vw / .866),
+      25vw calc(25vw / .866),
+      25vw calc(25vw / .866),
+      25vw calc(25vw / .866),
+
+    /* bottom right */
+      25vw calc(25vw / .866),
+      25vw calc(25vw / .866),
+      25vw calc(25vw / .866),
+      25vw calc(25vw / .866);
+
+  background-position:
+    /* top left */
+      0 0,
+      12.5vw 0,
+      25vw 0,
+      37.5vw 0,
+    
+    /* top right - reverse */
+      87.5vw 0,
+      75vw 0,
+      62.5vw 0,
+      50vw 0,
+
+    /* top left */
+      calc(-12.5vw + .25px) bottom,
+      .25px bottom,
+      calc(12.5vw + .25px) bottom,
+      calc(25vw + .25px) bottom,
+  
+    /* top right - reverse */
+      calc(87.5vw - .25px) bottom,
+      calc(75vw - .25px) bottom,
+      calc(62.5vw - .25px) bottom,
+      calc(50vw - .25px) bottom;
+
+  background-repeat:no-repeat;
+}

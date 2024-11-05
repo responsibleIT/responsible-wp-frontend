@@ -1,0 +1,465 @@
+/**********/
+/* TOKENS */
+/**********/
+
+:root {
+  --grey-hue:240;
+
+  --white:hsl(0 0 100%);
+  --white--t5:hsl(0 0 100% / .05);
+  --white--t10:hsl(0 0 100% / .1);
+
+  --black:hsl(0 0 0%);
+  --black--t5:hsl(0 0 0% / .05);
+  --black--t10:hsl(0 0 0% / .1);
+
+  --grey--10:hsl(var(--grey-hue), 3%, 10%);
+  --grey--20:hsl(var(--grey-hue), 3%, 20%);
+  --grey--30:hsl(var(--grey-hue), 3%, 30%);
+  --grey--40:hsl(var(--grey-hue), 3%, 40%);
+  --grey--50:hsl(var(--grey-hue), 3%, 50%);
+  --grey--60:hsl(var(--grey-hue), 3%, 60%);
+  --grey--70:hsl(var(--grey-hue), 3%, 70%);
+  --grey--80:hsl(var(--grey-hue), 3%, 80%);
+  --grey--90:hsl(var(--grey-hue), 3%, 90%);
+
+  
+  --orange:#FF611E;
+  --blue:#006BC3;
+  --pink:#DB35A2;
+  --yellow:#FFCB00;
+  --green:#869242;
+
+  
+  /* shadows and borders */
+  --shadow:0 .3em 1em .2em var(--shdw-clr);
+
+  --border-thin:solid 1px var(--brdr-clr);
+  --border-thin--t:solid 1px var(--brdr-clr--t);
+  --border-medium:solid .125em var(--brdr-clr);
+  --border-thick:solid .2em var(--brdr-clr);
+
+  --outline-medium--d:dashed .125em var(--brdr-clr);
+  --outline-thick--d:dashed .2em var(--brdr-clr);
+}
+
+
+:root[data-setting--contrast="true"] {
+  --shadow:none;
+}
+
+
+
+
+
+/****************************/
+/****************************/
+/***                      ***/
+/***   COLORS - GENERAL   ***/
+/***                      ***/
+/****************************/
+/****************************/
+
+/*********/
+/* LIGHT */
+/*********/
+
+:root {
+  color-scheme:light;
+
+  --clr:var(--grey--20);
+  --bg:var(--white);
+
+  /* selection */
+  --bg-selection:var(--yellow);
+  --clr-selection:var(--clr);
+
+  /* outline, shadow, border */
+  --bg-outline:var(--bg);
+  --brdr-clr-outline:var(--blue);
+
+  --shdw-clr:var(--black--t5);
+
+  --brdr-clr:var(--clr);
+  --brdr-clr--t:var(--black--t10);
+}
+
+
+/* LIGHT - GREY */
+
+[data-setting--grey="true"] {
+  /* selection */
+  --bg-selection:var(--grey--80);
+
+  /* outline, shadow, border */
+  --brdr-clr-outline:var(--grey--60);
+}
+
+
+/* LIGHT - CONTRAST */
+
+[data-setting--contrast="true"] {
+  --clr:var(--black);
+
+  /* selection */
+  --bg-selection:var(--blue);
+  --clr-selection:var(--white);
+
+  /* outline, shadow, border */
+  --brdr-clr-outline:var(--pink);
+
+  --brdr-clr--t:var(--black);
+}
+
+
+/* LIGHT - GREY - CONTRAST */
+
+[data-setting--grey="true"][data-setting--contrast="true"] {
+  /* selection */
+  --bg-selection:var(--black);
+
+  /* outline, shadow, border */
+  --brdr-clr-outline:var(--black);
+}
+
+
+
+@media only screen {
+
+  /********/
+  /* DARK */
+  /********/
+
+  [data-color-scheme="dark"] {
+    color-scheme:dark;
+      
+    --clr:var(--white);
+    --bg:var(--grey--20);
+    
+    /* selection */
+    --bg-selection:var(--blue);
+
+    /* outline, shadow, border */
+    --brdr-clr-outline:var(--yellow);
+
+    --shdw-clr:var(--white--t5);
+
+    --brdr-clr--t:var(--white--t10);
+  }
+
+
+  /* DARK - GREY */
+
+  [data-color-scheme="dark"][data-setting--grey="true"] {
+    /* selection */
+    --bg-selection:var(--grey--40);
+
+    /* outline, shadow, border */
+    --brdr-clr-outline:var(--grey--70);
+  }
+
+
+  /* DARK - CONTRAST */
+
+  [data-color-scheme="dark"][data-setting--contrast="true"] {
+    --bg:var(--black);
+
+    /* selection */
+    --bg-selection:var(--yellow);
+    --clr-selection:var(--black);
+
+    /* outline, shadow, border */
+    --brdr-clr-outline:var(--pink);
+
+    --brdr-clr--t:var(--white);
+  }
+
+
+  /* DARK - GREY - CONTRAST */
+
+  [data-color-scheme="dark"][data-setting--grey="true"][data-setting--contrast="true"] {
+    /* selection */
+    --bg-selection:var(--white);
+
+    /* outline, shadow, border */
+    --brdr-clr-outline:var(--white);
+  }
+}
+
+
+
+
+
+/*************************************/
+/*************************************/
+/***                               ***/
+/***   COLORS - CONTROLS & LINKS   ***/
+/***                               ***/
+/*************************************/
+/*************************************/
+
+/**********/
+/* LIGHT  */
+/**********/
+
+:root {
+  /* links */
+  --clr-link:var(--blue);
+
+  /* controls */
+  --bg-button:var(--bg);
+  --clr-button:var(--clr);
+  --clr-button--disabled:var(--grey--60);
+  --brdr-clr-button--disabled:var(--grey--60);
+
+  --bg-select:var(--bg);
+}
+
+
+/* LIGHT - GREY */
+
+[data-setting--grey="true"] {
+   /* links */
+   --clr-link:var(--grey--60);
+}
+
+
+/* LIGHT - CONTRAST */
+
+[data-setting--contrast="true"] {
+  /* links */
+  --clr-link:var(--pink);
+}
+
+
+/* LIGHT - GREY - CONTRAST */
+
+[data-setting--grey="true"][data-setting--contrast="true"] {
+  /* links */
+  --clr-link:var(--black);
+}
+
+
+
+@media only screen {
+
+  /********/
+  /* DARK */
+  /********/
+
+  :root[data-color-scheme="dark"] {
+    /* links */
+    --clr-link:var(--yellow);
+
+    /* controls */
+    --clr-button--disabled:var(--grey--70);
+    --brdr-clr-button--disabled:var(--grey--70);
+  }
+
+
+  /* DARK - GREY */
+
+  :root[data-color-scheme="dark"][data-setting--grey="true"] {
+    /* links */
+    --clr-link:var(--grey--70);
+  }
+  
+
+  /* DARK - CONTRAST */
+
+  :root[data-color-scheme="dark"][data-setting--contrast="true"] {
+    /* links */
+    --clr-link:var(--pink);
+  }
+
+
+   /* DARK - GREY - CONTRAST */
+
+  :root[data-color-scheme="dark"][data-setting--grey="true"][data-setting--contrast="true"] {
+    /* links */
+    --clr-link:var(--white);
+  }
+}
+
+
+
+
+
+/***************************/
+/***************************/
+/***                     ***/
+/***   COLORS - HEADER   ***/
+/***                     ***/
+/***************************/
+/***************************/
+
+/*********/
+/* LIGHT */
+/*********/
+
+:root {
+  --bg-header:var(--bg);
+  --brdr-clr-header:var(--black--t10);
+
+  --fill-logo: var(--clr);
+
+  --clr-nav--main:var(--clr);
+  --bg-nav--main:var(--bg);
+
+  --bg-form--accessibilty: var(--bg);
+  --brdr-clr-form--accessibilty: var(--black--t10);
+
+  --clr-input:var(--clr);
+  --bg-input__checked:var(--bg);
+}
+
+
+/* LIGHT - GREY */
+
+:root[data-setting--grey="true"] {
+
+}
+
+
+/* LIGHT - CONTRAST */
+
+:root[data-setting--contrast="true"] {
+  --brdr-clr-header:var(--black);
+
+  --brdr-clr-form--accessibilty: var(--black);
+}
+
+
+/* LIGHT - GREY - CONTRAST */
+
+:root[data-setting--grey="true"][data-setting--contrast="true"] {
+
+}
+
+
+
+@media only screen {
+
+  /*************/
+  /* DARK MODE */
+  /*************/
+
+  :root[data-color-scheme="dark"] {
+    --brdr-clr-header:var(--white--t10);
+    --brdr-clr-form--accessibilty: var(--white--t10);
+  }
+
+
+  /*****************/
+  /* DARK AND GREY */
+  /*****************/
+
+  :root[data-color-scheme="dark"][data-setting--grey="true"] {
+    
+  }
+  
+
+  /*********************/
+  /* DARK AND CONTRAST */
+  /*********************/
+
+  :root[data-color-scheme="dark"][data-setting--contrast="true"] {
+    --brdr-clr-header:var(--white);
+    --brdr-clr-form--accessibilty: var(--white);
+  }
+
+
+  /***************************/
+  /* DARK GREY, AND CONTRAST */
+  /***************************/
+
+  :root[data-color-scheme="dark"][data-setting--grey="true"][data-setting--contrast="true"] {
+
+  }
+}
+
+
+
+
+
+/***************************/
+/***************************/
+/***                     ***/
+/***   COLORS - HEADER   ***/
+/***                     ***/
+/***************************/
+/***************************/
+
+/*********/
+/* LIGHT */
+/*********/
+
+:root {
+  --clr-h1:var(--orange);
+  --clr-h2:var(--orange);
+}
+
+
+/* LIGHT - GREY */
+
+:root[data-setting--grey="true"] {
+  --clr-h1:var(--grey--60);
+  --clr-h2:var(--grey--60);
+}
+
+
+/* LIGHT - CONTRAST */
+
+:root[data-setting--contrast="true"] {
+  --clr-h1:var(--black);
+  --clr-h2:var(--black);
+}
+
+
+/* LIGHT - GREY - CONTRAST */
+
+:root[data-setting--grey="true"][data-setting--contrast="true"] {
+
+}
+
+
+
+@media only screen {
+
+  /*************/
+  /* DARK MODE */
+  /*************/
+
+  :root[data-color-scheme="dark"] {
+
+  }
+
+
+  /*****************/
+  /* DARK AND GREY */
+  /*****************/
+
+  :root[data-color-scheme="dark"][data-setting--grey="true"] {
+    --clr-h1:var(--grey--70);
+    --clr-h2:var(--grey--70);
+  }
+  
+
+  /*********************/
+  /* DARK AND CONTRAST */
+  /*********************/
+
+  :root[data-color-scheme="dark"][data-setting--contrast="true"] {
+    --clr-h1:var(--white);
+    --clr-h2:var(--white);
+  }
+
+
+  /***************************/
+  /* DARK GREY, AND CONTRAST */
+  /***************************/
+
+  :root[data-color-scheme="dark"][data-setting--grey="true"] {
+
+  }
+}

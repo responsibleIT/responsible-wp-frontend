@@ -1,0 +1,21 @@
+main {
+  grid-column:full;
+
+  display:grid;
+  grid-template-columns:inherit;
+}
+
+.section--content {
+  grid-column:full;
+
+  display:grid;
+  grid-template-columns:inherit;
+}
+
+.section--content__block {
+  grid-column:small;
+}
+
+.section--content__block--medium {
+  grid-column:medium;
+}
