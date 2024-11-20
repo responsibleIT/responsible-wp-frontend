@@ -3,7 +3,7 @@
   grid-column:full;
 
   height:20em;
-  margin-bottom:1em;
+  margin-bottom:var(--grid-gap);
 
   background-color:#0001;
 }
@@ -12,29 +12,6 @@
 
 :root[data-setting--no-images="true"] .triangles {
   display:none;
-}
-
-
-
-
-
-/***********************/
-/* TRIANGLES CONTAINER */
-/***********************/
-
-.triangles {
-  height:auto;
-  margin-bottom:clamp(1em, 4vw, 2em);
-}
-
-
-@container --container--body (width > 43em) {
-  @media (height > 24em) {
-    .triangles {
-      position:sticky;
-      top:0;
-    }
-  }
 }
 
 
@@ -56,7 +33,7 @@
 /* LOTTERY COLORS */
 
 :root[data-triangle-color-left-lottery="1"] .triangles {
-  --triangle-color-left-lottery:var(--orange);
+  --triangle-color-left-lottery:var(--orange--l);
 }
 :root[data-triangle-color-right-lottery="1"] .triangles {
   --triangle-color-right-lottery:var(--orange);
@@ -91,493 +68,851 @@
 }
 
 
-/* LIGHT - GREY */
-
-:root[data-setting--grey="true"] .triangles {
-  --triangle-color-left:var(--grey--80);
-  --triangle-color-right:var(--grey--80);
-}
-
-
-/* DARK - GREY */
-
-:root[data-color-scheme="dark"][data-setting--grey="true"] .triangles {
-  --triangle-color-left:var(--grey--50);
-  --triangle-color-right:var(--grey--50);
-}
 
 
 
-
-
-
-
-
-/*********************/
-/* TRIANGLES PATTERN */
-/*********************/
-
-/* 6 DRIEHOEKEN */
+/***********************/
+/* TRIANGLES CONTAINER */
+/***********************/
 
 .triangles {
-  --nmbr-triangles:6;
+  --max-width-triangles:108em;
 
-  --wdth-triangle: calc( 100vw / var(--nmbr-triangles) );
+  --wdth-triangle: calc( min(var(--max-width-triangles), 100vw) / var(--nmbr-triangles) );
   --hght-triangle: calc( var(--wdth-triangle) / .866 );
 
   --wdth-triangle--l: calc( var(--wdth-triangle) * 2 );
   --hgth-triangle--l: calc( var(--hght-triangle) * 2 );
 
-  aspect-ratio:calc(0.866 * var(--nmbr-triangles)) / calc(1 * 1.5);
+  
+  height:calc(var(--hght-triangle) * 1.5);
+  margin-bottom:clamp(1em, 4vw, 2em);
+}
 
-  background:no-repeat;
+
+@container --container--body (width > 43em) {
+  @media (height > 24em) {
+    .triangles {
+      position:sticky;
+      top:calc( 8.125em - var(--hght-triangle) * .5 );
+    }
+  }
+}
+
+
+
+
+
+@property --triangle-l4-1 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+@property --triangle-l4-2 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+@property --triangle-l4-3 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+
+@property --triangle-l6-1 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+@property --triangle-l6-2 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+@property --triangle-l6-3 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+@property --triangle-l6-4 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+
+@property --triangle-l8-1 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+@property --triangle-l8-2 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+@property --triangle-l8-3 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+@property --triangle-l8-4 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+@property --triangle-l8-5 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+
+@property --triangle-l10-1 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+@property --triangle-l10-2 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+@property --triangle-l10-3 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+@property --triangle-l10-4 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+@property --triangle-l10-5 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+@property --triangle-l10-6 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+
+@property --triangle-l12-1 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+@property --triangle-l12-2 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+@property --triangle-l12-3 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+@property --triangle-l12-4 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+@property --triangle-l12-5 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+@property --triangle-l12-6 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+@property --triangle-l12-7 { syntax: "<number>"; inherits:true; initial-value:1.2; }
+
+
+@keyframes --ani-triangle-l4-1 { 100% { --triangle-l4-1:.4; } }
+@keyframes --ani-triangle-l4-2 { 100% { --triangle-l4-2:.4; } }
+@keyframes --ani-triangle-l4-3 { 100% { --triangle-l4-3:.4; } }
+
+@keyframes --ani-triangle-l6-1 { 100% { --triangle-l6-1:.4; } }
+@keyframes --ani-triangle-l6-2 { 100% { --triangle-l6-2:.4; } }
+@keyframes --ani-triangle-l6-3 { 100% { --triangle-l6-3:.4; } }
+@keyframes --ani-triangle-l6-4 { 100% { --triangle-l6-4:.4; } }
+
+@keyframes --ani-triangle-l8-1 { 100% { --triangle-l8-1:.4; } }
+@keyframes --ani-triangle-l8-2 { 100% { --triangle-l8-2:.4; } }
+@keyframes --ani-triangle-l8-3 { 100% { --triangle-l8-3:.4; } }
+@keyframes --ani-triangle-l8-4 { 100% { --triangle-l8-4:.4; } }
+@keyframes --ani-triangle-l8-5 { 100% { --triangle-l8-5:.4; } }
+
+@keyframes --ani-triangle-l10-1 { 100% { --triangle-l10-1:.4; } }
+@keyframes --ani-triangle-l10-2 { 100% { --triangle-l10-2:.4; } }
+@keyframes --ani-triangle-l10-3 { 100% { --triangle-l10-3:.4; } }
+@keyframes --ani-triangle-l10-4 { 100% { --triangle-l10-4:.4; } }
+@keyframes --ani-triangle-l10-5 { 100% { --triangle-l10-5:.4; } }
+@keyframes --ani-triangle-l10-6 { 100% { --triangle-l10-6:.4; } }
+
+@keyframes --ani-triangle-l12-1 { 100% { --triangle-l12-1:.4; } }
+@keyframes --ani-triangle-l12-2 { 100% { --triangle-l12-2:.4; } }
+@keyframes --ani-triangle-l12-3 { 100% { --triangle-l12-3:.4; } }
+@keyframes --ani-triangle-l12-4 { 100% { --triangle-l12-4:.4; } }
+@keyframes --ani-triangle-l12-5 { 100% { --triangle-l12-5:.4; } }
+@keyframes --ani-triangle-l12-6 { 100% { --triangle-l12-6:.4; } }
+@keyframes --ani-triangle-l12-7 { 100% { --triangle-l12-7:.4; } }
+
+
+
+/***********************/
+/* 4 TRIANGLES PATTERN */
+/***********************/
+
+.triangles {
+  --nmbr-triangles:4;
+
+
+  animation:
+    --ani-triangle-l4-1 48s -16s linear infinite alternate,
+    --ani-triangle-l4-2 48s -32s linear infinite alternate,
+    --ani-triangle-l4-3 48s -48s linear infinite alternate;
+
+
+  background-color:transparent;
+  background-repeat:no-repeat;
+  background-size:var(--wdth-triangle--l) var(--hgth-triangle--l);
 
   background-image:
     /* top left */
       conic-gradient(
-        from -60deg at right center,
+        from -60deg,
         transparent 0 300deg,
-        color-mix(in srgb, var(--triangle-color-left), black 60%) 0
+        hsl(from var(--triangle-color-left) h s calc( l * var(--triangle-l4-3, .4) )) 0
       ),
       conic-gradient(
-        from -60deg at right center,
+        from -60deg,
         transparent 0 300deg,
-        color-mix(in srgb, var(--triangle-color-left), black 30%) 0
-      ),
-      conic-gradient(
-        from -60deg at right center,
-        transparent 0 300deg,
-        var(--triangle-color-left) 0
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l4-2, .8) )) 0
       ),
     
 
     /* top right - reverse */
       conic-gradient(
-        from 60deg at left center,
-        color-mix(in srgb, var(--triangle-color-right), black 60%) 0 60deg,
+        from 60deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l4-3, .4) )) 0 60deg,
         transparent 0
       ),
       conic-gradient(
-        from 60deg at left center,
-        color-mix(in srgb, var(--triangle-color-right), black 30%) 0 60deg,
-        transparent 0
-      ),
-      conic-gradient(
-        from 60deg at left center,
-        var(--triangle-color-right) 0 60deg,
+        from 60deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l4-2, .8) )) 0 60deg,
         transparent 0
       ),
       
 
     /* bottom left */
       conic-gradient(
-        from 60deg at left center,
-        color-mix(in srgb, var(--triangle-color-left), black 30%) 0 60deg,
+        from 60deg at left,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l4-2, .8) )) 0 60deg,
         transparent 0
       ),
       conic-gradient(
-        from 60deg at left center,
-        var(--triangle-color-left) 0 60deg,
-        transparent 0
-      ),
-      conic-gradient(
-        from 60deg at left center,
-        color-mix(in srgb, var(--triangle-color-left), white 20%) 0 60deg,
+        from 60deg at left,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l4-1, 1.2) )) 0 60deg,
         transparent 0
       ),
     
 
     /* bottom right - reverse */
       conic-gradient(
-        from -60deg at right center,
+        from -60deg at right,
         transparent 0 300deg,
-        color-mix(in srgb, var(--triangle-color-right), black 30%) 0
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l4-2, .8) )) 0
       ),
       conic-gradient(
-        from -60deg at right center,
+        from -60deg at right,
         transparent 0 300deg,
-        var(--triangle-color-right) 0
-      ),
-      conic-gradient(
-        from -60deg at right center,
-        transparent 0 300deg,
-        color-mix(in srgb, var(--triangle-color-right), white 20%) 0
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l4-1, 1.2) )) 0
       );
-  
-  background-size:
-    /* top left */
-      var(--wdth-triangle) var(--hght-triangle),
-      var(--wdth-triangle) var(--hght-triangle),
-      var(--wdth-triangle) var(--hght-triangle),
 
-    /* top right */
-      var(--wdth-triangle) var(--hght-triangle),
-      var(--wdth-triangle) var(--hght-triangle),
-      var(--wdth-triangle) var(--hght-triangle),
-
-    /* bottom left */
-      var(--wdth-triangle--l) var(--hgth-triangle--l),
-      var(--wdth-triangle--l) var(--hgth-triangle--l),
-      var(--wdth-triangle--l) var(--hgth-triangle--l),
-
-    /* bottom right */
-      var(--wdth-triangle--l) var(--hgth-triangle--l),
-      var(--wdth-triangle--l) var(--hgth-triangle--l),
-      var(--wdth-triangle--l) var(--hgth-triangle--l);
 
   background-position:
     /* top left */
-      0 0,
-      calc(var(--wdth-triangle) * 1) 0,
-      calc(var(--wdth-triangle) * 2) 0,
+      calc(50vw - var(--wdth-triangle) * 2) bottom,
+      calc(50vw - var(--wdth-triangle) * 1) bottom,
     
     /* top right - reverse */
-      calc(var(--wdth-triangle) * 5) 0,
-      calc(var(--wdth-triangle) * 4) 0,
-      calc(var(--wdth-triangle) * 3) 0,
+      calc(50vw + var(--wdth-triangle) * 0) bottom,
+      calc(50vw + var(--wdth-triangle) * -1) bottom,
 
     /* top left */
-      calc(var(--wdth-triangle) * -1 + .25px) bottom,
-      .25px bottom,
-      calc(var(--wdth-triangle) * 1 + .25px) bottom,
+      calc(50vw - var(--wdth-triangle) * 3 + .5px) bottom,
+      calc(50vw - var(--wdth-triangle) * 2 + .5px) bottom,
   
     /* top right - reverse */
-      calc(var(--wdth-triangle) * 5 - .25px) bottom,
-      calc(var(--wdth-triangle) * 4 - .25px) bottom,
-      calc(var(--wdth-triangle) * 3 - .25px) bottom;
+      calc(50vw + var(--wdth-triangle) * 1 - .5px) bottom,
+      calc(50vw + var(--wdth-triangle) * 0 - .5px) bottom;
+
 }
 
 
-/* 8 DRIEHOEKEN */
 
-@container (width > 40em) {
 
+
+/***********************/
+/* 6 TRIANGLES PATTERN */
+/***********************/
+
+@container (width > 32em) {
+  .triangles {
+    --nmbr-triangles:6;
+
+
+    animation:
+      --ani-triangle-l6-1 60s -15s linear infinite alternate,
+      --ani-triangle-l6-2 60s -30s linear infinite alternate,
+      --ani-triangle-l6-3 60s -45s linear infinite alternate,
+      --ani-triangle-l6-4 60s -60s linear infinite alternate;
+
+
+    background-image:
+    /* top left */
+      conic-gradient(
+        from -60deg,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l6-4, .4) )) 0
+      ),
+      conic-gradient(
+        from -60deg,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l6-3, .4) )) 0
+      ),
+      conic-gradient(
+        from -60deg,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l6-2, .4) )) 0
+      ),
+    
+
+    /* top right - reverse */
+      conic-gradient(
+        from 60deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l6-4, .4) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l6-3, .4) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l6-2, .4) )) 0 60deg,
+        transparent 0
+      ),
+      
+
+    /* bottom left */
+      conic-gradient(
+        from 60deg at left,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l6-3, .4) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg at left,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l6-2, .4) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg at left,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l6-1, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+    
+
+    /* bottom right - reverse */
+      conic-gradient(
+        from -60deg at right,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l6-3, .4) )) 0
+      ),
+      conic-gradient(
+        from -60deg at right,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l6-2, .4) )) 0
+      ),
+      conic-gradient(
+        from -60deg at right,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l6-1, 1.2) )) 0
+      );
+
+
+  background-position:
+    /* top left */
+      calc(50vw - var(--wdth-triangle) * 3) bottom,
+      calc(50vw - var(--wdth-triangle) * 2) bottom,
+      calc(50vw - var(--wdth-triangle) * 1) bottom,
+    
+    /* top right - reverse */
+      calc(50vw + var(--wdth-triangle) * 1) bottom,
+      calc(50vw + var(--wdth-triangle) * 0) bottom,
+      calc(50vw + var(--wdth-triangle) * -1) bottom,
+
+    /* top left */
+      calc(50vw - var(--wdth-triangle) * 4 + .5px) bottom,
+      calc(50vw - var(--wdth-triangle) * 3 + .5px) bottom,
+      calc(50vw - var(--wdth-triangle) * 2 + .5px) bottom,
+  
+    /* top right - reverse */
+      calc(50vw + var(--wdth-triangle) * 2 - .5px) bottom,
+      calc(50vw + var(--wdth-triangle) * 1 - .5px) bottom,
+      calc(50vw + var(--wdth-triangle) * 0 - .5px) bottom;
+
+  }
+}
+
+
+
+
+
+/***********************/
+/* 8 TRIANGLES PATTERN */
+/***********************/
+
+@container (width > 50em) {
   .triangles {
     --nmbr-triangles:8;
 
+
+    animation:
+      --ani-triangle-l8-1 72s -14.4s linear infinite alternate,
+      --ani-triangle-l8-2 72s -28.8s linear infinite alternate,
+      --ani-triangle-l8-3 72s -43.2s linear infinite alternate,
+      --ani-triangle-l8-4 72s -57.6s linear infinite alternate,
+      --ani-triangle-l8-5 72s -72s linear infinite alternate;
+    
+    
     background-image:
-      /* top left */
-        conic-gradient(
-          from -60deg at right center,
-          transparent 0 300deg,
-          color-mix(in srgb, var(--triangle-color-left), black 60%) 0
-        ),
-        conic-gradient(
-          from -60deg at right center,
-          transparent 0 300deg,
-          color-mix(in srgb, var(--triangle-color-left), black 40%) 0
-        ),
-        conic-gradient(
-          from -60deg at right center,
-          transparent 0 300deg,
-          color-mix(in srgb, var(--triangle-color-left), black 20%) 0
-        ),
-        conic-gradient(
-          from -60deg at right center,
-          transparent 0 300deg,
-          var(--triangle-color-left) 0
-        ),
-      
-
-      /* top right - reverse */
-        conic-gradient(
-          from 60deg at left center,
-          color-mix(in srgb, var(--triangle-color-right), black 60%) 0 60deg,
-          transparent 0
-        ),
-        conic-gradient(
-          from 60deg at left center,
-          color-mix(in srgb, var(--triangle-color-right), black 40%) 0 60deg,
-          transparent 0
-        ),
-        conic-gradient(
-          from 60deg at left center,
-          color-mix(in srgb, var(--triangle-color-right), black 20%) 0 60deg,
-          transparent 0
-        ),
-        conic-gradient(
-          from 60deg at left center,
-          var(--triangle-color-right) 0 60deg,
-          transparent 0
-        ),
-        
-
-      /* bottom left */
-        conic-gradient(
-          from 60deg at left center,
-          color-mix(in srgb, var(--triangle-color-left), black 40%) 0 60deg,
-          transparent 0
-        ),
-        conic-gradient(
-          from 60deg at left center,
-          color-mix(in srgb, var(--triangle-color-left), black 20%) 0 60deg,
-          transparent 0
-        ),
-        conic-gradient(
-          from 60deg at left center,
-          var(--triangle-color-left) 0 60deg,
-          transparent 0
-        ),
-        conic-gradient(
-          from 60deg at left center,
-          color-mix(in srgb, var(--triangle-color-left), white 20%) 0 60deg,
-          transparent 0
-        ),
-      
-
-      /* bottom right - reverse */
-        conic-gradient(
-          from -60deg at right center,
-          transparent 0 300deg,
-          color-mix(in srgb, var(--triangle-color-right), black 40%) 0
-        ),
-        conic-gradient(
-          from -60deg at right center,
-          transparent 0 300deg,
-          color-mix(in srgb, var(--triangle-color-right), black 20%) 0
-        ),
-        conic-gradient(
-          from -60deg at right center,
-          transparent 0 300deg,
-          var(--triangle-color-right) 0
-        ),
-        conic-gradient(
-          from -60deg at right center,
-          transparent 0 300deg,
-          color-mix(in srgb, var(--triangle-color-right), white 20%) 0
-        );
+    /* top left */
+      conic-gradient(
+        from -60deg,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l8-5, 1.2) )) 0
+      ),
+      conic-gradient(
+        from -60deg,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l8-4, 1.2) )) 0
+      ),
+      conic-gradient(
+        from -60deg,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l8-3, 1.2) )) 0
+      ),
+      conic-gradient(
+        from -60deg,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l8-2, 1.2) )) 0
+      ),
     
-    background-size:
-      /* top left */
-        var(--wdth-triangle) var(--hght-triangle),
-        var(--wdth-triangle) var(--hght-triangle),
-        var(--wdth-triangle) var(--hght-triangle),
-        var(--wdth-triangle) var(--hght-triangle),
 
-      /* top right */
-        var(--wdth-triangle) var(--hght-triangle),
-        var(--wdth-triangle) var(--hght-triangle),
-        var(--wdth-triangle) var(--hght-triangle),
-        var(--wdth-triangle) var(--hght-triangle),
-
-      /* bottom left */
-        var(--wdth-triangle--l) var(--hgth-triangle--l),
-        var(--wdth-triangle--l) var(--hgth-triangle--l),
-        var(--wdth-triangle--l) var(--hgth-triangle--l),
-        var(--wdth-triangle--l) var(--hgth-triangle--l),
-
-      /* bottom right */
-        var(--wdth-triangle--l) var(--hgth-triangle--l),
-        var(--wdth-triangle--l) var(--hgth-triangle--l),
-        var(--wdth-triangle--l) var(--hgth-triangle--l),
-        var(--wdth-triangle--l) var(--hgth-triangle--l);
-
-    background-position:
-      /* top left */
-        0 0,
-        calc(var(--wdth-triangle) * 1) 0,
-        calc(var(--wdth-triangle) * 2) 0,
-        calc(var(--wdth-triangle) * 3) 0,
+    /* top right - reverse */
+      conic-gradient(
+        from 60deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l8-5, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l8-4, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l8-3, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l8-2, 1.2) )) 0 60deg,
+        transparent 0
+      ),
       
-      /* top right - reverse */
-        calc(var(--wdth-triangle) * 7) 0,
-        calc(var(--wdth-triangle) * 6) 0,
-        calc(var(--wdth-triangle) * 5) 0,
-        calc(var(--wdth-triangle) * 4) 0,
 
-      /* top left */
-        calc(var(--wdth-triangle) * -1 + .25px) bottom,
-        .25px bottom,
-        calc(var(--wdth-triangle) * 1 + .25px) bottom,
-        calc(var(--wdth-triangle) * 2 + .25px) bottom,
+    /* bottom left */
+      conic-gradient(
+        from 60deg at left,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l8-4, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg at left,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l8-3, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg at left,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l8-2, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg at left,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l8-1, 1.2) )) 0 60deg,
+        transparent 0
+      ),
     
-      /* top right - reverse */
-        calc(var(--wdth-triangle) * 7 - .25px) bottom,
-        calc(var(--wdth-triangle) * 6 - .25px) bottom,
-        calc(var(--wdth-triangle) * 5 - .25px) bottom,
-        calc(var(--wdth-triangle) * 4 - .25px) bottom;
+
+    /* bottom right - reverse */
+      conic-gradient(
+        from -60deg at right,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l8-4, 1.2) )) 0
+      ),
+      conic-gradient(
+        from -60deg at right,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l8-3, 1.2) )) 0
+      ),
+      conic-gradient(
+        from -60deg at right,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l8-2, 1.2) )) 0
+      ),
+      conic-gradient(
+        from -60deg at right,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l8-1, 1.2) )) 0
+      );
+
+
+  background-position:
+    /* top left */
+      calc(50vw - var(--wdth-triangle) * 4) bottom,
+      calc(50vw - var(--wdth-triangle) * 3) bottom,
+      calc(50vw - var(--wdth-triangle) * 2) bottom,
+      calc(50vw - var(--wdth-triangle) * 1) bottom,
+    
+    /* top right - reverse */
+      calc(50vw + var(--wdth-triangle) * 2) bottom,
+      calc(50vw + var(--wdth-triangle) * 1) bottom,
+      calc(50vw + var(--wdth-triangle) * 0) bottom,
+      calc(50vw + var(--wdth-triangle) * -1) bottom,
+
+    /* top left */
+      calc(50vw - var(--wdth-triangle) * 5 + .5px) bottom,
+      calc(50vw - var(--wdth-triangle) * 4 + .5px) bottom,
+      calc(50vw - var(--wdth-triangle) * 3 + .5px) bottom,
+      calc(50vw - var(--wdth-triangle) * 2 + .5px) bottom,
+  
+    /* top right - reverse */
+      calc(50vw + var(--wdth-triangle) * 3 - .5px) bottom,
+      calc(50vw + var(--wdth-triangle) * 2 - .5px) bottom,
+      calc(50vw + var(--wdth-triangle) * 1 - .5px) bottom,
+      calc(50vw + var(--wdth-triangle) * 0 - .5px) bottom;
+
   }
-
 }
 
 
 
-/* 10 DRIEHOEKEN */
 
-@container (width > 56em) {
 
+/************************/
+/* 10 TRIANGLES PATTERN */
+/************************/
+
+@container (width > 70em) {
   .triangles {
     --nmbr-triangles:10;
 
+
+    animation:
+      --ani-triangle-l10-1 84s -14s linear infinite alternate,
+      --ani-triangle-l10-2 84s -28s linear infinite alternate,
+      --ani-triangle-l10-3 84s -42s linear infinite alternate,
+      --ani-triangle-l10-4 84s -56s linear infinite alternate,
+      --ani-triangle-l10-5 84s -70s linear infinite alternate,
+      --ani-triangle-l10-6 84s -84s linear infinite alternate;
+
+
     background-image:
-      /* top left */
-        conic-gradient(
-          from -60deg at right center,
-          transparent 0 300deg,
-          color-mix(in srgb, var(--triangle-color-left), black 60%) 0
-        ),
-        conic-gradient(
-          from -60deg at right center,
-          transparent 0 300deg,
-          color-mix(in srgb, var(--triangle-color-left), black 45%) 0
-        ),
-        conic-gradient(
-          from -60deg at right center,
-          transparent 0 300deg,
-          color-mix(in srgb, var(--triangle-color-left), black 30%) 0
-        ),
-        conic-gradient(
-          from -60deg at right center,
-          transparent 0 300deg,
-          color-mix(in srgb, var(--triangle-color-left), black 15%) 0
-        ),
-        conic-gradient(
-          from -60deg at right center,
-          transparent 0 300deg,
-          var(--triangle-color-left) 0
-        ),
-      
-
-      /* top right - reverse */
-        conic-gradient(
-          from 60deg at left center,
-          color-mix(in srgb, var(--triangle-color-right), black 60%) 0 60deg,
-          transparent 0
-        ),
-        conic-gradient(
-          from 60deg at left center,
-          color-mix(in srgb, var(--triangle-color-right), black 45%) 0 60deg,
-          transparent 0
-        ),
-        conic-gradient(
-          from 60deg at left center,
-          color-mix(in srgb, var(--triangle-color-right), black 30%) 0 60deg,
-          transparent 0
-        ),
-        conic-gradient(
-          from 60deg at left center,
-          color-mix(in srgb, var(--triangle-color-right), black 15%) 0 60deg,
-          transparent 0
-        ),
-        conic-gradient(
-          from 60deg at left center,
-          var(--triangle-color-right) 0 60deg,
-          transparent 0
-        ),
-        
-
-      /* bottom left */
-        conic-gradient(
-          from 60deg at left center,
-          color-mix(in srgb, var(--triangle-color-left), black 45%) 0 60deg,
-          transparent 0
-        ),
-        conic-gradient(
-          from 60deg at left center,
-          color-mix(in srgb, var(--triangle-color-left), black 30%) 0 60deg,
-          transparent 0
-        ),
-        conic-gradient(
-          from 60deg at left center,
-          color-mix(in srgb, var(--triangle-color-left), black 15%) 0 60deg,
-          transparent 0
-        ),
-        conic-gradient(
-          from 60deg at left center,
-          var(--triangle-color-left) 0 60deg,
-          transparent 0
-        ),
-        conic-gradient(
-          from 60deg at left center,
-          color-mix(in srgb, var(--triangle-color-left), white 20%) 0 60deg,
-          transparent 0
-        ),
-      
-
-      /* bottom right - reverse */
-        conic-gradient(
-          from -60deg at right center,
-          transparent 0 300deg,
-          color-mix(in srgb, var(--triangle-color-right), black 45%) 0
-        ),
-        conic-gradient(
-          from -60deg at right center,
-          transparent 0 300deg,
-          color-mix(in srgb, var(--triangle-color-right), black 30%) 0
-        ),
-        conic-gradient(
-          from -60deg at right center,
-          transparent 0 300deg,
-          color-mix(in srgb, var(--triangle-color-right), black 15%) 0
-        ),
-        conic-gradient(
-          from -60deg at right center,
-          transparent 0 300deg,
-          var(--triangle-color-right) 0
-        ),
-        conic-gradient(
-          from -60deg at right center,
-          transparent 0 300deg,
-          color-mix(in srgb, var(--triangle-color-right), white 20%) 0
-        );
+    /* top left */
+      conic-gradient(
+        from -60deg,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l10-6, 1.2) )) 0
+      ),
+      conic-gradient(
+        from -60deg,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l10-5, 1.2) )) 0
+      ),
+      conic-gradient(
+        from -60deg,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l10-4, 1.2) )) 0
+      ),
+      conic-gradient(
+        from -60deg,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l10-3, 1.2) )) 0
+      ),
+      conic-gradient(
+        from -60deg,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l10-2, 1.2) )) 0
+      ),
     
-    background-size:
-      /* top left */
-        var(--wdth-triangle) var(--hght-triangle),
-        var(--wdth-triangle) var(--hght-triangle),
-        var(--wdth-triangle) var(--hght-triangle),
-        var(--wdth-triangle) var(--hght-triangle),
-        var(--wdth-triangle) var(--hght-triangle),
 
-      /* top right */
-        var(--wdth-triangle) var(--hght-triangle),
-        var(--wdth-triangle) var(--hght-triangle),
-        var(--wdth-triangle) var(--hght-triangle),
-        var(--wdth-triangle) var(--hght-triangle),
-        var(--wdth-triangle) var(--hght-triangle),
-
-      /* bottom left */
-        var(--wdth-triangle--l) var(--hgth-triangle--l),
-        var(--wdth-triangle--l) var(--hgth-triangle--l),
-        var(--wdth-triangle--l) var(--hgth-triangle--l),
-        var(--wdth-triangle--l) var(--hgth-triangle--l),
-        var(--wdth-triangle--l) var(--hgth-triangle--l),
-
-      /* bottom right */
-        var(--wdth-triangle--l) var(--hgth-triangle--l),
-        var(--wdth-triangle--l) var(--hgth-triangle--l),
-        var(--wdth-triangle--l) var(--hgth-triangle--l),
-        var(--wdth-triangle--l) var(--hgth-triangle--l),
-        var(--wdth-triangle--l) var(--hgth-triangle--l);
-
-    background-position:
-      /* top left */
-        0 0,
-        calc(var(--wdth-triangle) * 1) 0,
-        calc(var(--wdth-triangle) * 2) 0,
-        calc(var(--wdth-triangle) * 3) 0,
-        calc(var(--wdth-triangle) * 4) 0,
+    /* top right - reverse */
+      conic-gradient(
+        from 60deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l10-6, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l10-5, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l10-4, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l10-3, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l10-2, 1.2) )) 0 60deg,
+        transparent 0
+      ),
       
-      /* top right - reverse */
-        calc(var(--wdth-triangle) * 9) 0,
-        calc(var(--wdth-triangle) * 8) 0,
-        calc(var(--wdth-triangle) * 7) 0,
-        calc(var(--wdth-triangle) * 6) 0,
-        calc(var(--wdth-triangle) * 5) 0,
 
-      /* top left */
-        calc(var(--wdth-triangle) * -1 + .25px) bottom,
-        .25px bottom,
-        calc(var(--wdth-triangle) * 1 + .25px) bottom,
-        calc(var(--wdth-triangle) * 2 + .25px) bottom,
-        calc(var(--wdth-triangle) * 3 + .25px) bottom,
+    /* bottom left */
+      conic-gradient(
+        from 60deg at left,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l10-5, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg at left,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l10-4, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg at left,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l10-3, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg at left,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l10-2, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg at left,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l10-1, 1.2) )) 0 60deg,
+        transparent 0
+      ),
     
-      /* top right - reverse */
-        calc(var(--wdth-triangle) * 9 - .25px) bottom,
-        calc(var(--wdth-triangle) * 8 - .25px) bottom,
-        calc(var(--wdth-triangle) * 7 - .25px) bottom,
-        calc(var(--wdth-triangle) * 6 - .25px) bottom,
-        calc(var(--wdth-triangle) * 5 - .25px) bottom;
+
+    /* bottom right - reverse */
+      conic-gradient(
+        from -60deg at right,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l10-5, 1.2) )) 0
+      ),
+      conic-gradient(
+        from -60deg at right,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l10-4, 1.2) )) 0
+      ),
+      conic-gradient(
+        from -60deg at right,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l10-3, 1.2) )) 0
+      ),
+      conic-gradient(
+        from -60deg at right,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l10-2, 1.2) )) 0
+      ),
+      conic-gradient(
+        from -60deg at right,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l10-1, 1.2) )) 0
+      );
+
+
+  background-position:
+    /* top left */
+      calc(50vw - var(--wdth-triangle) * 5) bottom,
+      calc(50vw - var(--wdth-triangle) * 4) bottom,
+      calc(50vw - var(--wdth-triangle) * 3) bottom,
+      calc(50vw - var(--wdth-triangle) * 2) bottom,
+      calc(50vw - var(--wdth-triangle) * 1) bottom,
+    
+    /* top right - reverse */
+      calc(50vw + var(--wdth-triangle) * 3) bottom,
+      calc(50vw + var(--wdth-triangle) * 2) bottom,
+      calc(50vw + var(--wdth-triangle) * 1) bottom,
+      calc(50vw + var(--wdth-triangle) * 0) bottom,
+      calc(50vw + var(--wdth-triangle) * -1) bottom,
+
+    /* top left */
+      calc(50vw - var(--wdth-triangle) * 6 + .5px) bottom,
+      calc(50vw - var(--wdth-triangle) * 5 + .5px) bottom,
+      calc(50vw - var(--wdth-triangle) * 4 + .5px) bottom,
+      calc(50vw - var(--wdth-triangle) * 3 + .5px) bottom,
+      calc(50vw - var(--wdth-triangle) * 2 + .5px) bottom,
+  
+    /* top right - reverse */
+      calc(50vw + var(--wdth-triangle) * 4 - .5px) bottom,
+      calc(50vw + var(--wdth-triangle) * 3 - .5px) bottom,
+      calc(50vw + var(--wdth-triangle) * 2 - .5px) bottom,
+      calc(50vw + var(--wdth-triangle) * 1 - .5px) bottom,
+      calc(50vw + var(--wdth-triangle) * 0 - .5px) bottom;
+
+  }
+}
+
+
+
+
+
+/************************/
+/* 12 TRIANGLES PATTERN */
+/************************/
+
+@container (width > 94em) {
+  .triangles {
+    --nmbr-triangles:12;
+
+    animation:
+      --ani-triangle-l12-1 96s -13.7s linear infinite alternate,
+      --ani-triangle-l12-2 96s -27.4s linear infinite alternate,
+      --ani-triangle-l12-3 96s -41.1s linear infinite alternate,
+      --ani-triangle-l12-4 96s -54.8s linear infinite alternate,
+      --ani-triangle-l12-5 96s -68.5s linear infinite alternate,
+      --ani-triangle-l12-6 96s -82.2s linear infinite alternate,
+      --ani-triangle-l12-7 96s -96s linear infinite alternate;
+
+    /* animation:
+      --ani-triangle-l12-1 96s -90s linear infinite alternate,
+      --ani-triangle-l12-2 96s -91s linear infinite alternate,
+      --ani-triangle-l12-3 96s -92s linear infinite alternate,
+      --ani-triangle-l12-4 96s -93s linear infinite alternate,
+      --ani-triangle-l12-5 96s -94s linear infinite alternate,
+      --ani-triangle-l12-6 96s -95s linear infinite alternate,
+      --ani-triangle-l12-7 96s -96s linear infinite alternate; */
+
+    /* animation:
+      --ani-triangle-l12-1 6s -0s steps(6, jump-endd) infinite alternate,
+      --ani-triangle-l12-2 6s -1s steps(6, jump-endd) infinite alternate,
+      --ani-triangle-l12-3 6s -2s steps(6, jump-endd) infinite alternate,
+      --ani-triangle-l12-4 6s -3s steps(6, jump-endd) infinite alternate,
+      --ani-triangle-l12-5 6s -4s steps(6, jump-endd) infinite alternate,
+      --ani-triangle-l12-6 6s -5s steps(6, jump-endd) infinite alternate,
+      --ani-triangle-l12-7 6s -6s steps(6, jump-endd) infinite alternate; */
+
+    background-image:
+    /* top left */
+      conic-gradient(
+        from -60deg,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l12-7, 1.2) )) 0
+      ),
+      conic-gradient(
+        from -60deg,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l12-6, 1.2) )) 0
+      ),
+      conic-gradient(
+        from -60deg,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l12-5, 1.2) )) 0
+      ),
+      conic-gradient(
+        from -60deg,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l12-4, 1.2) )) 0
+      ),
+      conic-gradient(
+        from -60deg,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l12-3, 1.2) )) 0
+      ),
+      conic-gradient(
+        from -60deg,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l12-2, 1.2) )) 0
+      ),
+    
+
+    /* top right - reverse */
+      conic-gradient(
+        from 60deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l12-7, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l12-6, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l12-5, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l12-4, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l12-3, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l12-2, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      
+
+    /* bottom left */
+      conic-gradient(
+        from 60deg at left,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l12-6, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg at left,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l12-5, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg at left,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l12-4, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg at left,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l12-3, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg at left,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l12-2, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+      conic-gradient(
+        from 60deg at left,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l12-1, 1.2) )) 0 60deg,
+        transparent 0
+      ),
+    
+
+    /* bottom right - reverse */
+      conic-gradient(
+        from -60deg at right,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l12-6, 1.2) )) 0
+      ),
+      conic-gradient(
+        from -60deg at right,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l12-5, 1.2) )) 0
+      ),
+      conic-gradient(
+        from -60deg at right,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l12-4, 1.2) )) 0
+      ),
+      conic-gradient(
+        from -60deg at right,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l12-3, 1.2) )) 0
+      ),
+      conic-gradient(
+        from -60deg at right,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l12-2, 1.2) )) 0
+      ),
+      conic-gradient(
+        from -60deg at right,
+        transparent 0 300deg,
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l12-1, 1.2) )) 0
+      );
+
+
+  background-position:
+    /* top left */
+      calc(50vw - var(--wdth-triangle) * 6) bottom,
+      calc(50vw - var(--wdth-triangle) * 5) bottom,
+      calc(50vw - var(--wdth-triangle) * 4) bottom,
+      calc(50vw - var(--wdth-triangle) * 3) bottom,
+      calc(50vw - var(--wdth-triangle) * 2) bottom,
+      calc(50vw - var(--wdth-triangle) * 1) bottom,
+    
+    /* top right - reverse */
+      calc(50vw + var(--wdth-triangle) * 4) bottom,
+      calc(50vw + var(--wdth-triangle) * 3) bottom,
+      calc(50vw + var(--wdth-triangle) * 2) bottom,
+      calc(50vw + var(--wdth-triangle) * 1) bottom,
+      calc(50vw + var(--wdth-triangle) * 0) bottom,
+      calc(50vw + var(--wdth-triangle) * -1) bottom,
+
+    /* top left */
+      calc(50vw - var(--wdth-triangle) * 7 + .5px) bottom,
+      calc(50vw - var(--wdth-triangle) * 6 + .5px) bottom,
+      calc(50vw - var(--wdth-triangle) * 5 + .5px) bottom,
+      calc(50vw - var(--wdth-triangle) * 4 + .5px) bottom,
+      calc(50vw - var(--wdth-triangle) * 3 + .5px) bottom,
+      calc(50vw - var(--wdth-triangle) * 2 + .5px) bottom,
+  
+    /* top right - reverse */
+      calc(50vw + var(--wdth-triangle) * 5 - .5px) bottom,
+      calc(50vw + var(--wdth-triangle) * 4 - .5px) bottom,
+      calc(50vw + var(--wdth-triangle) * 3 - .5px) bottom,
+      calc(50vw + var(--wdth-triangle) * 2 - .5px) bottom,
+      calc(50vw + var(--wdth-triangle) * 1 - .5px) bottom,
+      calc(50vw + var(--wdth-triangle) * 0 - .5px) bottom;
+
+  }
+
+  /********/
+  /* BARS */
+  /********/
+
+  .triangles::after {
+    content:"";
+
+    display:block;
+    width:100%;
+    height:var(--hght-triangle);
+
+    background-image:
+      linear-gradient(
+        to right,
+        hsl(from var(--triangle-color-left) h s calc(l * var(--triangle-l12-7, 1.2) )) 
+          0
+          calc( (100vw - var(--max-width-triangles)) * .5 + .5px),
+        transparent 
+          0 
+          calc( (100vw + var(--max-width-triangles)) * .5 - .5px),
+        hsl(from var(--triangle-color-right) h s calc(l * var(--triangle-l12-7, 1.2) )) 
+          0
+          100%
+      );
   }
 
 }

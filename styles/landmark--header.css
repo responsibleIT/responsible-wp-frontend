@@ -40,8 +40,8 @@
   flex-basis:0;
   flex-grow:1000;
   flex-shrink:0;
-  min-width:12rem;
-  max-width:20rem;
+  min-width:14rem;
+  max-width:16.75rem;
   padding:.5em 0;
   margin-right:auto;
 }

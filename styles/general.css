@@ -53,7 +53,7 @@ body {
   
   --grid-padding: clamp(1em, 5vw, 3.125em);
   --grid-gap: clamp(1em, 4vw, 2em);
-  --grid-inset:6em;
+  --grid-inset:3em;
   --grid-small:36em;
   --grid-side:12em;
   
@@ -64,7 +64,7 @@ body {
       [full-start]
     minmax(var(--grid-padding), 1fr)
       [xlarge-start large-start medium-start small-start] 
-    minmax(var(--grid-gap), var(--grid-inset))
+    minmax(0, var(--grid-inset))
       [inset-start] 
     min( 
       var(--grid-small) - var(--grid-inset), 

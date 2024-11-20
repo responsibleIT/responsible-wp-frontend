@@ -57,9 +57,10 @@ fieldset:has([type="checkbox"]) {
 }
 
 /* legend */
-.form--accessibility legend {
+.details--accessibility legend {
   padding:0 .33em;
   font-weight:400;
+  text-transform:uppercase;
 }
 
 
