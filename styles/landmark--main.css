@@ -43,20 +43,18 @@ main {
   background-image:
     repeating-linear-gradient(
       45deg,
-      transparent 0 2.5em, 
-      var(--line-section--content__block--hero) 0 2.7em
+      transparent 0 2.8em, 
+      var(--line-section--content__block--hero) 0 3em
     ), 
     repeating-linear-gradient(
       135deg,
-      transparent 0 1em, 
-      var(--line-section--content__block--hero) 0 1.2em
+      transparent 0 .7em, 
+      var(--line-section--content__block--hero) 0 .9em
     ), 
     linear-gradient(
       155deg,
-      var(--bg1-section--content__block--hero) 10%,
-      var(--bg2-section--content__block--hero),
       var(--bg1-section--content__block--hero),
-      var(--bg2-section--content__block--hero) 75%
+      var(--bg2-section--content__block--hero)
     );
 }
 

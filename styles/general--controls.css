@@ -79,7 +79,7 @@ summary::after {
   transition:transform .3s;
 }
 
-.open .button--disclosure::after,
+.is-open .button--disclosure::after,
 [open] summary::after {
   transform:rotate(180deg);
 }
