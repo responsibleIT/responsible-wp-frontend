@@ -19,7 +19,7 @@
 }
 
 .header--body__block {
-  grid-column:xlarge;
+  grid-column:large;
 
   display:flex;
   flex-wrap:wrap;

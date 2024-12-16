@@ -25,17 +25,13 @@ main {
 }
 
 .section--content__block--large {
-  grid-column:medium;
-}
-
-.section--content__block--xlarge {
-  grid-column:medium;
+  grid-column:large;
 }
 
 
 /* HERO */
 .section--content__block--hero {
-  grid-column:inset-start/large-end;
+  grid-column:inset-start/medium-end;
 
   padding:var(--grid-gap);
   margin:calc( var(--grid-gap) * 2) 0;

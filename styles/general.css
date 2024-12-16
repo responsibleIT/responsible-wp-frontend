@@ -54,8 +54,8 @@ body {
   --grid-padding: clamp(1em, 5vw, 3.125em);
   --grid-gap: clamp(1em, 4vw, 2em);
   --grid-inset:3em;
-  --grid-small:36em;
-  --grid-side:12em;
+  --grid-small:40em;
+  --grid-side:10em;
   
 
   display: grid;
@@ -68,7 +68,7 @@ body {
       [inset-start] 
     min( 
       var(--grid-small) - var(--grid-inset), 
-      100% - var(--grid-padding) * 2 - var(--grid-gap) 
+      100% - var(--grid-padding) * 2 
     )
       [small-end]
     minmax(0, var(--grid-gap))
@@ -76,13 +76,9 @@ body {
     minmax(0, var(--grid-side)) 
       [inset-end medium-end side-left-end] 
     minmax(0, var(--grid-gap))
-      [side-middle-start]
-    minmax(0, var(--grid-side))
-      [large-end side-middle-end]
-    minmax(0, var(--grid-gap))
       [side-right-start]
     minmax(0, var(--grid-side)) 
-      [xlarge-end side-end side-right-end]  
+      [large-end side-end side-right-end]  
     minmax(var(--grid-padding), 1fr) 
       [full-end];
 }

@@ -6,7 +6,7 @@ h1 {
 }
 
 h2 {
-  color:var(--clr-h2);
+  /* color:var(--clr-h2); */
   font-size:clamp(1.5em, 3.75vw, 2em);
   line-height:1.25;
 }
