@@ -1,0 +1,16 @@
+/********************/
+/* BASIS / FALLBACK */
+/********************/
+
+.triangles {
+  grid-column:full;
+  height:0;
+  margin-bottom:clamp(1em, 4vw, 2em);
+  border-bottom:solid 1em var( --brdr-clr-triangles);
+}
+
+/* YES, IMAGES */
+:root[data-setting--no-images="false"] .triangles {
+  height:calc(var(--height-triangle) * 1.5);
+  border-bottom:none;
+}
