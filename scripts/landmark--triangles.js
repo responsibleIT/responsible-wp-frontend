@@ -1,19 +1,6 @@
 const triangles = document.querySelector(".triangles");
 
 
-///////////////////////////////////////
-// TO TEST IF @PROPERTY IS SUPPORTED //
-///////////////////////////////////////
-
-CSS.registerProperty({
-	name: '--supported',
-	syntax: '*',
-	initialValue: " ",
-	inherits: false
-});
-
-
-
 
 
 
