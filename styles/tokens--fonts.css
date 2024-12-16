@@ -4,14 +4,14 @@
 	font-weight:300;
 	font-style: normal;
   src: url("../fonts/OpenSans-Light.ttf") format('truetype');
-	font-display: swap;
+	font-display: fallback;
 }
 @font-face {
   font-family: 'Open Sans';
 	font-weight:300;
 	font-style: italic;
   src: url("../fonts/OpenSans-LightItalic.ttf") format('truetype');
-	font-display: swap;
+	font-display: fallback;
 }
 
 @font-face {
@@ -19,14 +19,14 @@
 	font-weight:400;
 	font-style: normal;
   src: url("../fonts/OpenSans-Regular.ttf") format('truetype');
-	font-display: swap;
+	font-display: fallback;
 }
 @font-face {
   font-family: 'Open Sans';
 	font-weight:400;
 	font-style: italic;
   src: url("../fonts/OpenSans-Italic.ttf") format('truetype');
-	font-display: swap;
+	font-display: fallback;
 }
 
 @font-face {
@@ -34,14 +34,14 @@
 	font-weight:600;
 	font-style: normal;
   src: url("../fonts/OpenSans-SemiBold.ttf") format('truetype');
-	font-display: swap;
+	font-display: fallback;
 }
 @font-face {
   font-family: 'Open Sans';
 	font-weight:600;
 	font-style: italic;
   src: url("../fonts/OpenSans-SemiBoldItalic.ttf") format('truetype');
-	font-display: swap;
+	font-display: fallback;
 }
 
 @font-face {
@@ -49,12 +49,12 @@
 	font-weight:700;
 	font-style: normal;
   src: url("../fonts/OpenSans-Bold.ttf") format('truetype');
-	font-display: swap;
+	font-display: fallback;
 }
 @font-face {
   font-family: 'Open Sans';
 	font-weight:700;
 	font-style: italic;
   src: url("../fonts/OpenSans-BoldItalic.ttf") format('truetype');
-	font-display: swap;
+	font-display: fallback;
 }
