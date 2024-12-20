@@ -82,7 +82,8 @@
 /* TRIANGLES BARS - lEFT & RIGHT */
 /*********************************/
 
-.triangles::after {
+
+:root[data-setting--no-images="false"] .triangles::after {
   content:"";
 
   display:block;
