@@ -5,6 +5,11 @@ main {
   grid-template-columns:inherit;
 }
 
+/* Only apply margin when triangles are visible */
+:root:not([data-setting--no-images="true"]) .triangles + main {
+  margin-top: -6.125rem;
+}
+
 .section--content {
   grid-column:full;
 

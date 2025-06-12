@@ -2,19 +2,18 @@
 /* BASIS / FALLBACK */
 /********************/
 
-/* YES, IMAGES */
+/* YES, TRIANGLES */
 .triangles {
   grid-column:full;
   height:calc(var(--height-triangle) * 1.5);
   margin-bottom:clamp(1em, 4vw, 2em);
   border-bottom:none;
-  
 }
 
-/* NO, IMAGES */
-:root[data-setting--no-images="true"]  .triangles {
-  height:0;
-  border-bottom:solid 1em var( --brdr-clr-triangles);
+/* NO, TRIANGLES */
+:root[data-setting--no-images="true"] .triangles {
+  display: none;
+  content-visibility: hidden;
 }
 
 
