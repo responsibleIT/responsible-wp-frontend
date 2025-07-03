@@ -56,23 +56,12 @@ async function checkCache() {
     await writeFile('cache/last-run.txt', new Date().toISOString());
   }
 
-  // Main function to check for changes and rebuild if needed
+  // Main function – always rebuild, no change detection
   async function main() {
     await ensureCacheDir();
-    
     try {
-      const fresh = await fetchAllPages();
-      const freshJson = JSON.stringify(fresh);
-
-      if (await shouldBuild(freshJson)) {
-        console.log('Changes detected → rebuilding…');
-        await buildSite();
-        await writeFile(CACHE_FILE, freshJson, 'utf8');
-        console.log('Cache updated.');
-      } else {
-        console.log('No changes since last build; skipping.');
-      }
-      
+      console.log('Rebuilding site (change detection disabled)…');
+      await buildSite();
       await writeHealthCheck();  // Record successful run
     } catch (err) {
       console.error('Failed:', err);
