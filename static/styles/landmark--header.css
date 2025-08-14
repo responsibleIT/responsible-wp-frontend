@@ -3,12 +3,7 @@
 /**********/
 
 .header--body {
-  grid-column:full;
-
   padding:1em 0;
-
-  display:grid;
-  grid-template-columns:inherit;
 
   background-color:var(--bg-header);
 }
@@ -19,7 +14,9 @@
 }
 
 .header--body__block {
-  grid-column:large;
+  padding: 0 2rem;
+  margin: 0 auto;
+  max-width: var(--max-width);
 
   display:flex;
   flex-wrap:wrap;
