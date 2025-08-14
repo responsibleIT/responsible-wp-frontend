@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "Atkinson";
+  src: local("Atkinson"), 
+       url('../fonts/AtkinsonHyperlegibleNext-VariableFont_wght.ttf') format("truetype-variations"),
+       url('../fonts/AtkinsonHyperlegibleNext-VariableFont_wght.ttf') format("truetype");
+  font-style: normal;
+  font-display: fallback;
+}
