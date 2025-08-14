@@ -1,0 +1,23 @@
+aside.sidebar {
+  grid-column: 10 / -1;
+}
+
+/* Sidebar handling */
+.wp-sidebar {
+  grid-column: 1 / -1;
+
+  @media (min-width: 768px) {
+    grid-column: 10 / -1;
+  }
+}
+
+.wp-sidebar + .wp-sidebar {
+    margin-top: clamp(10vh, 5vh + 5rem, 10rem);
+}
+.wp-sidebar h3 {
+  margin: 0;
+  padding-bottom: 1rem;
+  border-bottom: 0.625rem solid var(--clr);
+}
+.wp-sidebar h3 p {
+}

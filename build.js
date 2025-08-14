@@ -32,6 +32,48 @@ async function ensureDir(dir) {
   }
 }
 
+async function fetchAllPages() {
+  let allPages = [];
+  let currentPage = 1;
+  let hasMorePages = true;
+
+  while (hasMorePages) {
+    try {
+      const response = await fetch(`${WP_API_URL}/pages?per_page=50&page=${currentPage}`);
+      
+      if (!response.ok) {
+        if (response.status === 400) {
+          // We've reached the end of available pages
+          hasMorePages = false;
+          break;
+        }
+        throw new Error(`WP API ${response.status} when fetching pages page ${currentPage}`);
+      }
+
+      const pages = await response.json();
+      if (pages.length === 0) {
+        hasMorePages = false;
+        break;
+      }
+
+      allPages = [...allPages, ...pages];
+      currentPage++;
+
+      const totalPages = parseInt(response.headers.get('X-WP-TotalPages'));
+      if (currentPage > totalPages) {
+        hasMorePages = false;
+      }
+
+      console.log(`Fetched page ${currentPage - 1} of ${totalPages || 'unknown'} (${pages.length} items)`);
+    } catch (error) {
+      console.error(`Error fetching page ${currentPage}:`, error);
+      hasMorePages = false;
+    }
+  }
+
+  return allPages;
+}
+
 async function fetchWordPressContent(endpoint) {
   try {
     // Special handling for home page
@@ -42,6 +84,11 @@ async function fetchWordPressContent(endpoint) {
         throw new Error(`WP API ${response.status} when fetching homepage`);
       }
       return await response.json();
+    }
+
+    // Special handling for pages endpoint to include pagination
+    if (endpoint === "pages") {
+      return await fetchAllPages();
     }
 
     // Regular page/content fetching
@@ -94,7 +141,23 @@ async function processTemplate(templatePath, outputPath, wpContent, pageName) {
     $(".wp-content").each((i, elem) => {
       const contentType = $(elem).data("wp-content");
       if (contentType === "content" && wpContent.content) {
-        $(elem).html($content.html());
+        // First extract the sidebars from the content
+        const $wpContent = $content;
+        const sidebars = $wpContent('.wp-sidebar').toArray();
+        
+        // Remove sidebars from the main content
+        $wpContent('.wp-sidebar').remove();
+        
+        // Insert the main content
+        $(elem).html($wpContent.html());
+        
+        // Insert sidebars into our designated aside.sidebar element
+        if (sidebars.length > 0) {
+          const $sidebar = $('.sidebar');
+          sidebars.forEach(sidebar => {
+            $sidebar.append(cheerio.load(sidebar).html());
+          });
+        }
       }
     });
 

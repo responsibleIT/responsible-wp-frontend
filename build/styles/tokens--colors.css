@@ -27,6 +27,8 @@
   --grey--90:hsl(var(--grey-hue), 3%, 90%);
   --grey--95:hsl(var(--grey-hue), 3%, 95%);
 
+  --link: #0352a0;
+  --selection: #f1fa03;
   
   --orange:#FF611E;
   --yellow:#FFCB00;
@@ -140,7 +142,7 @@
 
   [data-color-scheme="dark"] {
     color-scheme:dark;
-      
+
     --clr:var(--white);
     --bg:var(--grey--20);
     
@@ -190,7 +192,7 @@
 
 :root {
   /* links */
-  --clr-link:var(--blue);
+  --clr-link:var(--link);
 
   /* controls */
   --bg-button:var(--bg);
@@ -351,8 +353,8 @@
 /*********/
 
 :root {
-  --clr-h1:var(--orange);
-  --clr-h2:var(--orange);
+  --clr-h1:var(--black);
+  --clr-h2:var(--black);
 
   --bg1-section--content__block--hero:var(--black--t2);
   --bg2-section--content__block--hero:transparent;
@@ -380,6 +382,8 @@
 
   :root[data-color-scheme="dark"] {
     --bg1-section--content__block--hero:var(--white--t2);
+    --clr-h1:var(--white);
+    --clr-h2:var(--white);
   }
   
 

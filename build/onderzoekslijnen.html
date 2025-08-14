@@ -23,6 +23,8 @@
 
   <link rel="stylesheet" href="styles/landmark--main.css">
 
+  <link rel="stylesheet" href="styles/sidebar.css">
+
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
@@ -40,9 +42,11 @@
 
       <nav class="nav--main">
         <ul>
-          <li><a href="./" lang="en">Home</a></li>
+          <li><a href="./" lang="en">Responsible IT</a></li>
           <li><a href="./projecten">Projecten</a></li>
-          <li><a href="./responsible-it">Over Responsible IT</a></li>
+          <li><a href="./onderzoek">Onderzoek</a></li>
+          <li><a href="./onderwijs">Onderwijs</a></li>
+          <li><a href="./actueel">Actueel</a></li>
         </ul>
       </nav>
 
@@ -150,17 +154,22 @@
 
   <div class="triangles"></div>
 
-  <main id="main">
-    <section class="section--content">
-      <div class="section--content__block section--content__block--hero">
-        <h1>Onderzoekslijnen</h1>
-      </div>
-    </section>
-    <section class="section--content">
-      <div class="section--content__block wp-content" data-wp-content="content">
-        <!-- WordPress content will be inserted here -->
-      </div>
-    </section>
+  <main id="main" class="grid-container">
+    <div class="main-content">
+      <section class="section--content">
+        <div class="section--content__block section--content__block--hero">
+          <h1>Onderzoekslijnen</h1>
+        </div>
+      </section>
+      <section class="section--content">
+        <div class="section--content__block wp-content" data-wp-content="content">
+          <!-- WordPress content will be inserted here -->
+        </div>
+      </section>
+    </div>
+    <aside class="sidebar">
+      <!-- WordPress sidebar will be inserted here -->
+    </aside>
   </main>
 
   <script src="scripts/general--helpers.js"></script>
