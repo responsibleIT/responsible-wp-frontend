@@ -86,6 +86,10 @@ h3,
   font-size: clamp(1.5rem, 3vw, 1.875rem);
 }
 
+p, a {
+  font-size: 1.625rem;
+}
+
 /****************/
 /* SCREENREADER */
 /****************/
