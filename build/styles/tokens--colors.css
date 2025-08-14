@@ -144,7 +144,7 @@
     color-scheme:dark;
 
     --clr:var(--white);
-    --bg:var(--grey--20);
+    --bg:var(--black);
     
     /* selection */
     --bg-selection:var(--yellow);
