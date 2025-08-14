@@ -7,8 +7,6 @@
 }
 
 .details--accessibility {
-  cursor: pointer;
-  font-size: 1.25rem;
   position: relative;
 
   display:var(--js, flex);

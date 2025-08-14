@@ -10,7 +10,7 @@
   --white--t5:hsl(0 0 100% / .05);
   --white--t10:hsl(0 0 100% / .1);
 
-  --black:hsl(0, 0%, 1%);
+  --black:hsl(0 0 0%);
   --black--t2:hsl(0 0 0% / .02);
   --black--t5:hsl(0 0 0% / .05);
   --black--t10:hsl(0 0 0% / .1);
@@ -100,7 +100,7 @@
 :root {
   color-scheme:light;
 
-  --clr:var(--black);
+  --clr:var(--grey--20);
   --bg:var(--white);
 
   /* selection */
@@ -144,7 +144,7 @@
     color-scheme:dark;
 
     --clr:var(--white);
-    --bg:var(--black);
+    --bg:var(--grey--20);
     
     /* selection */
     --bg-selection:var(--yellow);
