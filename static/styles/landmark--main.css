@@ -11,12 +11,11 @@ main.grid-container {
 /* Content area */
 .section--content__block {
   grid-column: 1 / -1;
-  
+
   @media (min-width: 768px) {
     grid-column: 1 / span 9;
   }
 }
-
 
 /* Only apply margin when triangles are visible */
 /* :root:not([data-setting--no-images="true"]) .triangles + main {
@@ -24,47 +23,57 @@ main.grid-container {
 } */
 
 .section--content__block {
-  grid-column:1 / -1;
+  grid-column: 1 / -1;
 }
 
 .wp-block-image img {
-  width:100%;
+  width: 100%;
 }
 
 aside.sidebar .project-blocks:nth-child(2) {
   border-top: none;
 }
 
-.project-blocks{
+.project-blocks {
   margin: unset;
   padding: unset;
-  border: .125rem solid var(--clr);
+  border: 0.125rem solid var(--clr);
   border-left: none;
   border-right: none;
 }
 
-.project-blocks li{
-  transition: .3s ease;
+.project-blocks li {
+  transition: 0.3s ease;
   list-style-type: none;
   font-size: 1.875rem;
+  transition: 0.3s ease-in;
 }
 
 .project-blocks li + li {
-  border-top: .125rem solid var(--clr);
+  border-top: 0.125rem solid var(--clr);
 }
 
-.project-blocks li a{
+.project-blocks li a {
   display: block;
   color: unset;
   text-decoration: none;
-  padding: 2.875rem .875rem .75rem .875rem;
+  padding: 2.875rem 0.875rem 0.75rem 0.875rem;
+  transition: color 0.2s ease-out;
 }
 
-.sidebar .project-blocks li a{
-  padding: .75rem .875rem 1rem .875rem;
+.project-blocks li:hover {
+  padding-left: 0.375rem;
 }
 
-.project-blocks li:hover{
+:root[data-color-scheme="dark"] .project-blocks li:hover a {
+  color: var(--black);
+}
+
+.sidebar .project-blocks li a {
+  padding: 0.75rem 0.875rem 1rem 0.875rem;
+}
+
+.project-blocks li:hover {
   transition: 0s ease;
   background: var(--selection);
 }
