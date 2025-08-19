@@ -28,6 +28,7 @@
   --grey--95:hsl(var(--grey-hue), 3%, 95%);
 
   --link: #0352a0;
+  --link-hover: #cc0000;
   --selection: #f1fa03;
   
   --orange:#FF611E;
@@ -221,6 +222,7 @@
   :root[data-color-scheme="dark"] {
     /* links */
     --clr-link:var(--yellow);
+    --link-hover: #FF9999;
 
     /* controls */
     --clr-button--disabled:var(--grey--70);

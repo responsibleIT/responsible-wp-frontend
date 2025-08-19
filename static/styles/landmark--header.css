@@ -4,7 +4,7 @@
 
 .header--body {
   padding:1em 0;
-
+  view-transition-name: header;
   background-color:var(--bg-header);
 }
 
@@ -152,6 +152,7 @@ a.link--skip {
 
 .nav--main a[aria-current="page"]::after {
   opacity:1;
+  view-transition-name: line;
 }
 
 /* interaction */

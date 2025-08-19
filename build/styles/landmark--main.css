@@ -1,3 +1,9 @@
+p:first-of-type {
+  font-weight: 500;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.33;
+}
+
 main.grid-container {
   display: grid;
   grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
@@ -5,15 +11,14 @@ main.grid-container {
 }
 
 .main-content {
-  grid-column: 1 / 9;
-}
-
-/* Content area */
-.section--content__block {
   grid-column: 1 / -1;
 
-  @media (min-width: 768px) {
-    grid-column: 1 / span 9;
+  @media (min-width: 64rem) {
+    grid-column: 1 / 9;
+  }
+
+  @media (min-width: 75rem) {
+    grid-column: 2 / 9;
   }
 }
 
@@ -57,12 +62,16 @@ aside.sidebar .project-blocks:nth-child(2) {
   display: block;
   color: unset;
   text-decoration: none;
-  padding: 2.875rem 0.875rem 0.75rem 0.875rem;
+  padding: 2.125rem 1.125rem 1.625rem 1.125rem;
   transition: color 0.2s ease-out;
+<<<<<<< Updated upstream
 }
 
 .project-blocks li:hover {
   padding-left: 0.375rem;
+=======
+  font-weight: 500;
+>>>>>>> Stashed changes
 }
 
 :root[data-color-scheme="dark"] .project-blocks li:hover a {
@@ -70,7 +79,7 @@ aside.sidebar .project-blocks:nth-child(2) {
 }
 
 .sidebar .project-blocks li a {
-  padding: 0.75rem 0.875rem 1rem 0.875rem;
+  padding: 1.25rem 0.875rem;
 }
 
 .project-blocks li:hover {
