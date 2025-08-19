@@ -64,14 +64,7 @@ aside.sidebar .project-blocks:nth-child(2) {
   text-decoration: none;
   padding: 2.125rem 1.125rem 1.625rem 1.125rem;
   transition: color 0.2s ease-out;
-<<<<<<< Updated upstream
-}
-
-.project-blocks li:hover {
-  padding-left: 0.375rem;
-=======
   font-weight: 500;
->>>>>>> Stashed changes
 }
 
 :root[data-color-scheme="dark"] .project-blocks li:hover a {
