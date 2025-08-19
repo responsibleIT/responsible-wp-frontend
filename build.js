@@ -137,6 +137,22 @@ async function processTemplate(templatePath, outputPath, wpContent, pageName) {
     $(".section--content__block--hero h1").text(pageTitle);
     $("title").text(`${pageTitle} | Lectoraat Responsible IT`);
 
+    // Set active state for navigation
+    $(".nav--main a").each((i, elem) => {
+      const $link = $(elem);
+      const href = $link.attr("href");
+      // Remove leading ./ if present for comparison
+      const cleanHref = href.replace(/^\.\//, "");
+      // For homepage, check if it's index
+      if ((pageName === "index" && (cleanHref === "" || cleanHref === "/")) || 
+          // For other pages, check if the href matches the page name
+          (pageName !== "index" && cleanHref === pageName)) {
+        $link.attr("aria-current", "page");
+      } else {
+        $link.removeAttr("aria-current");
+      }
+    });
+
     // Replace content markers with WordPress content
     $(".wp-content").each((i, elem) => {
       const contentType = $(elem).data("wp-content");
@@ -246,6 +262,8 @@ export async function buildSite() {
           },
           page.slug
         );
+        console.log(page.slug);
+        
       }
     }
 
