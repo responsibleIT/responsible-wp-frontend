@@ -136,6 +136,7 @@ a.link--skip {
   text-decoration:none;
   color:var(--clr-nav--main);
   background-color: var(--bg-nav--main);
+  border-color: transparent;
 }
 
 .nav--main a::after {

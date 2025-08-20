@@ -101,7 +101,7 @@
 :root {
   color-scheme:light;
 
-  --clr:var(--grey--20);
+  --clr:var(--black);
   --bg:var(--white);
 
   /* selection */

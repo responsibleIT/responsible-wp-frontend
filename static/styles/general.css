@@ -26,7 +26,7 @@
 html {
   scrollbar-gutter: stable;
   background-color: var(--bg);
-
+  scroll-behavior: smooth;
   color: var(--clr);
   font-size: calc(1em * (1 + var(--setting-fontsize-factor)));
 }
@@ -42,6 +42,19 @@ body {
   margin: 0;
 
   font-size: clamp(1em, 0.75em + 0.75vw, 1.2em);
+}
+
+/********/
+/* IMAGES */
+/********/
+
+figure{
+  padding: 0;
+  margin: 0;
+}
+
+img{
+  width: 100%;
 }
 
 /********/
@@ -109,4 +122,53 @@ p, a {
   position: absolute;
   white-space: nowrap;
   width: 1px;
+}
+
+/*************/
+/* ITEM LIST */
+/*************/
+
+aside.sidebar .item-list:nth-child(2) {
+  border-top: none;
+}
+
+.item-list {
+  margin: unset;
+  padding: unset;
+  border: 0.125rem solid var(--clr);
+  border-left: none;
+  border-right: none;
+}
+
+.item-list li {
+  transition: 0.3s ease;
+  list-style-type: none;
+  font-size: 1.875rem;
+  transition: 0.3s ease-in;
+}
+
+.item-list li + li {
+  border-top: 0.125rem solid var(--clr);
+}
+
+.item-list li a {
+  display: block;
+  color: unset;
+  text-decoration: none;
+  padding: 2.125rem 1.125rem 1.625rem 1.125rem;
+  transition: color 0.2s ease-out;
+  font-weight: 500;
+}
+
+:root[data-color-scheme="dark"] .item-list li:hover a {
+  color: var(--black);
+}
+
+.sidebar .item-list li a {
+  padding: 1.25rem 0.875rem;
+}
+
+.item-list li:hover {
+  transition: 0s ease;
+  background: var(--selection);
 }

@@ -74,6 +74,48 @@ async function fetchAllPages() {
   return allPages;
 }
 
+async function fetchAllPosts() {
+  let allPosts = [];
+  let currentPage = 1;
+  let hasMorePages = true;
+
+  while (hasMorePages) {
+    try {
+      const response = await fetch(`${WP_API_URL}/posts?per_page=12&page=${currentPage}&_embed`);
+      
+      if (!response.ok) {
+        if (response.status === 400) {
+          // We've reached the end of available posts
+          hasMorePages = false;
+          break;
+        }
+        throw new Error(`WP API ${response.status} when fetching posts page ${currentPage}`);
+      }
+
+      const posts = await response.json();
+      if (posts.length === 0) {
+        hasMorePages = false;
+        break;
+      }
+
+      allPosts = [...allPosts, ...posts];
+      currentPage++;
+
+      const totalPages = parseInt(response.headers.get('X-WP-TotalPages'));
+      if (currentPage > totalPages) {
+        hasMorePages = false;
+      }
+
+      console.log(`Fetched posts page ${currentPage - 1} of ${totalPages || 'unknown'} (${posts.length} items)`);
+    } catch (error) {
+      console.error(`Error fetching posts page ${currentPage}:`, error);
+      hasMorePages = false;
+    }
+  }
+
+  return allPosts;
+}
+
 async function fetchWordPressContent(endpoint) {
   try {
     // Special handling for home page
@@ -89,6 +131,11 @@ async function fetchWordPressContent(endpoint) {
     // Special handling for pages endpoint to include pagination
     if (endpoint === "pages") {
       return await fetchAllPages();
+    }
+
+    // Special handling for posts endpoint to include pagination
+    if (endpoint === "posts") {
+      return await fetchAllPosts();
     }
 
     // Regular page/content fetching
@@ -177,6 +224,33 @@ async function processTemplate(templatePath, outputPath, wpContent, pageName) {
       }
     });
 
+    // Handle posts for actueel page
+    if (pageName === "actueel" && wpContent.posts) {
+      // Create the anchor links list and put it in the wp-content block
+      const anchorLinks = wpContent.posts.map(post => {
+        const postId = post.slug || post.title.rendered.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        return `<li><a href="#${postId}">${post.title.rendered}</a></li>`;
+      }).join('');
+      
+      $(".wp-content").html(`<ul class="post-links item-list">${anchorLinks}</ul>`);
+      
+      // Render the posts in actueel-layout
+      const $actueel = $(".actueel-layout");
+      wpContent.posts.forEach(post => {
+        const postId = post.slug || post.title.rendered.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        const article = `
+          <article class="post" id="${postId}">
+              <h2 class="post__title">
+                ${post.title.rendered}
+              </h2>
+              ${post.content.rendered}
+          </article>
+        `;
+        
+        $actueel.append(article);
+      });
+    }
+
     // Write processed file
     await writeFile(outputPath, $.html());
     console.log(`Generated: ${outputPath}`);
@@ -243,6 +317,21 @@ export async function buildSite() {
       "index"
     );
 
+    // Handle actueel page specially
+    const posts = await fetchWordPressContent("posts");
+    const actueel = {
+      content: { rendered: "" }, // Empty content since we're using posts
+      title: { rendered: "Actueel" },
+      posts: posts
+    };
+    const actueelTemplate = await findTemplate("actueel");
+    await processTemplate(
+      actueelTemplate,
+      join(BUILD_DIR, "actueel.html"),
+      actueel,
+      "actueel"
+    );
+
     // Get all other pages
     const pages = await fetchWordPressContent("pages");
     if (Array.isArray(pages)) {
@@ -251,6 +340,9 @@ export async function buildSite() {
 
       // Process each page using its slug
       for (const page of otherPages) {
+        // Skip actueel since we already handled it
+        if (page.slug === "actueel") continue;
+
         const outputPath = join(BUILD_DIR, `${page.slug}.html`);
         const pageTemplate = await findTemplate(page.slug);
         await processTemplate(
@@ -263,7 +355,6 @@ export async function buildSite() {
           page.slug
         );
         console.log(page.slug);
-        
       }
     }
 

@@ -1,0 +1,50 @@
+main{
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
+    gap: var(--grid-gap);
+    grid-template-rows: auto 1fr;
+}
+
+h1{
+    grid-row: 1;
+    grid-column: 1 / -1;
+}
+
+.main-content{
+    grid-column: 1 / 5;
+    position: sticky;
+    top: 2rem;
+    align-self: start;
+    max-height: 80vh;
+    overflow-y: auto;
+    grid-row: 2;
+}
+
+.actueel-layout{
+    grid-column: 6 / -1;
+    grid-row: 2;
+}
+
+.actueel-layout h2 {
+    margin-top: 0;
+}
+/* Hide all articles by default */
+.actueel-layout article {
+    display: none;
+}
+.actueel-layout:has(:not(:target)) article:first-of-type{
+    display: block;
+}
+/* Show first article when nothing is targeted */
+.actueel-layout:has(:target) article:first-of-type {
+    display: none;
+}
+
+html body .actueel-layout article:first-of-type:target{
+    display: block;
+}
+
+/* Show targeted article */
+.actueel-layout article:target {
+    display: block;
+}
