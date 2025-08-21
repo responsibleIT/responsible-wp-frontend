@@ -52,4 +52,5 @@ html body .actueel-layout article:first-of-type:target{
 /* Show targeted article */
 .actueel-layout article:target {
     display: block;
+    scroll-margin-top: 100vh;
 }
