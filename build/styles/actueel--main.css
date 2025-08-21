@@ -11,13 +11,18 @@ h1{
 }
 
 .main-content{
+    --header-height: 9.29rem;
     grid-column: 1 / 5;
     position: sticky;
-    top: 2rem;
+    top: calc(var(--header-height) + 2rem);
     align-self: start;
     max-height: 80vh;
     overflow-y: auto;
     grid-row: 2;
+}
+
+:root[data-setting--no-images="false"] .main-content{
+    top: calc(var(--height-triangle) - 11rem);
 }
 
 .actueel-layout{
