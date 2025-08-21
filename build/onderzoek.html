@@ -1,0 +1,234 @@
+<!DOCTYPE html><html lang="nl"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lectoraat Responsible IT">
+
+  <title>Onderzoek | Lectoraat Responsible IT</title>
+
+  <script>
+    document.documentElement.classList.add("js");
+  </script>
+
+  <link rel="stylesheet" href="styles/tokens--fonts.css">
+  <link rel="stylesheet" href="styles/tokens--colors.css">
+  
+  <link rel="stylesheet" href="styles/general.css">
+  <link rel="stylesheet" href="styles/general--controls.css">
+  <link rel="stylesheet" href="styles/general--text.css">
+
+  <link rel="stylesheet" href="styles/landmark--header.css">
+  <link rel="stylesheet" href="styles/landmark--header__accessibility.css">
+
+  <link rel="stylesheet" href="styles/landmark--triangles.css">
+
+  <link rel="stylesheet" href="styles/landmark--main.css">
+
+  <link rel="stylesheet" href="styles/testing.css">
+  <link rel="stylesheet" href="styles/sidebar.css">
+
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+
+  <script src="scripts/general--helpers.js" defer=""></script>
+
+  <script defer="" src="scripts/landmark--header.js"></script>
+  <script defer="" src="scripts/landmark--header__accessibility.js"></script>
+
+  <script defer="" src="scripts/landmark--triangles.js"></script>
+</head>
+<body>
+  <header class="header--body">
+    <div class="header--body__block">
+      <a href="/" class="link--logo" aria-label="naar de homepage">
+        <svg class="logo--hva-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 246.207 29.653">
+          <use xlink:href="images/logo-nl.svg#logo"></use>
+        </svg>
+      </a>
+
+      <a href="#main" class="visually-hidden link--skip">direct naar hoofdinhoud</a>
+
+      <button class="button--disclosure button--menu" hidden="">Menu</button>
+
+      <nav class="nav--main">
+        <ul>
+          <li><a href="./responsible-it" lang="en">Responsible IT</a></li>
+          <li><a href="./projecten.html">Projecten</a></li>
+          <li><a href="./onderzoek.html">Onderzoek</a></li>
+          <li><a href="./onderwijs">Onderwijs</a></li>
+          <li><a href="./actueel">Actueel</a></li>
+        </ul>
+      </nav>
+
+      <details class="details--accessibility">
+        <summary>Toeganke­lijkheid</summary>
+
+        <div class="details--accessibility__block">
+          <form>
+            <fieldset>
+              <legend>Lettergrootte</legend>
+  
+              <button type="button" name="setting--fontsize--min" class="setting--fontsize--button setting--fontsize--button--min" value="min" hidden="">
+                <span aria-hidden="true">
+                  A<span>A</span>
+                </span> 
+                Kleiner
+              </button>
+  
+              <select name="setting--fontsize" class="setting--fontsize">
+                <option value="-.2">-20%</option>
+                <option value="-.1">-10%</option>
+                
+                <option value="0" selected="">standaard</option>
+                
+                <option value=".1">+10%</option>
+                <option value=".2">+20%</option>
+                <option value=".3">+30%</option>
+                <option value=".4">+40%</option>
+                <option value=".5">+50%</option>
+              </select>
+              
+              <button type="button" name="setting--fontsize--plus" class="setting--fontsize--button setting--fontsize--button--plus" value="plus" hidden="">
+                <span aria-hidden="true">
+                  <span>A</span>A
+                </span>
+                Groter
+              </button>
+            </fieldset>
+  
+            <fieldset>
+              <legend>Alle of minder animaties</legend>
+              
+              <label aria-label="volg het systeem qua animaties">
+                <input type="radio" name="setting--motion" value="system" checked="">
+                Auto
+              </label>
+
+              <label aria-label="minder animaties">
+                <input type="radio" name="setting--motion" value="reduce">
+                Rustig&nbsp;aan
+              </label>
+
+              <label aria-label="alle animaties">
+                <input type="radio" name="setting--motion" value="no-preference">
+                Animaties
+              </label>
+  
+            </fieldset>
+  
+            <fieldset>
+              <legend>Lichte of donkere kleuren</legend>
+  
+              <label aria-label="kleurenthema van het systeem">
+                <input type="radio" name="setting--color-theme" value="system" checked="">
+                Auto
+              </label>
+
+              <label aria-label="donker kleurenthema">
+                <input type="radio" name="setting--color-theme" value="dark">
+                Donker
+              </label>
+
+              <label aria-label="licht kleurenthema">
+                <input type="radio" name="setting--color-theme" value="light">
+                Licht
+              </label>
+            </fieldset>
+  
+            <fieldset>
+              <legend>Contrast</legend>
+
+              <label>
+                <input type="checkbox" name="setting--contrast">
+                Meer contrast
+              </label>
+
+            </fieldset>
+
+            <fieldset>
+              <legend>Driehoeken</legend>
+
+              <label>
+                <input type="checkbox" name="setting--no-images">
+                Driehoeken verbergen
+              </label>
+            </fieldset>
+  
+            <button type="submit">Toepassen</button>
+          </form>
+        </div>
+
+      </details>
+    </div>
+  </header>
+
+  <div class="triangles"></div>
+
+  <main id="main" class="grid-container">
+    <div class="main-content">
+      <section class="section--content">
+        <div class="section--content__block section--content__block--hero">
+          <h1>Onderzoek</h1>
+        </div>
+      </section>
+      <section class="section--content">
+        <div class="section--content__block wp-content" data-wp-content="content"><ul class="wp-block-page-list"><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/onderzoek/aanpak/">Aanpak</a></li><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/onderzoek/onderzoekslijnen/">Onderzoekslijnen</a></li></ul>
+
+
+<h2 class="wp-block-heading">Onderzoek bij het Lectoraat Responsible IT</h2>
+
+
+
+<p>Het lectoraat richt zich op methodes (voor) duiden, ontwerpen en implementeren van verantwoorde IT systemen. Praktische handreikingen voor ontwerpers en ontwikkelaars van digitale toepassingen die duiding geven aan wat verantwoord betekent. (Kan zijn methode, modellen, toolkit, digitaal gereedschap, organisatievorm, inspiratie, codevoorbeeld, design patterns, datasets, boeken, manuals, lezingen, publicaties, installaties, onderwijs).</p>
+
+
+
+<h2 class="wp-block-heading">Output</h2>
+
+
+
+<p><a href="https://research.hva.nl/en/organisations/responsible-it">https://research.hva.nl/en/organisations/responsible-it</a></p>
+
+
+
+<p>Research output HvA Research Database</p>
+
+
+
+<h2 class="wp-block-heading">Onderzoekslijnen</h2>
+
+
+
+<h4 class="wp-block-heading">Verantwoorde AI algoritmes</h4>
+
+
+
+<p>Een algoritme is een automatische reeks computerinstructies die een beslissing van de mens kan nabootsen of ondersteunen. Kunstmatige intelligentie is een vorm van computerinstructies die kijken naar situaties uit het verleden (verzamelde data) en proberen de beslissingen die toen genomen zijn te gebruiken om te leren wat de beste beslissing is voor een toekomstige situatie. Die nieuwe situatie moet dus lijken op een gebeurtenis uit het verleden. Helaas was de beslissing uit het verleden niet altijd de juiste, verantwoorde keuze. De computerinstructie (het algoritme) leert dus de onverantwoorde keuzes uit het verleden en gebruikt die om nu beslissingen te nemen. We onderzoeken of we kunnen herkennen wat een “foute” keuze is, door naar de data die gebruikt wordt te kijken, door te kijken naar de beslissingen die we proberen te automatiseren en door te kijken naar de manier waarop de instructies worden geprogrammeerd. We noemen de AI smart, of slim, wij onderzoeken of het ook verantwoord kan.</p>
+
+
+
+<h4 class="wp-block-heading">Verantwoorde IT-systeemontwikkeling</h4>
+
+
+
+<p>Net als de algoritmes zijn onze computer systemen niet voor iedereen eenvoudig te gebruiken. En vaak moet je een computer met een algoritme gebruiken om iets voor elkaar te krijgen: het aanvragen van een paspoort, de aankoop van een festival ticket bijvoorbeeld. Overal zien we computerschermen, met mensen die zitten te typen in plaats van in gesprek met ons te zijn. Het gebruik van computers heeft veel voordelen, we kunnen als mensen heel veel aan computers overlaten. Daarvoor moet het systeem wel goed werken, veilig zijn voor hackers, en te begrijpen. Wij werken met de bouwers van computersystemen, om bij het bouwen van de computersystemen al te werken met een goed ontwerp. Deze moeten makkelijk te gebruiken zijn, te begrijpen zijn en te vertrouwen. Als je op die manier werkt bij het bouwen van een computersysteem, dan zul je als bouwer andere keuzes maken. De systemen worden er beter van, verantwoorder.</p>
+
+
+
+<h4 class="wp-block-heading">Duurzame IT</h4>
+
+
+
+<p>Wij onderzoeken waar computersystemen precies energie voor nodig hebben en hoe dat met minder energie kan. Dat is niet alleen aan de computertechnici, ook de gebruikers van de systemen kunnen helpen om minder energie te gebruiken, bijvoorbeeld door hun foto’s niet allemaal te bewaren in een “cloud”. Het blijkt dat we niet goed weten hoeveel energie het nu precies kost om een instagram bericht te posten, of een nieuwsbrief te sturen. Wij proberen dit uit te rekenen. Binnen het lectoraat werkt een groep onderzoekers onder aansturing van associate lector Pascal Wiggers aan verantwoorde artificiële intelligentie.</p>
+
+
+
+<p></p>
+</div>
+      </section>
+    </div>
+    <aside class="sidebar">
+      <!-- WordPress sidebar will be inserted here -->
+    </aside>
+  </main>
+
+
+</body></html>

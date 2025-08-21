@@ -144,7 +144,6 @@ aside.sidebar .item-list:nth-child(2) {
   transition: 0.3s ease;
   list-style-type: none;
   font-size: 1.875rem;
-  transition: 0.3s ease-in;
 }
 
 .item-list li + li {
@@ -156,8 +155,13 @@ aside.sidebar .item-list:nth-child(2) {
   color: unset;
   text-decoration: none;
   padding: 2.125rem 1.125rem 1.625rem 1.125rem;
-  transition: color 0.2s ease-out;
+  transition: color 0.2s ease-out, background 0.3s ease-in;
   font-weight: 500;
+}
+
+.item-list li a[data-selected="true"]{
+  background: var(--clr);
+  color: var(--bg);
 }
 
 :root[data-color-scheme="dark"] .item-list li:hover a {
@@ -168,7 +172,7 @@ aside.sidebar .item-list:nth-child(2) {
   padding: 1.25rem 0.875rem;
 }
 
-.item-list li:hover {
+.item-list li:hover a:not([data-selected="true"]) {
   transition: 0s ease;
   background: var(--selection);
 }

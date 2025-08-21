@@ -229,7 +229,7 @@ async function processTemplate(templatePath, outputPath, wpContent, pageName) {
       // Create the anchor links list and put it in the wp-content block
       const anchorLinks = wpContent.posts.map(post => {
         const postId = post.slug || post.title.rendered.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-        return `<li><a href="#${postId}">${post.title.rendered}</a></li>`;
+        return `<li><a href="#${postId}" data-selected="false">${post.title.rendered}</a></li>`;
       }).join('');
       
       $(".wp-content").html(`<ul class="post-links item-list">${anchorLinks}</ul>`);

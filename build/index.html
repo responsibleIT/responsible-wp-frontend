@@ -1,0 +1,221 @@
+<!DOCTYPE html><html lang="nl"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lectoraat Responsible IT">
+
+  <title>Homepage | Lectoraat Responsible IT</title>
+
+  <script>
+    document.documentElement.classList.add("js");
+  </script>
+
+  <link rel="stylesheet" href="styles/tokens--fonts.css">
+  <link rel="stylesheet" href="styles/tokens--colors.css">
+  
+  <link rel="stylesheet" href="styles/general.css">
+  <link rel="stylesheet" href="styles/general--controls.css">
+  <link rel="stylesheet" href="styles/general--text.css">
+
+  <link rel="stylesheet" href="styles/landmark--header.css">
+  <link rel="stylesheet" href="styles/landmark--header__accessibility.css">
+
+  <link rel="stylesheet" href="styles/landmark--triangles.css">
+
+  <link rel="stylesheet" href="styles/landmark--main.css">
+
+  <link rel="stylesheet" href="styles/testing.css">
+  <link rel="stylesheet" href="styles/sidebar.css">
+
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+
+  <script src="scripts/general--helpers.js" defer=""></script>
+
+  <script defer="" src="scripts/landmark--header.js"></script>
+  <script defer="" src="scripts/landmark--header__accessibility.js"></script>
+
+  <script defer="" src="scripts/landmark--triangles.js"></script>
+</head>
+<body>
+  <header class="header--body">
+    <div class="header--body__block">
+      <a href="/" class="link--logo" aria-label="naar de homepage">
+        <svg class="logo--hva-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 246.207 29.653">
+          <use xlink:href="images/logo-nl.svg#logo"></use>
+        </svg>
+      </a>
+
+      <a href="#main" class="visually-hidden link--skip">direct naar hoofdinhoud</a>
+
+      <button class="button--disclosure button--menu" hidden="">Menu</button>
+
+      <nav class="nav--main">
+        <ul>
+          <li><a href="./responsible-it" lang="en">Responsible IT</a></li>
+          <li><a href="./projecten.html">Projecten</a></li>
+          <li><a href="./onderzoek.html">Onderzoek</a></li>
+          <li><a href="./onderwijs">Onderwijs</a></li>
+          <li><a href="./actueel">Actueel</a></li>
+        </ul>
+      </nav>
+
+      <details class="details--accessibility">
+        <summary>Toeganke­lijkheid</summary>
+
+        <div class="details--accessibility__block">
+          <form>
+            <fieldset>
+              <legend>Lettergrootte</legend>
+  
+              <button type="button" name="setting--fontsize--min" class="setting--fontsize--button setting--fontsize--button--min" value="min" hidden="">
+                <span aria-hidden="true">
+                  A<span>A</span>
+                </span> 
+                Kleiner
+              </button>
+  
+              <select name="setting--fontsize" class="setting--fontsize">
+                <option value="-.2">-20%</option>
+                <option value="-.1">-10%</option>
+                
+                <option value="0" selected="">standaard</option>
+                
+                <option value=".1">+10%</option>
+                <option value=".2">+20%</option>
+                <option value=".3">+30%</option>
+                <option value=".4">+40%</option>
+                <option value=".5">+50%</option>
+              </select>
+              
+              <button type="button" name="setting--fontsize--plus" class="setting--fontsize--button setting--fontsize--button--plus" value="plus" hidden="">
+                <span aria-hidden="true">
+                  <span>A</span>A
+                </span>
+                Groter
+              </button>
+            </fieldset>
+  
+            <fieldset>
+              <legend>Alle of minder animaties</legend>
+              
+              <label aria-label="volg het systeem qua animaties">
+                <input type="radio" name="setting--motion" value="system" checked="">
+                Auto
+              </label>
+
+              <label aria-label="minder animaties">
+                <input type="radio" name="setting--motion" value="reduce">
+                Rustig&nbsp;aan
+              </label>
+
+              <label aria-label="alle animaties">
+                <input type="radio" name="setting--motion" value="no-preference">
+                Animaties
+              </label>
+  
+            </fieldset>
+  
+            <fieldset>
+              <legend>Lichte of donkere kleuren</legend>
+  
+              <label aria-label="kleurenthema van het systeem">
+                <input type="radio" name="setting--color-theme" value="system" checked="">
+                Auto
+              </label>
+
+              <label aria-label="donker kleurenthema">
+                <input type="radio" name="setting--color-theme" value="dark">
+                Donker
+              </label>
+
+              <label aria-label="licht kleurenthema">
+                <input type="radio" name="setting--color-theme" value="light">
+                Licht
+              </label>
+            </fieldset>
+  
+            <fieldset>
+              <legend>Contrast</legend>
+
+              <label>
+                <input type="checkbox" name="setting--contrast">
+                Meer contrast
+              </label>
+
+            </fieldset>
+
+            <fieldset>
+              <legend>Driehoeken</legend>
+
+              <label>
+                <input type="checkbox" name="setting--no-images">
+                Driehoeken verbergen
+              </label>
+            </fieldset>
+  
+            <button type="submit">Toepassen</button>
+          </form>
+        </div>
+
+      </details>
+    </div>
+  </header>
+
+  <div class="triangles"></div>
+
+  <main id="main" class="grid-container">
+    <div class="main-content">
+      <section class="section--content">
+        <div class="section--content__block section--content__block--hero">
+          <h1>Homepage</h1>
+        </div>
+      </section>
+      <section class="section--content">
+        <div class="section--content__block wp-content" data-wp-content="content"><p></p>
+
+
+
+<p>Het lectoraat Responsible IT onderzoekt hoe we bij het ontwerpen, ontwikkelen en gebruiken van digitale technologie, in het bijzonder AI, rekening kunnen houden met de ethische en maatschappelijke gevolgen van die technologie. <br><br>Technologie is niet neutraal, maar heeft effecten op mensen die direct of indirect met de technologie in aanraking komen. Technologie heeft daarmee altijd een maatschappelijke en een ethische dimensie. </p>
+
+
+
+<h2 class="wp-block-heading">Het Lectoraat</h2>
+
+
+<ul class="wp-block-page-list"><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/responsible-it/themas/">Thema’s</a></li><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/responsible-it/visie/">Visie</a></li><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/responsible-it/lectoraat-responsible-it/">Wat is het Lectoraat</a></li><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/responsible-it/werkplaats/">Werkplaats</a></li></ul>
+
+
+<h2 class="wp-block-heading">Projecten</h2>
+
+
+<ul class="project-blocks wp-block-page-list"><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/projecten/ai-en-media-samenwerken-voor-een-sterkere-democratie/">AI en media: samenwerken voor een sterkere democratie</a></li><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/projecten/als-de-machine-kiest-het-gebruik-van-kunstmatige-intelligentie-in-werving-en-selectie/">Als de machine kiest: het gebruik van kunstmatige intelligentie in werving en selectie</a></li><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/projecten/consensusmachine/">Consensusmachine</a></li><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/projecten/haicu-verantwoorde-ai-voor-cultureel-erfgoed/">HAICu: Verantwoorde AI voor Cultureel Erfgoed</a></li><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/projecten/hitloop/">Hitloop</a></li><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/projecten/juridische-besluitvorming-verbeteren-met-ai-tools-en-technieken-2/">Juridische besluitvorming verbeteren met AI-tools en -technieken</a></li><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/projecten/moralis-machina/">Moralis Machina</a></li><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/projecten/raait-responsible-applied-artificial-intelligence/">RAAIT – Responsible Applied Artificial InTelligence</a></li><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/projecten/teksten-van-ambtenaren-leesbaarder-maken-met-ai/">Teksten van ambtenaren leesbaarder maken met AI</a></li><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/projecten/verantwoord-ai-dashboard-transparantie-en-ethiek-in-kunstmatige-intelligentie/">Verantwoord AI Dashboard: Transparantie en Ethiek in Kunstmatige Intelligentie</a></li><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/projecten/verhaal-speciaal-cirkel-van-laaggeletterdheid-met-ai-doorbreken/">Verhaal Speciaal: cirkel van laaggeletterdheid met AI doorbreken</a></li></ul>
+
+
+
+
+
+
+
+</div>
+      </section>
+    </div>
+    <aside class="sidebar">
+      <!-- WordPress sidebar will be inserted here -->
+    <div class="wp-block-group wp-sidebar has-global-padding is-layout-constrained wp-block-group-is-layout-constrained">
+<h3 class="wp-block-heading">H3 Sidebar</h3>
+
+
+
+<p></p>
+
+
+
+<p>De techniek moet betrouwbaar werken. Niets is vervelender dan een computersysteem dat het niet doet, of de ene keer wel en de andere keer niet. Robuust betekent meer dan een werkend systeem. Het moet niet uitmaken met welke computer je werkt, een tablet, een Android smartphone of een Apple phone, of een desktop met groot scherm, het zou niet moeten uitmaken. Ook willen we future proof zijn, de techniek moet ook correct werken als er straks een nieuwe smartphone komt.</p>
+</div><div class="wp-block-group wp-sidebar has-global-padding is-layout-constrained wp-block-group-is-layout-constrained">
+<h3 class="wp-block-heading">H3 Submenu</h3>
+
+
+<ul class="project-blocks wp-block-page-list"><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/projecten/ai-en-media-samenwerken-voor-een-sterkere-democratie/">AI en media: samenwerken voor een sterkere democratie</a></li><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/projecten/als-de-machine-kiest-het-gebruik-van-kunstmatige-intelligentie-in-werving-en-selectie/">Als de machine kiest: het gebruik van kunstmatige intelligentie in werving en selectie</a></li><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/projecten/consensusmachine/">Consensusmachine</a></li><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/projecten/haicu-verantwoorde-ai-voor-cultureel-erfgoed/">HAICu: Verantwoorde AI voor Cultureel Erfgoed</a></li><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/projecten/hitloop/">Hitloop</a></li><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/projecten/juridische-besluitvorming-verbeteren-met-ai-tools-en-technieken-2/">Juridische besluitvorming verbeteren met AI-tools en -technieken</a></li><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/projecten/moralis-machina/">Moralis Machina</a></li><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/projecten/raait-responsible-applied-artificial-intelligence/">RAAIT – Responsible Applied Artificial InTelligence</a></li><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/projecten/teksten-van-ambtenaren-leesbaarder-maken-met-ai/">Teksten van ambtenaren leesbaarder maken met AI</a></li><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/projecten/verantwoord-ai-dashboard-transparantie-en-ethiek-in-kunstmatige-intelligentie/">Verantwoord AI Dashboard: Transparantie en Ethiek in Kunstmatige Intelligentie</a></li><li class="wp-block-pages-list__item"><a class="wp-block-pages-list__item__link" href="https://wordpress.responsible-it.nl/projecten/verhaal-speciaal-cirkel-van-laaggeletterdheid-met-ai-doorbreken/">Verhaal Speciaal: cirkel van laaggeletterdheid met AI doorbreken</a></li></ul></div></aside>
+  </main>
+
+
+</body></html>
