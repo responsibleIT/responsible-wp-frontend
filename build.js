@@ -224,6 +224,56 @@ async function processTemplate(templatePath, outputPath, wpContent, pageName) {
       }
     });
 
+    // Rewrite absolute WordPress links to local relative links
+    try {
+      const wpOrigin = new URL(WP_API_URL).origin; // handles WP_API_URL ending with /wp-json/wp/v2
+
+      const hasFileExtension = (path) => /\.[a-z0-9]{2,8}$/i.test(path);
+      const isMediaOrAdmin = (path) =>
+        path.startsWith('/wp-content/') ||
+        path.startsWith('/wp-includes/') ||
+        path.startsWith('/wp-admin/');
+
+      const rewriteHref = (href) => {
+        if (!href) return href;
+        // Already relative or hash-only
+        if (href.startsWith('#') || href.startsWith('./') || href.startsWith('/')) return href;
+
+        // Only rewrite absolute links that point to the WP site
+        if (href.startsWith(wpOrigin)) {
+          const u = new URL(href);
+          const { pathname, hash } = u;
+
+          // Skip media, admin, and direct files
+          if (isMediaOrAdmin(pathname) || hasFileExtension(pathname)) return href;
+
+          // Homepage
+          if (pathname === '/' || pathname === '') {
+            return `./${hash || ''}`.replace(/\.$/, '.');
+          }
+
+          // Use the last slug segment as filename
+          const segments = pathname.split('/').filter(Boolean);
+          const last = segments[segments.length - 1];
+          if (!last) return `./${hash || ''}`;
+          return `./${last}.html${hash || ''}`;
+        }
+        return href;
+      };
+
+      // Process links within inserted WP areas only
+      $('.wp-content a, .sidebar a').each((_, el) => {
+        const $a = $(el);
+        const orig = $a.attr('href');
+        const next = rewriteHref(orig);
+        if (next && next !== orig) {
+          $a.attr('href', next);
+        }
+      });
+    } catch (e) {
+      console.warn('Link rewrite skipped due to error:', e?.message || e);
+    }
+
     // Handle posts for actueel page
     if (pageName === "actueel" && wpContent.posts) {
       // Create the anchor links list and put it in the wp-content block
