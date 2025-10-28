@@ -8,9 +8,12 @@ main{
 h1{
     grid-row: 1;
     grid-column: 1 / -1;
+    display: inline;
 }
-
-.main-content{
+.section--content{
+    grid-column: 1 / -1;
+}
+.main--content{
     --header-height: 9.29rem;
     grid-column: 1 / 5;
     position: sticky;
@@ -21,7 +24,7 @@ h1{
     grid-row: 2;
 }
 
-:root[data-setting--no-images="false"] .main-content{
+:root[data-setting--no-images="false"] .main--content{
     top: calc(var(--height-triangle) - 11rem);
 }
 
@@ -33,13 +36,21 @@ h1{
 .actueel-layout h2 {
     margin-top: 0;
 }
+
+.actueel-layout p {
+    overflow-x: hidden;
+    overflow-x: clip;
+}
+
 /* Hide all articles by default */
 .actueel-layout article {
     display: none;
 }
+
 .actueel-layout:has(:not(:target)) article:first-of-type{
     display: block;
 }
+
 /* Show first article when nothing is targeted */
 .actueel-layout:has(:target) article:first-of-type {
     display: none;
