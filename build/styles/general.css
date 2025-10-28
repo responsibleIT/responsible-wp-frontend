@@ -43,6 +43,10 @@ body {
   font-size: clamp(1em, 0.75em + 0.75vw, 1.2em);
 }
 
+.hidden, .hiddem{
+  display: none !important;
+  opacity: 0 !important;
+}
 /********/
 /* IMAGES */
 /********/
