@@ -108,9 +108,15 @@ h3,
   font-size: clamp(1.5rem, 3vw, 1.875rem);
 }
 
-p, a {
+p, a, ul {
   font-size: 1.625rem;
   line-height: 1.65;
+}
+
+span, li{
+  font-size: inherit;
+  color: inherit;
+  line-height: inherit;
 }
 
 /****************/
