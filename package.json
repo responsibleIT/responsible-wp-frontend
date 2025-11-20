@@ -14,8 +14,11 @@
     "check": "node serverBuilder.js"
   },
   "dependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "@11ty/eleventy-img": "^6.0.4",
     "cheerio": "1.0.0-rc.10",
     "dotenv": "^16.3.1",
+    "liquidjs": "^10.24.0",
     "serve": "^14.2.5"
   },
   "devDependencies": {
