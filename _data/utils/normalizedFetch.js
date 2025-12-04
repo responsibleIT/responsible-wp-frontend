@@ -1,0 +1,3 @@
+const normalizedFetch = (source, options) => {
+
+}
