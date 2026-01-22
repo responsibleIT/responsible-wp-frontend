@@ -1,14 +1,15 @@
 {% layout './layouts/default-layout.liquid'
-  , title: "Homepagina" %}
+  , title: "Homepage - Lectoraat Responsible IT" %}
 
 {% block head %}
-  <link rel="stylesheet" href="styles/landmark_main-form.css">
+  <link rel="stylesheet" href="/styles/landmark_main-form.css">
 
 {% endblock %}
 
 {% block %}
   <main>
-    <h1>tekstje</h1>
-    <h2>nog 1</h2>
+    <h1>{{ pages.home.title.rendered }}</h1>
+    {{ pages.home.content.rendered | sanitize }}
+    test
   </main>
 {% endblock %}

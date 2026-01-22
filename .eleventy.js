@@ -2,6 +2,7 @@ import Image from "@11ty/eleventy-img";
 import { join } from "path";
 import { rm } from "fs/promises";
 import { existsSync } from "fs";
+import * as cheerio from "cheerio";
 
 export default function (eleventyConfig) {
   // Copy everything from public/ to /
@@ -18,6 +19,43 @@ export default function (eleventyConfig) {
     if (existsSync(projectVisualsPath)) {
       await rm(projectVisualsPath, { recursive: true, force: true });
       console.log("Removed:", projectVisualsPath);
+    }
+  });
+
+  // HTML sanitization filter - removes newlines and normalizes whitespace
+  eleventyConfig.addLiquidFilter("sanitize", function(html) {
+    if (!html || typeof html !== 'string') return html;
+    
+    try {
+      const $ = cheerio.load(html, null, false);
+      
+      // Remove empty text nodes and normalize whitespace
+      $('*').each(function() {
+        const $el = $(this);
+        const children = $el.contents();
+        
+        children.each(function() {
+          if (this.type === 'text') {
+            const text = $(this).text();
+            // Replace multiple whitespace/newlines with single space, trim
+            const cleaned = text.replace(/\s+/g, ' ').trim();
+            if (cleaned) {
+              $(this).replaceWith(cleaned);
+            } else {
+              $(this).remove();
+            }
+          }
+        });
+      });
+      
+      // Get cleaned HTML and remove leading/trailing whitespace
+      return $.html().trim();
+    } catch (error) {
+      // If parsing fails, just clean up newlines and extra whitespace
+      return html
+        .replace(/\n+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
     }
   });
 

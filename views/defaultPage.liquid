@@ -1,0 +1,20 @@
+---
+pagination:
+  data: pages.pages
+  size: 1
+  alias: page
+permalink: "{{ page.slug }}/index.html"
+---
+
+{% layout './layouts/default-layout.liquid'
+  , title: page.title.rendered %}
+
+{% block %}
+  <main>
+    <h1>{{ page.title.rendered | default: "Page" }}</h1>
+    {{ page.status }}
+    <div class="wp-content">
+      {{ page.content.rendered | sanitize }}
+    </div>
+  </main>
+{% endblock %}
