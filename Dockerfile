@@ -1,20 +1,19 @@
 FROM node:20-slim
-# Enable corepack to use pnpm
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
-WORKDIR /app
+# Use a standard, non-conflicting path
+WORKDIR /usr/src/app
 
-# Copy lockfile and package.json
 COPY pnpm-lock.yaml package.json ./
-
-# Install dependencies
 RUN pnpm install --frozen-lockfile
 
-# Copy the rest of the source
+# Copy everything (including your new /routing folder)
 COPY . .
 
-# Build the static site
+# Build the 11ty site into /dist
 RUN pnpm exec eleventy
 
 EXPOSE 3000
-CMD ["node", "server.js"]
+
+# Tell Node exactly where the script moved to
+CMD ["node", "routing/server.js"]
