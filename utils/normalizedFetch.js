@@ -1,4 +1,5 @@
 import { config } from "dotenv";
+import specifiedSkip from "./specifiedSkip.js"
 config();
 
 const WP_API_URL = process.env.WP_API_URL;
@@ -117,6 +118,11 @@ export default async function NormalizedFetch(fetchSource, options = "") {
 
     // Convert date strings to Date objects for Eleventy compatibility
     data = convertDatesToObjects(data);
+
+    // Apply any configured skip rules for collection endpoints
+    if (Array.isArray(data)) {
+      data = specifiedSkip(fetchSource, data);
+    }
 
     // Determine if data is an array (multiple objects) or a single object
     const isArray = Array.isArray(data);
