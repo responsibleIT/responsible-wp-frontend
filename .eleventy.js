@@ -2,7 +2,10 @@ import Image from "@11ty/eleventy-img";
 import { join } from "path";
 import { rm } from "fs/promises";
 import { existsSync } from "fs";
-import * as cheerio from "cheerio";
+import sanitize from "./lib/filters/sanitize.js";
+import extractElement from "./lib/filters/extractElement.js";
+
+// ! .evelenty.js makes use of lib
 
 export default function (eleventyConfig) {
   // Copy everything from public/ to /
@@ -10,11 +13,7 @@ export default function (eleventyConfig) {
 
   // Remove project-visuals/ after build
   eleventyConfig.on("eleventy.after", async ({ dir }) => {
-    const projectVisualsPath = join(
-      dir.output,
-      "assets",
-      "img",
-    );
+    const projectVisualsPath = join(dir.output, "assets", "img");
 
     if (existsSync(projectVisualsPath)) {
       await rm(projectVisualsPath, { recursive: true, force: true });
@@ -22,42 +21,8 @@ export default function (eleventyConfig) {
     }
   });
 
-  // HTML sanitization filter - removes newlines and normalizes whitespace
-  eleventyConfig.addLiquidFilter("sanitize", function(html) {
-    if (!html || typeof html !== 'string') return html;
-    
-    try {
-      const $ = cheerio.load(html, null, false);
-      
-      // Remove empty text nodes and normalize whitespace
-      $('*').each(function() {
-        const $el = $(this);
-        const children = $el.contents();
-        
-        children.each(function() {
-          if (this.type === 'text') {
-            const text = $(this).text();
-            // Replace multiple whitespace/newlines with single space, trim
-            const cleaned = text.replace(/\s+/g, ' ').trim();
-            if (cleaned) {
-              $(this).replaceWith(cleaned);
-            } else {
-              $(this).remove();
-            }
-          }
-        });
-      });
-      
-      // Get cleaned HTML and remove leading/trailing whitespace
-      return $.html().trim();
-    } catch (error) {
-      // If parsing fails, just clean up newlines and extra whitespace
-      return html
-        .replace(/\n+/g, ' ')
-        .replace(/\s+/g, ' ')
-        .trim();
-    }
-  });
+  eleventyConfig.addLiquidFilter("sanitize", sanitize);
+  eleventyConfig.addLiquidFilter("extract", extractElement);
 
   // Image generation shortcode
   eleventyConfig.addLiquidShortcode(
@@ -86,7 +51,7 @@ export default function (eleventyConfig) {
         // console.error(`Error processing image ${src}:`, error);
         return `<picture><img src="" alt="${alt ? alt : "Image not found"}" /></picture>`;
       }
-    }
+    },
   );
 
   return {
