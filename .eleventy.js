@@ -9,7 +9,7 @@ import extractElement from "./lib/filters/extractElement.js";
 
 export default function (eleventyConfig) {
   // Copy everything from public/ to /
-  eleventyConfig.addPassthroughCopy({ "public/": "/" });
+  eleventyConfig.addPassthroughCopy({ "src/public/": "/" });
 
   // Remove project-visuals/ after build
   eleventyConfig.on("eleventy.after", async ({ dir }) => {
@@ -56,10 +56,12 @@ export default function (eleventyConfig) {
 
   return {
     dir: {
-      input: "views",
+      input: "src/views",
       includes: "partials",
       layouts: "layouts",
-      data: "../_data", // <-- Go up one level from 'views' to reach root/_data
+      // Note: `data` is resolved relative to `input`
+      // `src/views` + `../../_data` → project root `_data`
+      data: "../../_data",
       output: "dist",
     },
     templateFormats: ["liquid", "md", "html"],
