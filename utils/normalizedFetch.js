@@ -47,7 +47,7 @@ async function fetchAllWithPagination(endpoint) {
   while (hasMorePages) {
     try {
       const response = await fetch(
-        `${WP_API_URL}/${endpoint}?per_page=${perPage}&page=${currentPage}`
+        `${WP_API_URL}/${endpoint}?per_page=${perPage}&page=${currentPage}&status=publish`
       );
 
       if (!response.ok) {
