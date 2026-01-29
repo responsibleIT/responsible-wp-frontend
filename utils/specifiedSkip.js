@@ -16,19 +16,20 @@ const skipConfig = {
 };
 
 const specifiedSkip = (endpoint, items) => {
+  
   const config = skipConfig[endpoint];
   if (!config || !Array.isArray(items)) return items;
-
+  
   let filtered = items;
-
+  
   if (config.slugs && config.slugs.length > 0) {
     filtered = filtered.filter((item) => !config.slugs.includes(item.slug));
   }
-
+  
   if (config.ids && config.ids.length > 0) {
     filtered = filtered.filter((item) => !config.ids.includes(item.id));
   }
-
+  
   return filtered;
 };
 
