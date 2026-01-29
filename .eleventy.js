@@ -11,6 +11,10 @@ export default function (eleventyConfig) {
   // Copy everything from public/ to /
   eleventyConfig.addPassthroughCopy({ "src/public/": "/" });
 
+  // Ignore SSR-only templates; these are rendered by Express, not Eleventy
+  // Paths are relative to the project root here
+  eleventyConfig.ignores.add("src/views/SSR/**");
+
   // Remove project-visuals/ after build
   eleventyConfig.on("eleventy.after", async ({ dir }) => {
     const projectVisualsPath = join(dir.output, "assets", "img");
