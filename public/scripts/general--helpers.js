@@ -105,10 +105,23 @@ function setAttr(attribute, value, element = document.documentElement) {
 // LOCAL STORAGE //
 ///////////////////
 
+/**
+ * Stores an item {item: value} in local storage
+ * @param {any} item
+ * @param {any} value
+ * @returns {any}
+ */
 function storeItem(item, value) {
 	localStorage.setItem(item, JSON.stringify( value ));	
 }
 
+
+/**
+ * Retrieve an item {item: value} from local storage
+ * 
+ * @param {any} item
+ * @returns {any}
+ */
 function retrieveItem(item) {
 	return( JSON.parse( localStorage.getItem(item) ) );
 }
