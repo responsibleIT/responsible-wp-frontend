@@ -3,10 +3,11 @@ pagination:
   data: pages.pages
   size: 1
   alias: page
+  resolve: values
 permalink: "{{ page.slug }}/index.html"
 ---
 
-{% layout './layouts/default-layout.liquid', title: page.title.rendered, current: page.slug | prepend: '/' %}
+{% layout './layouts/default-layout', title: page.title.rendered, current: page.slug | prepend: '/' %}
 
 {% block %}
   <main class="grid-container" id="main">
