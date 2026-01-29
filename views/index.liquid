@@ -1,15 +1,23 @@
 {% layout './layouts/default-layout.liquid'
-  , title: "Homepage - Lectoraat Responsible IT" %}
+  , title: pages.home.title.rendered
+  , current: "/" %}
 
 {% block head %}
   <link rel="stylesheet" href="/styles/landmark_main-form.css">
-
 {% endblock %}
 
 {% block %}
-  <main>
-    <h1>{{ pages.home.title.rendered }}</h1>
-    {{ pages.home.content.rendered | sanitize }}
-    test
+  <main class="grid-container">
+    <div class="main-content">
+      <section class="section--content" style="--delay: 0.1s">
+        <h1>{{ pages.home.title.rendered }}</h1>
+      </section>
+      <section class="section--content" style="--delay: 0.1s">
+        {{ pages.home.content.rendered | extract: "wp-main" | sanitize }}
+      </section>
+    </div>
+    <aside class="sidebar" style="--delay:.2s">
+      {{ pages.home.content.rendered | extract: "wp-sidebar" | sanitize }}
+    </aside>
   </main>
 {% endblock %}
