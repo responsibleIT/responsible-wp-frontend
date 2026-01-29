@@ -2,6 +2,7 @@
   , title: title %}
 {% block head %}
 {% endblock %}</head><body>
-{% render './partials/Header.liquid' %}
+{% render './partials/Header.liquid'
+  , current: current %}
 {% block %}
 {% endblock %}</body></html>
