@@ -1,18 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title | default: "Page"}} | Responsible IT</title>
+    <title>{{ title | default: "Page"}} | Lectoraat Responsible IT</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
 
-    <link rel="stylesheet" href="/styles/general.css">
-    <link rel="stylesheet" href="/styles/general--text.css">
-    <link rel="stylesheet" href="/styles/general--controls.css">
-    
-    <link rel="stylesheet" href="/styles/tokens--colors.css">
-    <link rel="stylesheet" href="/styles/tokens--fonts.css">
+    <script defer>
+      document.documentElement.classList.add("js");
+    </script>
+
+    <link rel="stylesheet" href="/styles/tokens--fonts.css" />
+    <link rel="stylesheet" href="/styles/tokens--colors.css" />
+
+    <link rel="stylesheet" href="/styles/general.css" />
+    <link rel="stylesheet" href="/styles/general--controls.css" />
+    <link rel="stylesheet" href="/styles/general--text.css" />
 
     <link rel="stylesheet" href="/styles/landmark--header.css" />
     <link rel="stylesheet" href="/styles/landmark--header__accessibility.css" />
 
     <link rel="stylesheet" href="/styles/landmark--triangles.css" />
+
+    <link rel="stylesheet" href="/styles/landmark--main.css" />
+    <link rel="stylesheet" href="/styles/landmark_main-form.css" />
+
+    <link rel="stylesheet" href="/styles/testing.css" />
+    <link rel="stylesheet" href="/styles/sidebar.css" />
+
+    <link rel="stylesheet" href="/styles/animation-entry.css" />
+
+    <script src="/scripts/general--helpers.js" defer></script>
+
+    <script defer src="/scripts/landmark--header.js"></script>
+    <script defer src="/scripts/landmark__main--form.js"></script>
+    <script defer src="/scripts/landmark--header__accessibility.js" defer></script>
+
+    <script defer src="/scripts/landmark--triangles.js" defer></script>
