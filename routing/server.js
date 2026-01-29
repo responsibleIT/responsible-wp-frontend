@@ -1,7 +1,8 @@
 import express from "express";
 import { Liquid } from "liquidjs";
-import path from "path"; // Just use it for the initial setup to be safe
+import path, { normalize } from "path"; // Just use it for the initial setup to be safe
 import "dotenv/config";
+import NormalizedFetch from "../utils/normalizedFetch.js";
 
 const app = express();
 console.log("Booting SSR server.js...");
@@ -21,12 +22,13 @@ app.set("views", path.join(process.cwd(), "src/views/SSR"));
 
 // The Route
 app.get("/projecten", async (req, res) => {
-  console.log("Booting SSR server.js...");
-    // Manually fetch your data here
-    const projectData = []; 
-
+  console.log("accessing /projecten");
+  
+    const data = await NormalizedFetch("pages", "slug=projecten")
+    console.log(data, "hi hello");
+  
     res.render("projecten", {
-        projects: projectData,
+        data,
         filters: req.query,
         site: { title: "Responsible WP" }
     });
