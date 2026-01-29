@@ -6,15 +6,19 @@ pagination:
 permalink: "{{ page.slug }}/index.html"
 ---
 
-{% layout './layouts/default-layout.liquid'
-  , title: page.title.rendered %}
+{% layout './layouts/default-layout.liquid', title: page.title.rendered, current: page.slug | prepend: '/' %}
 
 {% block %}
-  <main>
-    <h1>{{ page.title.rendered | default: "Page" }}</h1>
-    {{ page.status }}
-    <div class="wp-content">
-      {{ page.content.rendered | sanitize }}
+  <main class="grid-container">
+    <div class="main-content">
+      <section class="section--content" style="--delay: 0.1s">
+        <h1>{{ page.title.rendered | default: "Page" }}</h1>
+      </section>
+      <section class="section--content" style="--delay: 0.15s">
+        {{ page.content.rendered | sanitize }}
+      </section>
     </div>
   </main>
+  <aside class="sidebar" style="--delay:.2s"></aside>
+
 {% endblock %}
