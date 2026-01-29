@@ -4,7 +4,6 @@ const list = $("[data-display]");
 const hasSupport = CSS.supports("selector(:has(*))");
 let initialItem;
 
-console.log(hasSupport);
 items.forEach((item) => {
   item.addEventListener("change", (e) => {
     storeItem("view", e.target.value);
@@ -19,6 +18,7 @@ items.forEach((item) => {
 
 const initialView = () => {
   const currentView = retrieveItem("view");
+  if(currentView === null) return
   initialItem = Array.from(items).find((item) => item.value === currentView);
   console.log(initialItem);
 
