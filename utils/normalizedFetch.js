@@ -1,14 +1,37 @@
 import { config } from "dotenv";
-import specifiedSkip from "./specifiedSkip.js"
+import specifiedSkip from "./specifiedSkip.js";
 config();
 
 const WP_API_URL = process.env.WP_API_URL;
 
-// Helper function to convert date strings to Date objects recursively
-function convertDatesToObjects(obj) {
-  if (obj === null || obj === undefined) {
-    return obj;
+// --- 1. Move fetchBuilder to the top so it is available to other functions ---
+const fetchBuilder = (options, page = 1) => {
+  const defaultParams = {
+    per_page: "100",
+    status: "publish",
+    _fields: "id,title,slug,content,date,tags,categories",
+    page: page.toString(),
+  };
+
+  const params = new URLSearchParams(defaultParams);
+
+  if (options) {
+    try {
+      const customParams = new URLSearchParams(options);
+      customParams.forEach((value, key) => {
+        params.set(key, value);
+      });
+    } catch (e) {
+      console.error("Error parsing options string:", options, e);
+    }
   }
+
+  return `?${params.toString()}`;
+};
+
+// --- 2. Date Conversion Helper ---
+function convertDatesToObjects(obj) {
+  if (obj === null || obj === undefined) return obj;
 
   if (Array.isArray(obj)) {
     return obj.map((item) => convertDatesToObjects(item));
@@ -17,13 +40,9 @@ function convertDatesToObjects(obj) {
   if (typeof obj === "object") {
     const converted = {};
     for (const [key, value] of Object.entries(obj)) {
-      // Convert common WordPress date fields
       if (
-        (key === "date" ||
-          key === "date_gmt" ||
-          key === "modified" ||
-          key === "modified_gmt") &&
-        typeof value === "string"
+        ["date", "date_gmt", "modified", "modified_gmt"].includes(key) &&
+        typeof value === "string" && value !== ""
       ) {
         converted[key] = new Date(value);
       } else if (typeof value === "object") {
@@ -34,141 +53,111 @@ function convertDatesToObjects(obj) {
     }
     return converted;
   }
-
   return obj;
 }
 
-// Helper function to fetch all pages from a WordPress API endpoint with pagination
-async function fetchAllWithPagination(endpoint) {
+// --- 3. Pagination Helper ---
+async function fetchAllWithPagination(endpoint, options = "") {
   let allItems = [];
-  let currentPage = 1;
+  let currentPage = 2;
   let hasMorePages = true;
-  const perPage = 100; // WordPress API maximum
 
   while (hasMorePages) {
+    const url = `${WP_API_URL}/${endpoint}${fetchBuilder(options, currentPage)}`;
     try {
-      const response = await fetch(
-        `${WP_API_URL}/${endpoint}?per_page=${perPage}&page=${currentPage}&status=publish`
-      );
-
+      const response = await fetch(url);
+      
       if (!response.ok) {
-        if (response.status === 400) {
-          // We've reached the end of available pages
-          hasMorePages = false;
-          break;
-        }
-        throw new Error(
-          `WP API ${response.status} when fetching ${endpoint} page ${currentPage}`
-        );
+        const errorText = await response.text();
+        console.error(`Pagination Error: [${response.status}] at ${url}`, errorText);
+        break;
       }
 
       const items = await response.json();
-      if (items.length === 0) {
+      if (!Array.isArray(items) || items.length === 0) {
         hasMorePages = false;
         break;
       }
 
       allItems = [...allItems, ...items];
-      currentPage++;
+      
+      const totalPages = parseInt(response.headers.get("X-WP-TotalPages") || "1");
+      console.log(`Successfully fetched page ${currentPage} of ${totalPages}`);
 
-      const totalPages = parseInt(response.headers.get("X-WP-TotalPages"));
-      if (currentPage > totalPages) {
+      if (currentPage >= totalPages) {
         hasMorePages = false;
+      } else {
+        currentPage++;
       }
-
-      console.log(
-        `Fetched ${endpoint} page ${currentPage - 1} of ${totalPages || "unknown"} (${items.length} items)`
-      );
     } catch (error) {
-      console.error(`Error fetching ${endpoint} page ${currentPage}:`, error);
+      console.error(`Critical Pagination Failure at ${url}:`, error);
       hasMorePages = false;
     }
   }
-
   return allItems;
 }
 
+// --- 4. Main Exported Function ---
 export default async function NormalizedFetch(fetchSource, options = "") {
-  console.log("typeof fetchSource:", typeof fetchSource, "value:", fetchSource);
-  console.log("typeof options:", typeof options, "value:", options);
+  if (!WP_API_URL) {
+    console.error("Critical Error: WP_API_URL is not defined in .env");
+    return {};
+  }
 
+  let url = `${WP_API_URL}/${fetchSource}`;
+  
   try {
-    // Check if this is a collection endpoint that might need pagination
-    // WordPress collection endpoints: pages, posts, etc.
-    const collectionEndpoints = ["pages", "posts"];
-    const isCollectionEndpoint = collectionEndpoints.includes(fetchSource);
+    if (fetchSource !== "frontpage") {
+      url += fetchBuilder(options);
+    }
 
-    let data;
+    console.log(`Starting fetch: ${url}`);
+    const response = await fetch(url);
 
-    if (isCollectionEndpoint) {
-      // Use pagination to fetch all items
-      console.log(`Fetching all ${fetchSource} with pagination...`);
-      data = await fetchAllWithPagination(fetchSource);
+    if (!response.ok) {
+      const errorBody = await response.text();
+      throw new Error(`HTTP ${response.status}: ${errorBody} at URL: ${url}`);
+    }
+
+    let firstPageData = await response.json();
+    const totalPages = parseInt(response.headers.get("X-WP-TotalPages") || "1");
+    const totalRecords = response.headers.get("X-WP-Total");
+
+    let finalCombinedData;
+
+    if (totalPages > 1 && Array.isArray(firstPageData)) {
+      
+      console.log(`Page 1 of ${totalPages} fetched (${totalRecords} total records). Fetching remaining...`);
+      const remainingPagesData = await fetchAllWithPagination(fetchSource, options);
+      finalCombinedData = [...firstPageData, ...remainingPagesData];
     } else {
-      // Regular single fetch
-      const url = `${WP_API_URL}/${fetchSource}`;
-      const response = await fetch(url);
-
-      if (!response.ok) {
-        throw new Error(`Fetch error: ${response.status} ${response.statusText}`);
-      }
-
-      data = await response.json();
+      finalCombinedData = firstPageData;
     }
 
-    // Convert date strings to Date objects for Eleventy compatibility
-    data = convertDatesToObjects(data);
+    if(finalCombinedData.length === 1) {
+      finalCombinedData = finalCombinedData[0];
+    }
+    
+    
+    // Process and Normalize
+    if (Array.isArray(finalCombinedData) && finalCombinedData.length > 1) {
+      console.log(fetchSource, "I am not an array...");
+      const filteredData = specifiedSkip(fetchSource, finalCombinedData);
+      const pagesIndexedBySlug = {};
 
-    // Apply any configured skip rules for collection endpoints
-    if (Array.isArray(data)) {
-      data = specifiedSkip(fetchSource, data);
+      filteredData.forEach((item) => {
+        const key = item.slug || item.id;
+        if (!key) console.warn("Found item without slug or ID:", item);
+        pagesIndexedBySlug[key] = item;
+      });
+
+      return convertDatesToObjects(pagesIndexedBySlug);
     }
 
-    // Determine if data is an array (multiple objects) or a single object
-    const isArray = Array.isArray(data);
-    const dataType = isArray ? "array" : "object";
-    const itemCount = isArray ? data.length : 1;
+    return convertDatesToObjects(finalCombinedData);
 
-    console.log(
-      `Data type: ${dataType}`,
-      isArray ? `(${itemCount} items)` : "(single object)"
-    );
-
-    // If it's an array with multiple items, fetch each item separately by ID
-    if (isArray && data.length > 0) {
-      const fetchedItems = await Promise.all(
-        data.map(async (item) => {
-          if (item.id) {
-            try {
-              const itemUrl = `${WP_API_URL}/${fetchSource}/${item.id}`;
-              console.log(`Fetching ${fetchSource}/${item.id}...`);
-              const itemResponse = await fetch(itemUrl);
-              if (itemResponse.ok) {
-                const itemData = await itemResponse.json();
-                return convertDatesToObjects(itemData);
-              } else {
-                console.warn(
-                  `Failed to fetch ${fetchSource}/${item.id}: ${itemResponse.status}`,
-                );
-                return item; // Return original item if fetch fails
-              }
-            } catch (err) {
-              console.error(`Error fetching ${fetchSource}/${item.id}:`, err);
-              return item; // Return original item if fetch fails
-            }
-          }
-          return item; // Return item as-is if no ID
-        }),
-      );
-      console.log(`Fetched ${fetchedItems.length} individual items`);
-      return fetchedItems;
-    } else if (!isArray && data) {
-      console.log("Object keys:", Object.keys(data));
-    }
-
-    return data;
-  } catch (err) {
-    console.error(`Error fetching ${fetchSource}:`, err);
-    return null;
+  } catch (error) {
+    console.error(`NormalizedFetch failed for source "${fetchSource}":`, error.message);
+    return {}; // Return empty object to prevent app crash
   }
 }
