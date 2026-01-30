@@ -20,6 +20,7 @@ app.set("view engine", "liquid");
 app.set("views", path.join(process.cwd(), "src/views/SSR"));
 const distPath = path.join(process.cwd(), 'dist');
 
+app.use(express.static(distPath));
 
 // The Route
 app.get("/projecten", async (req, res) => {
@@ -35,7 +36,6 @@ app.get("/projecten", async (req, res) => {
   });
 });
 
-app.use(express.static(distPath));
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
