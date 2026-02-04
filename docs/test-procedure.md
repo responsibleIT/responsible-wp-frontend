@@ -44,11 +44,13 @@ If testing only one branch with no candidate, omit the “vs” section:
 > [!CAUTION]
 > As these are not comparisons; do not include them in the `/comparisons` directory
 
-##### Examples: 
+##### Examples:
+```yaml
 2026-02-04-main-run1.md
 2027-02-05-main-run2.md
 2026-10-04-foobar-run1.md
 2026-12-04-foobar-run2.md
+```
 
 ## Comparisons
 
