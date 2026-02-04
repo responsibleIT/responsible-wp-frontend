@@ -70,14 +70,23 @@ Each snapshot Markdown should follow this **structured template**:
 - Device(s) used for testing [Desktop, Specific mobile, specific tablet]
 
 ### WebPageTest
+
+#### Desktop
 ![Metrics screenshot](https://github.com/user-attachments/assets/x)
+- [annotations / written metrics]
 
 ![Waterfall screenshot](../assets/WebPageTest/[branch1])
+- [annotations / written metrics]
 
+#### Mobile [specific device]
+![Metrics screenshot](https://github.com/user-attachments/assets/x)
+- [annotations / written metrics]
 
+![Waterfall screenshot](../assets/WebPageTest/[branch1])
+- [annotations / written metrics]
 
-
-###
+### PageSpeed Insights
+...
 ```
 
  
