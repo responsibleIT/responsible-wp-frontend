@@ -68,7 +68,8 @@ main-vs-svelte-latest.md
 
 main-vs-reliquary-latest.md
 
-> [!NOTE] Comparisons are updated only after completing all intended snapshot runs for a given baseline/candidate pair.
+> [!NOTE]
+> Comparisons are updated only after completing all intended snapshot runs for a given baseline/candidate pair.
 
 ## Assets
 All supporting images, waterfalls, and JSON reports should be stored under the /assets directory and organized by tool:
