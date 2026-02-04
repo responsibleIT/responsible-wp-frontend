@@ -61,12 +61,11 @@ They represent the aggregated or averaged metrics for a baseline vs candidate, h
 [baseline branch/tag]-vs-[candidate branch/tag]-latest.md
 
 ##### Examples:
-
+```yaml
 main-vs-packages-latest.md
-
 main-vs-svelte-latest.md
-
 main-vs-reliquary-latest.md
+```
 
 > [!NOTE]
 > Comparisons are updated only after completing all intended snapshot runs for a given baseline/candidate pair.
