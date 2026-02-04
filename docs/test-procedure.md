@@ -18,12 +18,17 @@ docs/
      │   └─ main-vs-reliquary-latest.md
      └─ assets/                         # Screenshots, waterfalls, JSON reports
          ├─ lighthouse/
-         │   ├─ main-vs-packages-run1.png
-         │   ├─ main-vs-packages-run2.png
-         │   └─ main-vs-svelte-run1.png
+         │   ├─ main-vs-packages-run1-main.png
+         │   ├─ main-vs-packages-run1-packages.png
+         │   ├─ main-vs-packages-run2-main.png
+         │   ├─ main-vs-packages-run2-packages.png
+         │   ├─ main-vs-svelte-run1-main.png
+         │   └─ main-vs-svelte-run1-packages.png
          └─ webpagetest/
-             ├─ main-vs-packages-run1-waterfall.png
-             ├─ main-vs-packages-run2-waterfall.png
+             ├─ main-vs-packages-run1-main-waterfall.png
+             ├─ main-vs-packages-run1-packages-waterfall.png
+             ├─ main-vs-packages-run1-main-waterfall.png
+             ├─ main-vs-packages-run2-packages-waterfall.png
              └─ main-vs-svelte-run1-waterfall.png
 ```
 
