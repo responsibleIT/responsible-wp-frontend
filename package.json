@@ -10,7 +10,7 @@
     "dev": "pnpm exec eleventy --serve",
     "build": "pnpm exec eleventy",
     "server": "nodemon routing/server.js",
-    "docker:test": "docker rm -f 11ty-app || true && docker build -t 11ty-hybrid-test . && docker run -p 5000:3000 --name 11ty-app 11ty-hybrid-test"
+    "docker:test": "docker rm -f 11ty-app & docker build -t 11ty-hybrid-test . & docker run -p 5000:3000 --name 11ty-app 11ty-hybrid-test"
   },
   "dependencies": {
     "@11ty/eleventy": "^3.1.2",
