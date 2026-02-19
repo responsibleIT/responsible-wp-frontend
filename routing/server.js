@@ -58,7 +58,7 @@ async function startServer() {
   });
 
   // Register filters for SSR (same as 11ty)
-  engine.registerFilter('sanitize', sanitize);
+  engine.registerFilter("sanitize", sanitize);
 
   app.engine("liquid", engine.express());
   app.set("view engine", "liquid");
@@ -93,12 +93,28 @@ async function startServer() {
   });
 
   app.get("/projecten", async (req, res) => {
+    const projectID = 27; // Project ID in WP
+    const baseParam = "slug=projecten";
+    const queryParams = new URLSearchParams(req.query).toString();
+    
+    let additionalOptions;
+    const queryCheck = !(Object.keys(req.query).length === 0);
+    if (queryCheck) {
+      additionalOptions = `_fields=id,title,slug,date,modified,acf&parent=${projectID}`;
+    }
+    const options = queryParams ? `${queryParams}&${additionalOptions}` : baseParam;
+    console.log(options);
+
     try {
-      const data = await NormalizedFetch("pages", "slug=projecten");
+      const data = await NormalizedFetch("pages", options);
+
+      const filtered = queryParams ? true : false;
+      // console.log(data);
+      
       res.render("projecten", {
         data,
         filters: req.query,
-        site: { title: "Responsible WP" },
+        site: { title: "Responsible WP", filtered },
       });
     } catch (err) {
       console.error("SSR Error:", err);

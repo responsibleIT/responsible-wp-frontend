@@ -9,7 +9,7 @@ const fetchBuilder = (options, page = 1) => {
   const defaultParams = {
     per_page: "100",
     status: "publish",
-    _fields: "id,title,slug,content,date,tags,categories",
+    _fields: "id,title,slug,content,date,tags,categories,parent",
     page: page.toString(),
   };
 
@@ -135,26 +135,15 @@ export default async function NormalizedFetch(fetchSource, options = "") {
     }
 
     if(finalCombinedData.length === 1) {
-      finalCombinedData = finalCombinedData[0];
-    }
-    
-    
-    // Process and Normalize
-    if (Array.isArray(finalCombinedData) && finalCombinedData.length > 1) {
-      console.log(fetchSource, "I am not an array...");
-      const filteredData = specifiedSkip(fetchSource, finalCombinedData);
-      const pagesIndexedBySlug = {};
+  finalCombinedData = finalCombinedData[0];
+}
 
-      filteredData.forEach((item) => {
-        const key = item.slug || item.id;
-        if (!key) console.warn("Found item without slug or ID:", item);
-        pagesIndexedBySlug[key] = item;
-      });
+if (Array.isArray(finalCombinedData)) {
+  const filteredData = specifiedSkip(fetchSource, finalCombinedData);
+  return convertDatesToObjects(filteredData);
+}
 
-      return convertDatesToObjects(pagesIndexedBySlug);
-    }
-
-    return convertDatesToObjects(finalCombinedData);
+return convertDatesToObjects(finalCombinedData);
 
   } catch (error) {
     console.error(`NormalizedFetch failed for source "${fetchSource}":`, error.message);

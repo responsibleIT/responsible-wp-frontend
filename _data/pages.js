@@ -7,9 +7,22 @@ export default async function (eleventyData) {
   const home = await NormalizedFetch("frontpage", "");
   const pages = await NormalizedFetch("pages", "");
 
+  const idToSlug = { 27: 'projecten' };
+  pages.forEach(page => idToSlug[page.id] = page.slug);
+
+  pages.forEach(page => {
+    page.permalink = page.parent !== 0
+      ? `/${idToSlug[page.parent]}/${page.slug}/`
+      : `/${page.slug}/`;
+  });
+
+  const projects = pages.filter(p => p.parent === 27);
+const nonProjectPages = pages.filter(p => p.parent !== 27);
+  
   const content = {
     home,
-    pages
+    pages: nonProjectPages,
+    projects,
   }
   return content;
 }
