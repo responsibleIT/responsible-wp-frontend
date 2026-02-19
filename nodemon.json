@@ -1,0 +1,21 @@
+{
+  "watch": [
+    "routing/",
+    "src/",
+    "_data/",
+    "utils/",
+    ".env"
+  ],
+  "ext": "js,json,liquid,md,css",
+  "ignore": [
+    "dist/",
+    "node_modules/"
+  ],
+  "exec": "node routing/server.js",
+  "env": {
+    "BUILD_ON_START": "true"
+  },
+  "events": {
+    "restart": "echo '\n🔄 Server restarting with fresh build...\n'"
+  }
+}

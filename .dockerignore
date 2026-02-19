@@ -4,3 +4,4 @@ build/
 .git
 .github
 .DS_Store
+nodemon.json

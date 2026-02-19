@@ -1,6 +1,6 @@
 {% layout './layouts/default-layout.liquid'
   , title: "Projecten"
-  , current: "/projecten" %}
+  , current: "projecten" %}
 
 {% block %}
   <main class="grid-container" id="main">
@@ -10,7 +10,7 @@
       </section>
 
       <section class="section--content" style="--delay: .15s">
-        {{ data.content.rendered }}
+        {{ data.content.rendered | sanitize }}
       </section>
     </div>
   </main>

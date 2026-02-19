@@ -10,12 +10,7 @@
 
         <button class="button--disclosure button--menu" hidden>Menu</button>
 
-        <nav class="nav--main">
-            <ul>
-                <li><a href="/" lang="en" {% if current == "/" %}aria-current="page"{% endif %}>Home</a></li>
-                <li><a href="/visie" {% if current == "visie" %}aria-current="page"{% endif %}>Visie</a></li>
-            </ul>
-        </nav>
+        {% render 'Header/components/Nav/Nav', current: current %}
 
         <details class="details--accessibility">
             <summary>Toeganke&shy;lijkheid</summary>
