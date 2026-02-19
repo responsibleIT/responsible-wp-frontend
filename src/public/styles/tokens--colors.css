@@ -3,29 +3,27 @@
 /**********/
 
 :root {
-  --grey-hue:240;
+    --white: #ffffff;
+  --white--t2: rgba(255, 255, 255, .02);
+  --white--t5: rgba(255, 255, 255, .05);
+  --white--t10: rgba(255, 255, 255, .1);
 
-  --white:hsl(0 0 100%);
-  --white--t2:hsl(0 0 100% / .02);
-  --white--t5:hsl(0 0 100% / .05);
-  --white--t10:hsl(0 0 100% / .1);
+  --black: #000000;
+  --black--t2: rgba(0, 0, 0, .02);
+  --black--t5: rgba(0, 0, 0, .05);
+  --black--t10: rgba(0, 0, 0, .1);
 
-  --black:hsl(0 0 0%);
-  --black--t2:hsl(0 0 0% / .02);
-  --black--t5:hsl(0 0 0% / .05);
-  --black--t10:hsl(0 0 0% / .1);
-
-  --grey--10:hsl(var(--grey-hue), 3%, 10%);
-  --grey--20:hsl(var(--grey-hue), 3%, 20%);
-  --grey--25:hsl(var(--grey-hue), 3%, 25%);
-  --grey--30:hsl(var(--grey-hue), 3%, 30%);
-  --grey--40:hsl(var(--grey-hue), 3%, 40%);
-  --grey--50:hsl(var(--grey-hue), 3%, 50%);
-  --grey--60:hsl(var(--grey-hue), 3%, 60%);
-  --grey--70:hsl(var(--grey-hue), 3%, 70%);
-  --grey--80:hsl(var(--grey-hue), 3%, 80%);
-  --grey--90:hsl(var(--grey-hue), 3%, 90%);
-  --grey--95:hsl(var(--grey-hue), 3%, 95%);
+  --grey--10: #191a1a;
+  --grey--20: #323333;
+  --grey--25: #3e3f3f;
+  --grey--30: #4a4b4b;
+  --grey--40: #636464;
+  --grey--50: #7d7e7e;
+  --grey--60: #969797;
+  --grey--70: #b0b0b0;
+  --grey--80: #c9caca;
+  --grey--90: #e3e3e3;
+  --grey--95: #f1f1f1;
 
   --link: #0352a0;
   --link-hover: #cc0000;
