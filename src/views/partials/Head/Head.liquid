@@ -11,6 +11,19 @@
       document.documentElement.classList.add("js");
     </script>
 
+    <link rel="stylesheet" href="/packages/lenis.css">
+    <script type="module">
+      import Lenis from '/packages/lenis.min.js';
+      const lenis = new Lenis();
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+
+      requestAnimationFrame(raf);
+    </script>
+
     <link rel="stylesheet" href="/styles/tokens--fonts.css" />
     <link rel="stylesheet" href="/styles/tokens--colors.css" />
 
