@@ -23,11 +23,11 @@ permalink: "/{{ pages.sections.projecten.index.slug }}/"
       <form action="/{{pages.sections.projecten.index.slug}}">
         {% for taxonomy in pages.terms %}
         <details name="filter">
-          <summary>{{ taxonomy[0] }}</summary>
-          {% for term in taxonomy[1] %}
+          <summary>{{ taxonomy[1].label }}</summary>
+          {% for term in taxonomy[1].items %}
           <label>
             <input type="checkbox" data-filter="{{ taxonomy[0] }}" value="{{ term.slug }}">
-            {{ term.name }}
+  {{ term.name }} ({{ term.count }})
           </label>
           {% endfor %}
         </details>

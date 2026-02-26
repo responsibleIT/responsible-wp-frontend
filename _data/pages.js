@@ -59,24 +59,35 @@ export default async function (eleventyData) {
   // fetch only the terms we actually need
   const terms = {};
   for (const [taxonomy, ids] of Object.entries(taxonomyIds)) {
-    console.log('taxonomy:', taxonomy, 'ids:', [...ids]);
-    const raw = await NormalizedFetch(taxonomy, '_fields=slug,name,id,taxonomy');
-    console.log('raw:', raw);
+    const [raw, meta] = await Promise.all([
+      NormalizedFetch(taxonomy, '_fields=slug,name,id,taxonomy'),
+      NormalizedFetch(`taxonomies/${taxonomy}`, '_fields=name')
+    ]);
     const rawArray = Array.isArray(raw) ? raw : [raw];
-    terms[taxonomy] = rawArray.filter(term => ids.has(Number(term.id)));
-    console.log('filtered terms:', terms[taxonomy]);
+    terms[taxonomy] = {
+      label: meta.name,
+      items: rawArray.filter(term => ids.has(Number(term.id)))
+    };
   }
-  
+
   sections.projecten.items.forEach(item => {
     if (!item.acf) return;
-    for (const [key, termList] of Object.entries(terms)) {
-      if (Array.isArray(item.acf[key])) {
-        item.acf[key] = item.acf[key].map(id => 
-          termList.find(t => t.id === id)?.slug
+    for (const [key, termData] of Object.entries(terms)) {
+      if (Array.isArray(item.acf[key]) && Array.isArray(termData.items)) {
+        item.acf[key] = item.acf[key].map(id =>
+          termData.items.find(t => t.id === id)?.slug
         ).filter(Boolean);
       }
     }
   });
+
+  for (const [taxonomy, termData] of Object.entries(terms)) {
+    termData.items.forEach(term => {
+      term.count = sections.projecten.items.filter(item =>
+        Array.isArray(item.acf[taxonomy]) && item.acf[taxonomy].includes(term.slug)
+      ).length;
+    });
+  }
 
   return {
     home,
