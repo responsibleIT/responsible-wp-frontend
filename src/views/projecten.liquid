@@ -1,0 +1,30 @@
+{% layout './layouts/default-layout.liquid'
+, title: "Projecten"
+, current: "projecten" %}
+
+{% block %}
+<main class="grid-container" id="main">
+  <div class="main-content">
+    <section class="section--content" style="--delay: .1s">
+      <h1>
+        Projecten
+      </h1>
+    </section>
+
+    <section class="section--content">
+      <form action="/projecten"></form>
+    </section>
+
+    <section class="section--content" style="--delay: .15s">
+      <ul>
+        {% for project in pages.projects %}
+        <li>
+          <a href="/projecten/{{ project.slug }}">
+            {{ project.title.rendered }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+  </div>
+</main>
+{% endblock %}

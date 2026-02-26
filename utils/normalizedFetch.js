@@ -1,5 +1,4 @@
 import { config } from "dotenv";
-import specifiedSkip from "./specifiedSkip.js";
 config();
 
 const WP_API_URL = process.env.WP_API_URL;
@@ -134,16 +133,11 @@ export default async function NormalizedFetch(fetchSource, options = "") {
       finalCombinedData = firstPageData;
     }
 
-    if(finalCombinedData.length === 1) {
-  finalCombinedData = finalCombinedData[0];
-}
+    if (Array.isArray(finalCombinedData) && finalCombinedData.length === 1) {
+      finalCombinedData = finalCombinedData[0];
+    }
 
-if (Array.isArray(finalCombinedData)) {
-  const filteredData = specifiedSkip(fetchSource, finalCombinedData);
-  return convertDatesToObjects(filteredData);
-}
-
-return convertDatesToObjects(finalCombinedData);
+    return convertDatesToObjects(finalCombinedData);
 
   } catch (error) {
     console.error(`NormalizedFetch failed for source "${fetchSource}":`, error.message);
