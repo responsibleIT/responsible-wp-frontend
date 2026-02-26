@@ -8,7 +8,7 @@ const fetchBuilder = (options, page = 1) => {
   const defaultParams = {
     per_page: "100",
     status: "publish",
-    _fields: "id,title,slug,content,date,tags,categories,parent",
+    _fields: "id,title,slug,content,date,tags,categories,parent,acf",
     page: page.toString(),
   };
 

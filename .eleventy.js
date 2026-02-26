@@ -10,6 +10,8 @@ import extractElement from "./lib/filters/extractElement.js";
 export default function (eleventyConfig) {
   // Copy everything from public/ to /
   eleventyConfig.addPassthroughCopy({ "src/public/": "/" });
+  eleventyConfig.addPassthroughCopy({ "utils": "/utils" });
+
 
   // Ignore SSR-only templates; these are rendered by Express, not Eleventy
   // Paths are relative to the project root here

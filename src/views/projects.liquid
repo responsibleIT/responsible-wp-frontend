@@ -1,13 +1,13 @@
 ---
 permalink: "/{{ pages.sections.projecten.index.slug }}/"
 ---
-  
+
 {% layout './layouts/default-layout.liquid'
 , title: pages.sections.projecten.index.title.rendered
 , current: pages.sections.projecten.index.slug %}
 
 {% block head %}
-<script src="/scripts/filter/projects.js" defer></script>
+<script src="/scripts/filter/projects.js" type="module"></script>
 {% endblock %}
 
 {% block %}
@@ -15,24 +15,41 @@ permalink: "/{{ pages.sections.projecten.index.slug }}/"
   <div class="main-content">
     <section class="section--content" style="--delay: .1s">
       <h1>
-        {{pages.sections.projecten.index.title.rendered}}sss
+        {{pages.sections.projecten.index.title.rendered}}
       </h1>
     </section>
 
     <section class="section--content">
-      <form action="/{{pages.sections.projecten.index.slug}}"></form>
+      <form action="/{{pages.sections.projecten.index.slug}}">
+        {% for taxonomy in pages.terms %}
+        <details name="filter">
+          <summary>{{ taxonomy[0] }}</summary>
+          {% for term in taxonomy[1] %}
+          <label>
+            <input type="checkbox" data-filter="{{ taxonomy[0] }}" value="{{ term.slug }}">
+            {{ term.name }}
+          </label>
+          {% endfor %}
+        </details>
+        {% endfor %}
+      </form>
     </section>
-
     <section class="section--content" style="--delay: .15s">
       <ul class="project--list" data-list="list">
         {% for project in pages.sections.projecten.items %}
         <li>
-          <a href="/{{pages.sections.projecten.index.slug}}/{{ project.slug }}">
+          <a href="/{{ pages.sections.projecten.index.slug }}/{{ project.slug }}">
             {{ project.title.rendered }}
           </a>
         </li>
         {% endfor %}
       </ul>
+
+      <template data-project-template>
+        <li>
+          <a data-permalink data-title></a>
+        </li>
+      </template>
     </section>
   </div>
 </main>
