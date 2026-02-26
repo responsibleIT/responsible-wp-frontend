@@ -1,6 +1,4 @@
-import NormalizedFetch from "../utils/NormalizedFetch.js";
-import fs from 'fs';
-import path from 'path';
+import NormalizedFetch from "../utils/NormalizedFetch";
 
 // ! _data makes use of utils
 
