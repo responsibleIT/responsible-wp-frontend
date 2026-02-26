@@ -1,4 +1,4 @@
-import NormalizedFetch from "./normalizedFetch.js";
+import NormalizedFetch from "./NormalizedFetch.js";
 import { exec } from "child_process";
 import { promisify } from "util";
 
