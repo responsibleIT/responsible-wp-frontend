@@ -6,11 +6,6 @@ export default async function (eleventyData) {
   console.log("Fetching home data...");
   const home = await NormalizedFetch("frontpage", "");
   const pages = await NormalizedFetch("pages", "");
-  console.log(
-    "[pages.js] Fetched pages:",
-    Array.isArray(pages),
-    Array.isArray(pages) ? pages.length : typeof pages,
-  );
 
   // Map WP IDs to slugs so we can build nested permalinks
   const idToSlug = {};
@@ -26,23 +21,33 @@ export default async function (eleventyData) {
         : `/${page.slug}/`;
   });
 
-  const PROJECTS_PARENT_ID = 27;
+  // Configure parent IDs for sectioned collections
+  // Extend this map to add more sections (e.g. onderzoek, onderwijs, etc.)
+  const SECTION_PARENTS = {
+    projecten: 27,
+  };
 
-  const projects = pages.filter((p) => p.parent === PROJECTS_PARENT_ID);
-  const nonProjectPages = pages.filter(
-    (p) => p.parent !== PROJECTS_PARENT_ID && p.id !== PROJECTS_PARENT_ID,
-  );
-  console.log(
-    "[pages.js] Split counts => projects:",
-    projects.length,
-    "nonProjectPages:",
-    nonProjectPages.length,
-  );
-  
-  const content = {
-    home,
-    pages: nonProjectPages,
-    projects,
+  const sections = {};
+  const sectionParentIds = Object.values(SECTION_PARENTS);
+
+  for (const [key, parentId] of Object.entries(SECTION_PARENTS)) {
+    const indexPage = pages.find((p) => p.id === parentId) || null;
+    const children = pages.filter((p) => p.parent === parentId);
+
+    sections[key] = {
+      index: indexPage,
+      items: children,
+    };
   }
-  return content;
+
+  const nonSectionPages = pages.filter(
+    (p) =>
+      !sectionParentIds.includes(p.id) && !sectionParentIds.includes(p.parent),
+  );
+
+  return {
+    home,
+    pages: nonSectionPages,
+    sections,
+  };
 }
