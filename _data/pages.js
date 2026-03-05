@@ -1,4 +1,4 @@
-import NormalizedFetch from "../utils/normalizedFetch.js";
+import NormalizedFetch from "../utils/NormalizedFetch.js";
 
 // ! _data makes use of utils
 
