@@ -5,10 +5,105 @@
 /* YES, TRIANGLES */
 .triangles {
   z-index: 2;
-  grid-column:full;
-  height:calc(var(--height-triangle) * 1.5);
-  margin-bottom:clamp(1em, 4vw, 2em);
-  border-bottom:none;
+  grid-column: full;
+  height: calc(var(--height-triangle) * 1.5);
+  margin-bottom: clamp(1em, 4vw, 2em);
+  border-bottom: none;
+
+  /* pre-defined colors */
+  --rgb-orange: var(--orange);
+  --rgb-orange-l: var(--orange--l);
+  --rgb-orange-d: var(--orange--d);
+
+  --rgb-blue: var(--blue);
+  --rgb-blue-l: var(--blue--l);
+  --rgb-blue-d: var(--blue--d);
+
+  --rgb-pink: var(--pink);
+  --rgb-pink-l: var(--pink--l);
+  --rgb-pink-d: var(--pink--d);
+
+  --rgb-yellow: var(--yellow);
+  --rgb-yellow-l: var(--yellow--l);
+  --rgb-yellow-d: var(--yellow--d);
+
+  --rgb-green: var(--green);
+  --rgb-green-l: var(--green--l);
+  --rgb-green-d: var(--green--d);
+
+  @supports (color: oklch(from red l c calc((h * 1deg) + 10deg))) {
+
+    --oklch-orange: oklch(
+      from var(--rgb-orange) l c calc((h * 1deg) + var(--chroma-shifter))
+    );
+    --oklch-orange-l: oklch(
+      from var(--rgb-orange-l) l c calc((h * 1deg) + var(--chroma-shifter))
+    );
+    --oklch-orange-d: oklch(
+      from var(--rgb-orange-d) l c calc((h * 1deg) + var(--chroma-shifter))
+    );
+
+    --oklch-blue: oklch(
+      from var(--rgb-blue) l c calc((h * 1deg) + var(--chroma-shifter))
+    );
+    --oklch-blue-l: oklch(
+      from var(--rgb-blue-l) l c calc((h * 1deg) + var(--chroma-shifter))
+    );
+    --oklch-blue-d: oklch(
+      from var(--rgb-blue-d) l c calc((h * 1deg) + var(--chroma-shifter))
+    );
+
+    --oklch-pink: oklch(
+      from var(--rgb-pink) l c calc((h * 1deg) + var(--chroma-shifter))
+    );
+    --oklch-pink-l: oklch(
+      from var(--rgb-pink-l) l c calc((h * 1deg) + var(--chroma-shifter))
+    );
+    --oklch-pink-d: oklch(
+      from var(--rgb-pink-d) l c calc((h * 1deg) + var(--chroma-shifter))
+    );
+
+    --oklch-yellow: oklch(
+      from var(--rgb-yellow) l c calc((h * 1deg) + var(--chroma-shifter))
+    );
+    --oklch-yellow-l: oklch(
+      from var(--rgb-yellow-l) l c calc((h * 1deg) + var(--chroma-shifter))
+    );
+    --oklch-yellow-d: oklch(
+      from var(--rgb-yellow-d) l c calc((h * 1deg) + var(--chroma-shifter))
+    );
+
+    --oklch-green: oklch(
+      from var(--rgb-green) l c calc((h * 1deg) + var(--chroma-shifter))
+    );
+    --oklch-green-l: oklch(
+      from var(--rgb-green-l) l c calc((h * 1deg) + var(--chroma-shifter))
+    );
+    --oklch-green-d: oklch(
+      from var(--rgb-green-d) l c calc((h * 1deg) + var(--chroma-shifter))
+    );
+  }
+
+  /* guaranteed to resolve: falls back to rgb if oklch unsupported */
+  --triangle-orange: var(--oklch-orange, var(--rgb-orange));
+  --triangle-orange-l: var(--oklch-orange-l, var(--rgb-orange-l));
+  --triangle-orange-d: var(--oklch-orange-d, var(--rgb-orange-d));
+
+  --triangle-blue: var(--oklch-blue, var(--rgb-blue));
+  --triangle-blue-l: var(--oklch-blue-l, var(--rgb-blue-l));
+  --triangle-blue-d: var(--oklch-blue-d, var(--rgb-blue-d));
+
+  --triangle-pink: var(--oklch-pink, var(--rgb-pink));
+  --triangle-pink-l: var(--oklch-pink-l, var(--rgb-pink-l));
+  --triangle-pink-d: var(--oklch-pink-d, var(--rgb-pink-d));
+
+  --triangle-yellow: var(--oklch-yellow, var(--rgb-yellow));
+  --triangle-yellow-l: var(--oklch-yellow-l, var(--rgb-yellow-l));
+  --triangle-yellow-d: var(--oklch-yellow-d, var(--rgb-yellow-d));
+
+  --triangle-green: var(--oklch-green, var(--rgb-green));
+  --triangle-green-l: var(--oklch-green-l, var(--rgb-green-l));
+  --triangle-green-d: var(--oklch-green-d, var(--rgb-green-d));
 }
 
 /* NO, TRIANGLES */
@@ -17,108 +112,92 @@
   content-visibility: hidden;
 }
 
-
-
-
-
-
 /***********************/
 /* TRIANGLES CONTAINER */
 /***********************/
 
 :root {
-  --number-triangles:4;
-  --max-width-triangles:108em;
+  --number-triangles: 4;
+  --max-width-triangles: 108em;
 
-  --width-triangle: calc( min(var(--max-width-triangles), 100vw + 4px) / var(--number-triangles) );
-  --height-triangle: calc( var(--width-triangle) / .866 );
+  --width-triangle: calc(
+    min(var(--max-width-triangles), 100vw + 4px) / var(--number-triangles)
+  );
+  --height-triangle: calc(var(--width-triangle) / 0.866);
 
-  --width-triangle--l: calc( var(--width-triangle) * 2 );
-  --hgth-triangle--l: calc( var(--height-triangle) * 2 );
+  --width-triangle--l: calc(var(--width-triangle) * 2);
+  --hgth-triangle--l: calc(var(--height-triangle) * 2);
 }
 
 .triangles {
-  --number-triangles:8;
-  --max-width-triangles:108em;
+  --number-triangles: 8;
+  --max-width-triangles: 108em;
 
-  --width-triangle: calc( min(var(--max-width-triangles), 100vw + 4px) / var(--number-triangles) );
-  --height-triangle: calc( var(--width-triangle) / .866 );
+  --width-triangle: calc(
+    min(var(--max-width-triangles), 100vw + 4px) / var(--number-triangles)
+  );
+  --height-triangle: calc(var(--width-triangle) / 0.866);
 
-  --width-triangle--l: calc( var(--width-triangle) * 2 );
-  --hgth-triangle--l: calc( var(--height-triangle) * 2 );
+  --width-triangle--l: calc(var(--width-triangle) * 2);
+  --hgth-triangle--l: calc(var(--height-triangle) * 2);
 }
 
 @container (width > 32em) {
   .triangles {
-    --number-triangles:6;
+    --number-triangles: 6;
   }
 }
 
 @container (width > 50em) {
   .triangles {
-    --number-triangles:8;
+    --number-triangles: 8;
   }
 }
 
 @container (width > 70em) {
   .triangles {
-    --number-triangles:10;
+    --number-triangles: 10;
   }
 }
 
 @container (width > 92em) {
   .triangles {
-    --number-triangles:12;
+    --number-triangles: 12;
   }
 }
 
 @container --container--body (width > 43em) {
   @media (height > 24em) {
     .triangles {
-      position:sticky;
-      top:8.125em;
+      position: sticky;
+      top: 8.125em;
     }
 
     :root[data-setting--no-images="false"] .triangles {
-      top:calc( 8.125em - var(--height-triangle) * .5 );
+      top: calc(8.125em - var(--height-triangle) * 0.5);
     }
   }
 }
-
-
-
-
 
 /*********************************/
 /* TRIANGLES BARS - lEFT & RIGHT */
 /*********************************/
 
-
 :root[data-setting--no-images="false"] .triangles::after {
-  content:"";
+  content: "";
 
-  display:block;
-  width:100%;
-  height:var(--height-triangle);
+  display: block;
+  width: 100%;
+  height: var(--height-triangle);
 
-  background-image:
-    linear-gradient(
-      to right,
-      var(--triangle-color-l7, var( --triangle-color-left-middle))
-        0
-        calc( (100vw - var(--max-width-triangles)) * .5 + 2.5px),
-      transparent 
-        0 
-        calc( (100vw + var(--max-width-triangles)) * .5 - 2.5px),
-      var(--triangle-color-r7, var( --triangle-color-left-middle))
-        0
-        100%
-    );
+  background-image: linear-gradient(
+    to right,
+    var(--triangle-color-l7, var(--triangle-color-left-middle)) 0
+      calc((100vw - var(--max-width-triangles)) * 0.5 + 2.5px),
+    transparent 0 calc((100vw + var(--max-width-triangles)) * 0.5 - 2.5px),
+    var(--triangle-color-r7, var(--triangle-color-left-middle)) 0 100%
+  );
 }
-
-
-
-
 
 /********************/
 /* TRIANGLES COLORS */
@@ -127,65 +206,60 @@
 /* DEFAULT COLORS */
 
 .triangles {
-  --triangle-color-left-start:var(--orange--l);
-  --triangle-color-left-middle:var(--orange);
-  --triangle-color-left-end:var(--orange--d);
+  --triangle-color-left-start: var(--triangle-orange-l);
+  --triangle-color-left-middle: var(--triangle-orange);
+  --triangle-color-left-end: var(--triangle-orange-d);
 
-  --triangle-color-right-start:var(--orange--l);
-  --triangle-color-right-middle:var(--orange);
-  --triangle-color-right-end:var(--orange--d);
+  --triangle-color-right-start: var(--triangle-orange-l);
+  --triangle-color-right-middle: var(--triangle-orange);
+  --triangle-color-right-end: var(--triangle-orange-d);
 }
 
 /* LOTTERY COLORS */
 
 :root[data-triangle-color-left-lottery="2"] .triangles {
-  --triangle-color-left-start:var(--blue--l);
-  --triangle-color-left-middle:var(--blue);
-  --triangle-color-left-end:var(--blue--d);
+  --triangle-color-left-start: var(--triangle-blue-l);
+  --triangle-color-left-middle: var(--triangle-blue);
+  --triangle-color-left-end: var(--triangle-blue-d);
 }
 :root[data-triangle-color-right-lottery="2"] .triangles {
-  --triangle-color-right-start:var(--blue--l);
-  --triangle-color-right-middle:var(--blue);
-  --triangle-color-right-end:var(--blue--d);
+  --triangle-color-right-start: var(--triangle-blue-l);
+  --triangle-color-right-middle: var(--triangle-blue);
+  --triangle-color-right-end: var(--triangle-blue-d);
 }
-
 
 :root[data-triangle-color-left-lottery="3"] .triangles {
-  --triangle-color-left-start:var(--pink--l);
-  --triangle-color-left-middle:var(--pink);
-  --triangle-color-left-end:var(--pink--d);
+  --triangle-color-left-start: var(--triangle-pink-l);
+  --triangle-color-left-middle: var(--triangle-pink);
+  --triangle-color-left-end: var(--triangle-pink-d);
 }
 :root[data-triangle-color-right-lottery="3"] .triangles {
-  --triangle-color-right-start:var(--pink--l);
-  --triangle-color-right-middle:var(--pink);
-  --triangle-color-right-end:var(--pink--d);
+  --triangle-color-right-start: var(--triangle-pink-l);
+  --triangle-color-right-middle: var(--triangle-pink);
+  --triangle-color-right-end: var(--triangle-pink-d);
 }
 
 :root[data-triangle-color-left-lottery="4"] .triangles {
-  --triangle-color-left-start:var(--yellow--l);
-  --triangle-color-left-middle:var(--yellow);
-  --triangle-color-left-end:var(--yellow--d);
+  --triangle-color-left-start: var(--triangle-yellow-l);
+  --triangle-color-left-middle: var(--triangle-yellow);
+  --triangle-color-left-end: var(--triangle-yellow-d);
 }
 :root[data-triangle-color-right-lottery="4"] .triangles {
-  --triangle-color-right-start:var(--yellow--l);
-  --triangle-color-right-middle:var(--yellow);
-  --triangle-color-right-end:var(--yellow--d);
+  --triangle-color-right-start: var(--triangle-yellow-l);
+  --triangle-color-right-middle: var(--triangle-yellow);
+  --triangle-color-right-end: var(--triangle-yellow-d);
 }
 
 :root[data-triangle-color-left-lottery="5"] .triangles {
-  --triangle-color-left-start:var(--green--l);
-  --triangle-color-left-middle:var(--green);
-  --triangle-color-left-end:var(--green--d);
+  --triangle-color-left-start: var(--triangle-green-l);
+  --triangle-color-left-middle: var(--triangle-green);
+  --triangle-color-left-end: var(--triangle-green-d);
 }
 :root[data-triangle-color-right-lottery="5"] .triangles {
-  --triangle-color-right-start:var(--green--l);
-  --triangle-color-right-middle:var(--green);
-  --triangle-color-right-end:var(--green--d);
+  --triangle-color-right-start: var(--triangle-green-l);
+  --triangle-color-right-middle: var(--triangle-green);
+  --triangle-color-right-end: var(--triangle-green-d);
 }
-
-
-
-
 
 /**********************/
 /* TRIANGLES PATTERNS */
@@ -196,204 +270,296 @@
 
   --triangles-pattern-left-bars:
     linear-gradient(
-      30deg, 
+      30deg,
       transparent calc(100% * 1/3),
-      var(--triangle-color-l7, var(--triangle-color-left-middle)) 0 calc(100% * 2/3),
+      var(--triangle-color-l7, var(--triangle-color-left-middle)) 0
+        calc(100% * 2/3),
       var(--triangle-color-l6, var(--triangle-color-left-middle)) 0
     ),
     linear-gradient(
-      30deg, 
+      30deg,
       transparent calc(100% * 1/3),
-      var(--triangle-color-l6, var(--triangle-color-left-middle)) 0 calc(100% * 2/3),
+      var(--triangle-color-l6, var(--triangle-color-left-middle)) 0
+        calc(100% * 2/3),
       var(--triangle-color-l5, var(--triangle-color-left-middle)) 0
     ),
     linear-gradient(
-      30deg, 
+      30deg,
       transparent calc(100% * 1/3),
-      var(--triangle-color-l5, var(--triangle-color-left-middle)) 0 calc(100% * 2/3),
+      var(--triangle-color-l5, var(--triangle-color-left-middle)) 0
+        calc(100% * 2/3),
       var(--triangle-color-l4, var(--triangle-color-left-middle)) 0
     ),
     linear-gradient(
-      30deg, 
+      30deg,
       transparent calc(100% * 1/3),
-      var(--triangle-color-l4, var(--triangle-color-left-middle)) 0 calc(100% * 2/3),
+      var(--triangle-color-l4, var(--triangle-color-left-middle)) 0
+        calc(100% * 2/3),
       var(--triangle-color-l3, var(--triangle-color-left-middle)) 0
     ),
     linear-gradient(
-      30deg, 
+      30deg,
       transparent calc(100% * 1/3),
-      var(--triangle-color-l3, var(--triangle-color-left-middle)) 0 calc(100% * 2/3),
+      var(--triangle-color-l3, var(--triangle-color-left-middle)) 0
+        calc(100% * 2/3),
       var(--triangle-color-l2, var(--triangle-color-left-middle)) 0
     ),
     linear-gradient(
-      30deg, 
+      30deg,
       transparent calc(100% * 1/3),
-      var(--triangle-color-l2, var(--triangle-color-left-middle)) 0 calc(100% * 2/3),
+      var(--triangle-color-l2, var(--triangle-color-left-middle)) 0
+        calc(100% * 2/3),
       var(--triangle-color-l1, var(--triangle-color-left-middle)) 0
     );
-  
+
   /* left bars pos */
-  --triangles-pattern-left-bars-pos: 
+  --triangles-pattern-left-bars-pos:
     calc(50vw - var(--width-triangle) * 7 + 2px) bottom,
     calc(50vw - var(--width-triangle) * 6 + 1.67px) bottom,
     calc(50vw - var(--width-triangle) * 5 + 1.33px) bottom,
     calc(50vw - var(--width-triangle) * 4 + 1px) bottom,
     calc(50vw - var(--width-triangle) * 3 + 0.67px) bottom,
     calc(50vw - var(--width-triangle) * 2 + 0.33px) bottom;
-  
-
 
   /* RIGHT BARS */
 
   --triangles-pattern-right-bars:
     linear-gradient(
-      -30deg, 
+      -30deg,
       transparent calc(100% * 1/3),
-      var(--triangle-color-r7, var(--triangle-color-right-middle)) 0 calc(100% * 2/3),
+      var(--triangle-color-r7, var(--triangle-color-right-middle)) 0
+        calc(100% * 2/3),
       var(--triangle-color-r6, var(--triangle-color-right-middle)) 0
     ),
     linear-gradient(
-      -30deg, 
+      -30deg,
       transparent calc(100% * 1/3),
-      var(--triangle-color-r6, var(--triangle-color-right-middle)) 0 calc(100% * 2/3),
+      var(--triangle-color-r6, var(--triangle-color-right-middle)) 0
+        calc(100% * 2/3),
       var(--triangle-color-r5, var(--triangle-color-right-middle)) 0
     ),
     linear-gradient(
-      -30deg, 
+      -30deg,
       transparent calc(100% * 1/3),
-      var(--triangle-color-r5, var(--triangle-color-right-middle)) 0 calc(100% * 2/3),
+      var(--triangle-color-r5, var(--triangle-color-right-middle)) 0
+        calc(100% * 2/3),
       var(--triangle-color-r4, var(--triangle-color-right-middle)) 0
     ),
     linear-gradient(
-      -30deg, 
+      -30deg,
       transparent calc(100% * 1/3),
-      var(--triangle-color-r4, var(--triangle-color-right-middle)) 0 calc(100% * 2/3),
+      var(--triangle-color-r4, var(--triangle-color-right-middle)) 0
+        calc(100% * 2/3),
       var(--triangle-color-r3, var(--triangle-color-right-middle)) 0
     ),
     linear-gradient(
-      -30deg, 
+      -30deg,
       transparent calc(100% * 1/3),
-      var(--triangle-color-r3, var(--triangle-color-right-middle)) 0 calc(100% * 2/3),
+      var(--triangle-color-r3, var(--triangle-color-right-middle)) 0
+        calc(100% * 2/3),
       var(--triangle-color-r2, var(--triangle-color-right-middle)) 0
     ),
     linear-gradient(
-      -30deg, 
+      -30deg,
       transparent calc(100% * 1/3),
-      var(--triangle-color-r2, var(--triangle-color-right-middle)) 0 calc(100% * 2/3),
+      var(--triangle-color-r2, var(--triangle-color-right-middle)) 0
+        calc(100% * 2/3),
       var(--triangle-color-r1, var(--triangle-color-right-middle)) 0
     );
-  
-  /* right bars pos */
-    --triangles-pattern-right-bars-pos:
-      calc(50vw + var(--width-triangle) * 5 - 2px) bottom,
-      calc(50vw + var(--width-triangle) * 4 - 1.67px) bottom,
-      calc(50vw + var(--width-triangle) * 3 - 1.33px) bottom,
-      calc(50vw + var(--width-triangle) * 2 - 1px) bottom,
-      calc(50vw + var(--width-triangle) * 1 - 0.67px) bottom,
-      calc(50vw + var(--width-triangle) * 0 - 0.33px) bottom;
-  
 
+  /* right bars pos */
+  --triangles-pattern-right-bars-pos:
+    calc(50vw + var(--width-triangle) * 5 - 2px) bottom,
+    calc(50vw + var(--width-triangle) * 4 - 1.67px) bottom,
+    calc(50vw + var(--width-triangle) * 3 - 1.33px) bottom,
+    calc(50vw + var(--width-triangle) * 2 - 1px) bottom,
+    calc(50vw + var(--width-triangle) * 1 - 0.67px) bottom,
+    calc(50vw + var(--width-triangle) * 0 - 0.33px) bottom;
 
   /* LEFT ARROWS */
 
-    --triangles-pattern-left-arrows:
-      conic-gradient( from -60deg, transparent 0 300deg, var(--triangle-color-l7, var(--triangle-color-left-middle)) 0 ),
-      conic-gradient( from -60deg, transparent 0 300deg, var(--triangle-color-l6, var(--triangle-color-left-middle)) 0 ),
-      conic-gradient( from -60deg, transparent 0 300deg, var(--triangle-color-l5, var(--triangle-color-left-middle)) 0 ),
-      conic-gradient( from -60deg, transparent 0 300deg, var(--triangle-color-l4, var(--triangle-color-left-middle)) 0 ),
-      conic-gradient( from -60deg, transparent 0 300deg, var(--triangle-color-l3, var(--triangle-color-left-middle)) 0 ),
-      conic-gradient( from -60deg, transparent 0 300deg, var(--triangle-color-l2, var(--triangle-color-left-middle)) 0 ), 
-      
-      conic-gradient( from 60deg at left, var(--triangle-color-l6, var(--triangle-color-left-middle)) 0 60deg, transparent 0 ), 
-      conic-gradient( from 60deg at left, var(--triangle-color-l5, var(--triangle-color-left-middle)) 0 60deg, transparent 0 ), 
-      conic-gradient( from 60deg at left, var(--triangle-color-l4, var(--triangle-color-left-middle)) 0 60deg, transparent 0 ),  
-      conic-gradient( from 60deg at left, var(--triangle-color-l3, var(--triangle-color-left-middle)) 0 60deg, transparent 0 ),  
-      conic-gradient( from 60deg at left, var(--triangle-color-l2, var(--triangle-color-left-middle)) 0 60deg, transparent 0 ),
-      conic-gradient( from 60deg at left, var(--triangle-color-l1, var(--triangle-color-left-middle)) 0 60deg, transparent 0 );
+  --triangles-pattern-left-arrows:
+    conic-gradient(
+      from -60deg,
+      transparent 0 300deg,
+      var(--triangle-color-l7, var(--triangle-color-left-middle)) 0
+    ),
+    conic-gradient(
+      from -60deg,
+      transparent 0 300deg,
+      var(--triangle-color-l6, var(--triangle-color-left-middle)) 0
+    ),
+    conic-gradient(
+      from -60deg,
+      transparent 0 300deg,
+      var(--triangle-color-l5, var(--triangle-color-left-middle)) 0
+    ),
+    conic-gradient(
+      from -60deg,
+      transparent 0 300deg,
+      var(--triangle-color-l4, var(--triangle-color-left-middle)) 0
+    ),
+    conic-gradient(
+      from -60deg,
+      transparent 0 300deg,
+      var(--triangle-color-l3, var(--triangle-color-left-middle)) 0
+    ),
+    conic-gradient(
+      from -60deg,
+      transparent 0 300deg,
+      var(--triangle-color-l2, var(--triangle-color-left-middle)) 0
+    ),
+    conic-gradient(
+      from 60deg at left,
+      var(--triangle-color-l6, var(--triangle-color-left-middle)) 0 60deg,
+      transparent 0
+    ),
+    conic-gradient(
+      from 60deg at left,
+      var(--triangle-color-l5, var(--triangle-color-left-middle)) 0 60deg,
+      transparent 0
+    ),
+    conic-gradient(
+      from 60deg at left,
+      var(--triangle-color-l4, var(--triangle-color-left-middle)) 0 60deg,
+      transparent 0
+    ),
+    conic-gradient(
+      from 60deg at left,
+      var(--triangle-color-l3, var(--triangle-color-left-middle)) 0 60deg,
+      transparent 0
+    ),
+    conic-gradient(
+      from 60deg at left,
+      var(--triangle-color-l2, var(--triangle-color-left-middle)) 0 60deg,
+      transparent 0
+    ),
+    conic-gradient(
+      from 60deg at left,
+      var(--triangle-color-l1, var(--triangle-color-left-middle)) 0 60deg,
+      transparent 0
+    );
 
   /* left arrows pos */
-    --triangles-pattern-left-arrows-pos:
-      calc(50vw - var(--width-triangle) * 6 + 2px) bottom,
-      calc(50vw - var(--width-triangle) * 5 + 1.67px) bottom,
-      calc(50vw - var(--width-triangle) * 4 + 1.33px) bottom,
-      calc(50vw - var(--width-triangle) * 3 + 1px) bottom,
-      calc(50vw - var(--width-triangle) * 2 + .67px) bottom,
-      calc(50vw - var(--width-triangle) * 1 + .33px) bottom, 
-      
-      calc(50vw - var(--width-triangle) * 7 + 2px) bottom,
-      calc(50vw - var(--width-triangle) * 6 + 1.67px) bottom,
-      calc(50vw - var(--width-triangle) * 5 + 1.33px) bottom,
-      calc(50vw - var(--width-triangle) * 4 + 1px) bottom,
-      calc(50vw - var(--width-triangle) * 3 + 0.67px) bottom,
-      calc(50vw - var(--width-triangle) * 2 + 0.33px) bottom;
-
-
+  --triangles-pattern-left-arrows-pos:
+    calc(50vw - var(--width-triangle) * 6 + 2px) bottom,
+    calc(50vw - var(--width-triangle) * 5 + 1.67px) bottom,
+    calc(50vw - var(--width-triangle) * 4 + 1.33px) bottom,
+    calc(50vw - var(--width-triangle) * 3 + 1px) bottom,
+    calc(50vw - var(--width-triangle) * 2 + 0.67px) bottom,
+    calc(50vw - var(--width-triangle) * 1 + 0.33px) bottom,
+    calc(50vw - var(--width-triangle) * 7 + 2px) bottom,
+    calc(50vw - var(--width-triangle) * 6 + 1.67px) bottom,
+    calc(50vw - var(--width-triangle) * 5 + 1.33px) bottom,
+    calc(50vw - var(--width-triangle) * 4 + 1px) bottom,
+    calc(50vw - var(--width-triangle) * 3 + 0.67px) bottom,
+    calc(50vw - var(--width-triangle) * 2 + 0.33px) bottom;
 
   /* RIGHT ARROWS */
 
-    --triangles-pattern-right-arrows:
-      conic-gradient( from 60deg, var(--triangle-color-r7, var(--triangle-color-right-middle)) 0 60deg, transparent 0 ),
-      conic-gradient( from 60deg, var(--triangle-color-r6, var(--triangle-color-right-middle)) 0 60deg, transparent 0 ),
-      conic-gradient( from 60deg, var(--triangle-color-r5, var(--triangle-color-right-middle)) 0 60deg, transparent 0 ),
-      conic-gradient( from 60deg, var(--triangle-color-r4, var(--triangle-color-right-middle)) 0 60deg, transparent 0 ),
-      conic-gradient( from 60deg, var(--triangle-color-r3, var(--triangle-color-right-middle)) 0 60deg, transparent 0 ),
-      conic-gradient( from 60deg, var(--triangle-color-r2, var(--triangle-color-right-middle)) 0 60deg, transparent 0 ), 
-      
-      conic-gradient( from -60deg at right, transparent 0 300deg, var(--triangle-color-r6, var(--triangle-color-right-middle)) 0 ),
-      conic-gradient( from -60deg at right, transparent 0 300deg, var(--triangle-color-r5, var(--triangle-color-right-middle)) 0 ),
-      conic-gradient( from -60deg at right, transparent 0 300deg, var(--triangle-color-r4, var(--triangle-color-right-middle)) 0 ),
-      conic-gradient( from -60deg at right, transparent 0 300deg, var(--triangle-color-r3, var(--triangle-color-right-middle)) 0 ),
-      conic-gradient( from -60deg at right, transparent 0 300deg, var(--triangle-color-r2, var(--triangle-color-right-middle)) 0 ),
-      conic-gradient( from -60deg at right, transparent 0 300deg, var(--triangle-color-r1, var(--triangle-color-right-middle)) 0 );
+  --triangles-pattern-right-arrows:
+    conic-gradient(
+      from 60deg,
+      var(--triangle-color-r7, var(--triangle-color-right-middle)) 0 60deg,
+      transparent 0
+    ),
+    conic-gradient(
+      from 60deg,
+      var(--triangle-color-r6, var(--triangle-color-right-middle)) 0 60deg,
+      transparent 0
+    ),
+    conic-gradient(
+      from 60deg,
+      var(--triangle-color-r5, var(--triangle-color-right-middle)) 0 60deg,
+      transparent 0
+    ),
+    conic-gradient(
+      from 60deg,
+      var(--triangle-color-r4, var(--triangle-color-right-middle)) 0 60deg,
+      transparent 0
+    ),
+    conic-gradient(
+      from 60deg,
+      var(--triangle-color-r3, var(--triangle-color-right-middle)) 0 60deg,
+      transparent 0
+    ),
+    conic-gradient(
+      from 60deg,
+      var(--triangle-color-r2, var(--triangle-color-right-middle)) 0 60deg,
+      transparent 0
+    ),
+    conic-gradient(
+      from -60deg at right,
+      transparent 0 300deg,
+      var(--triangle-color-r6, var(--triangle-color-right-middle)) 0
+    ),
+    conic-gradient(
+      from -60deg at right,
+      transparent 0 300deg,
+      var(--triangle-color-r5, var(--triangle-color-right-middle)) 0
+    ),
+    conic-gradient(
+      from -60deg at right,
+      transparent 0 300deg,
+      var(--triangle-color-r4, var(--triangle-color-right-middle)) 0
+    ),
+    conic-gradient(
+      from -60deg at right,
+      transparent 0 300deg,
+      var(--triangle-color-r3, var(--triangle-color-right-middle)) 0
+    ),
+    conic-gradient(
+      from -60deg at right,
+      transparent 0 300deg,
+      var(--triangle-color-r2, var(--triangle-color-right-middle)) 0
+    ),
+    conic-gradient(
+      from -60deg at right,
+      transparent 0 300deg,
+      var(--triangle-color-r1, var(--triangle-color-right-middle)) 0
+    );
 
   /* right arrows pos */
-    --triangles-pattern-right-arrows-pos:
-      calc(50vw + var(--width-triangle) * 4 - 2px) bottom,
-      calc(50vw + var(--width-triangle) * 3 - 1.67px) bottom,
-      calc(50vw + var(--width-triangle) * 2 - 1.33px) bottom,
-      calc(50vw + var(--width-triangle) * 1 - 1px) bottom,
-      calc(50vw + var(--width-triangle) * 0 - 0.67px) bottom,
-      calc(50vw + var(--width-triangle) * -1 - 0.33px) bottom, 
-      
-      calc(50vw + var(--width-triangle) * 5 - 2px) bottom,
-      calc(50vw + var(--width-triangle) * 4 - 1.67px) bottom,
-      calc(50vw + var(--width-triangle) * 3 - 1.33px) bottom,
-      calc(50vw + var(--width-triangle) * 2 - 1px) bottom,
-      calc(50vw + var(--width-triangle) * 1 - 0.67px) bottom,
-      calc(50vw + var(--width-triangle) * 0 - 0.33px) bottom;
+  --triangles-pattern-right-arrows-pos:
+    calc(50vw + var(--width-triangle) * 4 - 2px) bottom,
+    calc(50vw + var(--width-triangle) * 3 - 1.67px) bottom,
+    calc(50vw + var(--width-triangle) * 2 - 1.33px) bottom,
+    calc(50vw + var(--width-triangle) * 1 - 1px) bottom,
+    calc(50vw + var(--width-triangle) * 0 - 0.67px) bottom,
+    calc(50vw + var(--width-triangle) * -1 - 0.33px) bottom,
+    calc(50vw + var(--width-triangle) * 5 - 2px) bottom,
+    calc(50vw + var(--width-triangle) * 4 - 1.67px) bottom,
+    calc(50vw + var(--width-triangle) * 3 - 1.33px) bottom,
+    calc(50vw + var(--width-triangle) * 2 - 1px) bottom,
+    calc(50vw + var(--width-triangle) * 1 - 0.67px) bottom,
+    calc(50vw + var(--width-triangle) * 0 - 0.33px) bottom;
 }
 
 /* DEFAULT PATTERNS */
 
 .triangles {
-  --triangles-pattern-left:var(--triangles-pattern-left-arrows);
-  --triangles-pattern-left-pos:var(--triangles-pattern-left-arrows-pos);
-  --triangles-pattern-right:var(--triangles-pattern-right-arrows);
-  --triangles-pattern-right-pos:var(--triangles-pattern-right-arrows-pos);
+  --triangles-pattern-left: var(--triangles-pattern-left-arrows);
+  --triangles-pattern-left-pos: var(--triangles-pattern-left-arrows-pos);
+  --triangles-pattern-right: var(--triangles-pattern-right-arrows);
+  --triangles-pattern-right-pos: var(--triangles-pattern-right-arrows-pos);
 
-  background-color:transparent;
+  background-color: transparent;
   background-image:
-    var(--triangles-pattern-left),
-    var(--triangles-pattern-right);
+    var(--triangles-pattern-left), var(--triangles-pattern-right);
   background-position:
-    var(--triangles-pattern-left-pos),
-    var(--triangles-pattern-right-pos);
-  background-size:var(--width-triangle--l) var(--hgth-triangle--l);
-  background-repeat:no-repeat;
+    var(--triangles-pattern-left-pos), var(--triangles-pattern-right-pos);
+  background-size: var(--width-triangle--l) var(--hgth-triangle--l);
+  background-repeat: no-repeat;
 }
 
 :root[data-triangle-pattern-left-lottery="2"] .triangles {
-  --triangles-pattern-left:var(--triangles-pattern-left-bars);
-  --triangles-pattern-left-pos:var(--triangles-pattern-left-bars-pos);
+  --triangles-pattern-left: var(--triangles-pattern-left-bars);
+  --triangles-pattern-left-pos: var(--triangles-pattern-left-bars-pos);
 }
 :root[data-triangle-pattern-right-lottery="2"] .triangles {
-  --triangles-pattern-right:var(--triangles-pattern-right-bars);
-  --triangles-pattern-right-pos:var(--triangles-pattern-right-bars-pos);
+  --triangles-pattern-right: var(--triangles-pattern-right-bars);
+  --triangles-pattern-right-pos: var(--triangles-pattern-right-bars-pos);
 }
-
-
-
-
 
 /***********************/
 /* TRIANGLES KEYFRAMES */
@@ -404,175 +570,293 @@
 /* The previous check does not work in a Docker environment, thus we opted for a simpler check */
 /* We do this because @property degrades gracefully if not supported */
 @supports (aspect-ratio: 1) {
-
   /* cust prop declarations */
-  @property --triangle-color-l1 { syntax: "<color>"; inherits:true; initial-value:red; }
-  @property --triangle-color-r1 { syntax: "<color>"; inherits:true; initial-value:red; }
+  @property --triangle-color-l1 {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: red;
+  }
+  @property --triangle-color-r1 {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: red;
+  }
 
-  @property --triangle-color-l2 { syntax: "<color>"; inherits:true; initial-value:red; }
-  @property --triangle-color-r2 { syntax: "<color>"; inherits:true; initial-value:red; }
+  @property --triangle-color-l2 {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: red;
+  }
+  @property --triangle-color-r2 {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: red;
+  }
 
-  @property --triangle-color-l3 { syntax: "<color>"; inherits:true; initial-value:red; }
-  @property --triangle-color-r3 { syntax: "<color>"; inherits:true; initial-value:red; }
+  @property --triangle-color-l3 {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: red;
+  }
+  @property --triangle-color-r3 {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: red;
+  }
 
-  @property --triangle-color-l4 { syntax: "<color>"; inherits:true; initial-value:red; }
-  @property --triangle-color-r4 { syntax: "<color>"; inherits:true; initial-value:red; }
+  @property --triangle-color-l4 {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: red;
+  }
+  @property --triangle-color-r4 {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: red;
+  }
 
-  @property --triangle-color-l5 { syntax: "<color>"; inherits:true; initial-value:red; }
-  @property --triangle-color-r5 { syntax: "<color>"; inherits:true; initial-value:red; }
+  @property --triangle-color-l5 {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: red;
+  }
+  @property --triangle-color-r5 {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: red;
+  }
 
-  @property --triangle-color-l6 { syntax: "<color>"; inherits:true; initial-value:red; }
-  @property --triangle-color-r6 { syntax: "<color>"; inherits:true; initial-value:red; }
+  @property --triangle-color-l6 {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: red;
+  }
+  @property --triangle-color-r6 {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: red;
+  }
 
-  @property --triangle-color-l7 { syntax: "<color>"; inherits:true; initial-value:red; }
-  @property --triangle-color-r7 { syntax: "<color>"; inherits:true; initial-value:red; }
-
+  @property --triangle-color-l7 {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: red;
+  }
+  @property --triangle-color-r7 {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: red;
+  }
 
   /* cust prop animations */
   /* keyframes for every color in the pattern */
-  @keyframes --ani-triangle-l1 { 
-    0% { --triangle-color-l1: var(--triangle-color-left-start);} 
-    14% { --triangle-color-l1: var(--triangle-color-left-middle);} 
-    100% { --triangle-color-l1: var(--triangle-color-left-end); }
+  @keyframes --ani-triangle-l1 {
+    0% {
+      --triangle-color-l1: var(--triangle-color-left-start);
+    }
+    14% {
+      --triangle-color-l1: var(--triangle-color-left-middle);
+    }
+    100% {
+      --triangle-color-l1: var(--triangle-color-left-end);
+    }
   }
-  @keyframes --ani-triangle-l2 { 
-    0% { --triangle-color-l2: var(--triangle-color-left-start);} 
-    14% { --triangle-color-l2: var(--triangle-color-left-middle);} 
-    100% { --triangle-color-l2: var(--triangle-color-left-end); }
+  @keyframes --ani-triangle-l2 {
+    0% {
+      --triangle-color-l2: var(--triangle-color-left-start);
+    }
+    14% {
+      --triangle-color-l2: var(--triangle-color-left-middle);
+    }
+    100% {
+      --triangle-color-l2: var(--triangle-color-left-end);
+    }
   }
-  @keyframes --ani-triangle-l3 { 
-    0% { --triangle-color-l3: var(--triangle-color-left-start);} 
-    14% { --triangle-color-l3: var(--triangle-color-left-middle);} 
-    100% { --triangle-color-l3: var(--triangle-color-left-end); }
+  @keyframes --ani-triangle-l3 {
+    0% {
+      --triangle-color-l3: var(--triangle-color-left-start);
+    }
+    14% {
+      --triangle-color-l3: var(--triangle-color-left-middle);
+    }
+    100% {
+      --triangle-color-l3: var(--triangle-color-left-end);
+    }
   }
-  @keyframes --ani-triangle-l4 { 
-    0% { --triangle-color-l4: var(--triangle-color-left-start);} 
-    14% { --triangle-color-l4: var(--triangle-color-left-middle);} 
-    100% { --triangle-color-l4: var(--triangle-color-left-end); }
+  @keyframes --ani-triangle-l4 {
+    0% {
+      --triangle-color-l4: var(--triangle-color-left-start);
+    }
+    14% {
+      --triangle-color-l4: var(--triangle-color-left-middle);
+    }
+    100% {
+      --triangle-color-l4: var(--triangle-color-left-end);
+    }
   }
-  @keyframes --ani-triangle-l5 { 
-    0% { --triangle-color-l5: var(--triangle-color-left-start);} 
-    14% { --triangle-color-l5: var(--triangle-color-left-middle);} 
-    100% { --triangle-color-l5: var(--triangle-color-left-end); }
+  @keyframes --ani-triangle-l5 {
+    0% {
+      --triangle-color-l5: var(--triangle-color-left-start);
+    }
+    14% {
+      --triangle-color-l5: var(--triangle-color-left-middle);
+    }
+    100% {
+      --triangle-color-l5: var(--triangle-color-left-end);
+    }
   }
-  @keyframes --ani-triangle-l6 { 
-    0% { --triangle-color-l6: var(--triangle-color-left-start);} 
-    14% { --triangle-color-l6: var(--triangle-color-left-middle);} 
-    100% { --triangle-color-l6: var(--triangle-color-left-end); }
+  @keyframes --ani-triangle-l6 {
+    0% {
+      --triangle-color-l6: var(--triangle-color-left-start);
+    }
+    14% {
+      --triangle-color-l6: var(--triangle-color-left-middle);
+    }
+    100% {
+      --triangle-color-l6: var(--triangle-color-left-end);
+    }
   }
-  @keyframes --ani-triangle-l7 { 
-    0% { --triangle-color-l7: var(--triangle-color-left-start);} 
-    14% { --triangle-color-l7: var(--triangle-color-left-middle);} 
-    100% { --triangle-color-l7: var(--triangle-color-left-end); }
+  @keyframes --ani-triangle-l7 {
+    0% {
+      --triangle-color-l7: var(--triangle-color-left-start);
+    }
+    14% {
+      --triangle-color-l7: var(--triangle-color-left-middle);
+    }
+    100% {
+      --triangle-color-l7: var(--triangle-color-left-end);
+    }
   }
 
-  @keyframes --ani-triangle-r1 { 
-    0% { --triangle-color-r1: var(--triangle-color-right-start);} 
-    14% { --triangle-color-r1: var(--triangle-color-right-middle);} 
-    100% { --triangle-color-r1: var(--triangle-color-right-end); }
+  @keyframes --ani-triangle-r1 {
+    0% {
+      --triangle-color-r1: var(--triangle-color-right-start);
+    }
+    14% {
+      --triangle-color-r1: var(--triangle-color-right-middle);
+    }
+    100% {
+      --triangle-color-r1: var(--triangle-color-right-end);
+    }
   }
-  @keyframes --ani-triangle-r2 { 
-    0% { --triangle-color-r2: var(--triangle-color-right-start);} 
-    14% { --triangle-color-r2: var(--triangle-color-right-middle);} 
-    100% { --triangle-color-r2: var(--triangle-color-right-end); }
+  @keyframes --ani-triangle-r2 {
+    0% {
+      --triangle-color-r2: var(--triangle-color-right-start);
+    }
+    14% {
+      --triangle-color-r2: var(--triangle-color-right-middle);
+    }
+    100% {
+      --triangle-color-r2: var(--triangle-color-right-end);
+    }
   }
-  @keyframes --ani-triangle-r3 { 
-    0% { --triangle-color-r3: var(--triangle-color-right-start);} 
-    14% { --triangle-color-r3: var(--triangle-color-right-middle);} 
-    100% { --triangle-color-r3: var(--triangle-color-right-end); }
+  @keyframes --ani-triangle-r3 {
+    0% {
+      --triangle-color-r3: var(--triangle-color-right-start);
+    }
+    14% {
+      --triangle-color-r3: var(--triangle-color-right-middle);
+    }
+    100% {
+      --triangle-color-r3: var(--triangle-color-right-end);
+    }
   }
-  @keyframes --ani-triangle-r4 { 
-    0% { --triangle-color-r4: var(--triangle-color-right-start);} 
-    14% { --triangle-color-r4: var(--triangle-color-right-middle);} 
-    100% { --triangle-color-r4: var(--triangle-color-right-end); }
+  @keyframes --ani-triangle-r4 {
+    0% {
+      --triangle-color-r4: var(--triangle-color-right-start);
+    }
+    14% {
+      --triangle-color-r4: var(--triangle-color-right-middle);
+    }
+    100% {
+      --triangle-color-r4: var(--triangle-color-right-end);
+    }
   }
-  @keyframes --ani-triangle-r5 { 
-    0% { --triangle-color-r5: var(--triangle-color-right-start);} 
-    14% { --triangle-color-r5: var(--triangle-color-right-middle);} 
-    100% { --triangle-color-r5: var(--triangle-color-right-end); }
+  @keyframes --ani-triangle-r5 {
+    0% {
+      --triangle-color-r5: var(--triangle-color-right-start);
+    }
+    14% {
+      --triangle-color-r5: var(--triangle-color-right-middle);
+    }
+    100% {
+      --triangle-color-r5: var(--triangle-color-right-end);
+    }
   }
-  @keyframes --ani-triangle-r6 { 
-    0% { --triangle-color-r6: var(--triangle-color-right-start);} 
-    14% { --triangle-color-r6: var(--triangle-color-right-middle);} 
-    100% { --triangle-color-r6: var(--triangle-color-right-end); }
+  @keyframes --ani-triangle-r6 {
+    0% {
+      --triangle-color-r6: var(--triangle-color-right-start);
+    }
+    14% {
+      --triangle-color-r6: var(--triangle-color-right-middle);
+    }
+    100% {
+      --triangle-color-r6: var(--triangle-color-right-end);
+    }
   }
-  @keyframes --ani-triangle-r7 { 
-    0% { --triangle-color-r7: var(--triangle-color-right-start);} 
-    14% { --triangle-color-r7: var(--triangle-color-right-middle);} 
-    100% { --triangle-color-r7: var(--triangle-color-right-end); }
+  @keyframes --ani-triangle-r7 {
+    0% {
+      --triangle-color-r7: var(--triangle-color-right-start);
+    }
+    14% {
+      --triangle-color-r7: var(--triangle-color-right-middle);
+    }
+    100% {
+      --triangle-color-r7: var(--triangle-color-right-end);
+    }
   }
-
-
-
-
 
   /***********************/
   /* TRIANGLE ANIMATIONS */
   /***********************/
 
-
   /* BASE - 4 TRIANGLES PATTERN */
 
   .triangles {
-    --ani-triangle-duration:48s;
+    --ani-triangle-duration: 48s;
 
     animation-name:
-        --ani-triangle-l1,
-        --ani-triangle-r1,   
-        --ani-triangle-l2,
-        --ani-triangle-r2,
-        --ani-triangle-l3,
-        --ani-triangle-r3,
-        --ani-triangle-l4,
-        --ani-triangle-r4,
-        --ani-triangle-l5,
-        --ani-triangle-r5,
-        --ani-triangle-l6,
-        --ani-triangle-r6,
-        --ani-triangle-l7,
-        --ani-triangle-r7;
+      --ani-triangle-l1, --ani-triangle-r1, --ani-triangle-l2,
+      --ani-triangle-r2, --ani-triangle-l3, --ani-triangle-r3,
+      --ani-triangle-l4, --ani-triangle-r4, --ani-triangle-l5,
+      --ani-triangle-r5, --ani-triangle-l6, --ani-triangle-r6,
+      --ani-triangle-l7, --ani-triangle-r7;
 
-    animation-duration:var( --ani-triangle-duration);
+    animation-duration: var(--ani-triangle-duration);
 
-    animation-delay: 
-      calc(var( --ani-triangle-duration) * 0),
-      calc(var( --ani-triangle-duration) * 0),
+    animation-delay:
+      calc(var(--ani-triangle-duration) * 0),
+      calc(var(--ani-triangle-duration) * 0),
+      calc(var(--ani-triangle-duration) * -0.5),
+      calc(var(--ani-triangle-duration) * -0.5),
+      calc(var(--ani-triangle-duration) * -1),
+      calc(var(--ani-triangle-duration) * -1);
 
-      calc(var( --ani-triangle-duration) * -.5),
-      calc(var( --ani-triangle-duration) * -.5),
-      
-      calc(var( --ani-triangle-duration) * -1),
-      calc(var( --ani-triangle-duration) * -1);
-
-    animation-timing-function:linear;
-    animation-iteration-count:infinite;
-    animation-direction:alternate;
-    animation-play-state:paused;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-play-state: paused;
   }
 
   [data-reduced-motion="no-preference"] .triangles {
-    animation-play-state:running;
+    animation-play-state: running;
   }
-
 
   /* 6 TRIANGLES PATTERN */
 
   @container (width > 32em) {
     .triangles {
-      --ani-triangle-duration:60s;
-      
-      animation-delay: 
-        calc(var( --ani-triangle-duration) * 0),
-        calc(var( --ani-triangle-duration) * 0),
+      --ani-triangle-duration: 60s;
 
-        calc(var( --ani-triangle-duration) * -.33),
-        calc(var( --ani-triangle-duration) * -.33),
-
-        calc(var( --ani-triangle-duration) * -.67),
-        calc(var( --ani-triangle-duration) * -.67),
-
-        calc(var( --ani-triangle-duration) * -1),
-        calc(var( --ani-triangle-duration) * -1);
+      animation-delay:
+        calc(var(--ani-triangle-duration) * 0),
+        calc(var(--ani-triangle-duration) * 0),
+        calc(var(--ani-triangle-duration) * -0.33),
+        calc(var(--ani-triangle-duration) * -0.33),
+        calc(var(--ani-triangle-duration) * -0.67),
+        calc(var(--ani-triangle-duration) * -0.67),
+        calc(var(--ani-triangle-duration) * -1),
+        calc(var(--ani-triangle-duration) * -1);
     }
   }
 
@@ -580,82 +864,65 @@
 
   @container (width > 50em) {
     .triangles {
-      --ani-triangle-duration:72s;
-      
-      animation-delay: 
-        calc(var( --ani-triangle-duration) * 0),
-        calc(var( --ani-triangle-duration) * 0),
+      --ani-triangle-duration: 72s;
 
-        calc(var( --ani-triangle-duration) * -.25),
-        calc(var( --ani-triangle-duration) * -.25),
-
-        calc(var( --ani-triangle-duration) * -.5),
-        calc(var( --ani-triangle-duration) * -.5),
-
-        calc(var( --ani-triangle-duration) * -.75),
-        calc(var( --ani-triangle-duration) * -.75),
-
-        calc(var( --ani-triangle-duration) * -1),
-        calc(var( --ani-triangle-duration) * -1);
+      animation-delay:
+        calc(var(--ani-triangle-duration) * 0),
+        calc(var(--ani-triangle-duration) * 0),
+        calc(var(--ani-triangle-duration) * -0.25),
+        calc(var(--ani-triangle-duration) * -0.25),
+        calc(var(--ani-triangle-duration) * -0.5),
+        calc(var(--ani-triangle-duration) * -0.5),
+        calc(var(--ani-triangle-duration) * -0.75),
+        calc(var(--ani-triangle-duration) * -0.75),
+        calc(var(--ani-triangle-duration) * -1),
+        calc(var(--ani-triangle-duration) * -1);
     }
   }
-
 
   /* 10 TRIANGLES PATTERN */
 
   @container (width > 70em) {
     .triangles {
-      --ani-triangle-duration:84s;
-      
-      animation-delay: 
-        calc(var( --ani-triangle-duration) * 0),
-        calc(var( --ani-triangle-duration) * 0),
+      --ani-triangle-duration: 84s;
 
-        calc(var( --ani-triangle-duration) * -.2),
-        calc(var( --ani-triangle-duration) * -.2),
-
-        calc(var( --ani-triangle-duration) * -.4),
-        calc(var( --ani-triangle-duration) * -.4),
-
-        calc(var( --ani-triangle-duration) * -.6),
-        calc(var( --ani-triangle-duration) * -.6),
-
-        calc(var( --ani-triangle-duration) * -.8),
-        calc(var( --ani-triangle-duration) * -.8),
-
-        calc(var( --ani-triangle-duration) * -1),
-        calc(var( --ani-triangle-duration) * -1);
+      animation-delay:
+        calc(var(--ani-triangle-duration) * 0),
+        calc(var(--ani-triangle-duration) * 0),
+        calc(var(--ani-triangle-duration) * -0.2),
+        calc(var(--ani-triangle-duration) * -0.2),
+        calc(var(--ani-triangle-duration) * -0.4),
+        calc(var(--ani-triangle-duration) * -0.4),
+        calc(var(--ani-triangle-duration) * -0.6),
+        calc(var(--ani-triangle-duration) * -0.6),
+        calc(var(--ani-triangle-duration) * -0.8),
+        calc(var(--ani-triangle-duration) * -0.8),
+        calc(var(--ani-triangle-duration) * -1),
+        calc(var(--ani-triangle-duration) * -1);
     }
   }
-
 
   /* 12 TRIANGLES PATTERN */
 
   @container (width > 92em) {
     .triangles {
-      --ani-triangle-duration:96s;
-        
-      animation-delay: 
-        calc(var( --ani-triangle-duration) * 0),
-        calc(var( --ani-triangle-duration) * 0),
+      --ani-triangle-duration: 96s;
 
-        calc(var( --ani-triangle-duration) * -.17),
-        calc(var( --ani-triangle-duration) * -.17),
-
-        calc(var( --ani-triangle-duration) * -.33),
-        calc(var( --ani-triangle-duration) * -.33),
-
-        calc(var( --ani-triangle-duration) * -.5),
-        calc(var( --ani-triangle-duration) * -.5),
-
-        calc(var( --ani-triangle-duration) * -.67),
-        calc(var( --ani-triangle-duration) * -.67),
-
-        calc(var( --ani-triangle-duration) * -.83),
-        calc(var( --ani-triangle-duration) * -.83),
-
-        calc(var( --ani-triangle-duration) * -1),
-        calc(var( --ani-triangle-duration) * -1);
+      animation-delay:
+        calc(var(--ani-triangle-duration) * 0),
+        calc(var(--ani-triangle-duration) * 0),
+        calc(var(--ani-triangle-duration) * -0.17),
+        calc(var(--ani-triangle-duration) * -0.17),
+        calc(var(--ani-triangle-duration) * -0.33),
+        calc(var(--ani-triangle-duration) * -0.33),
+        calc(var(--ani-triangle-duration) * -0.5),
+        calc(var(--ani-triangle-duration) * -0.5),
+        calc(var(--ani-triangle-duration) * -0.67),
+        calc(var(--ani-triangle-duration) * -0.67),
+        calc(var(--ani-triangle-duration) * -0.83),
+        calc(var(--ani-triangle-duration) * -0.83),
+        calc(var(--ani-triangle-duration) * -1),
+        calc(var(--ani-triangle-duration) * -1);
     }
   }
 }
