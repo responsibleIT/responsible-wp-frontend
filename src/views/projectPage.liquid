@@ -16,7 +16,10 @@ permalink: "{{ page.permalink }}"
         <h1>{{ page.title.rendered }}</h1>
       </section>
       <section class="section--content" style="--delay: 0.15s">
-        {{ page.content.rendered | sanitize }}
+
+        {{ page.content.rendered | extract: "projectContent" | sanitize | default: "No content available." }}
+        {{ page.content.rendered | extract: "projectTags" | sanitize }}
+
       </section>
     </div>
   </main>

@@ -38,7 +38,7 @@
 }
 
 .triangles {
-  --number-triangles:4;
+  --number-triangles:8;
   --max-width-triangles:108em;
 
   --width-triangle: calc( min(var(--max-width-triangles), 100vw + 4px) / var(--number-triangles) );

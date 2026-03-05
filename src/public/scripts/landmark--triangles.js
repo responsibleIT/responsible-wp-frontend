@@ -1,4 +1,4 @@
-const triangles = document.querySelector(".triangles");
+const triangles = $(".triangles");
 
 
 
