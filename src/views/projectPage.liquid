@@ -18,7 +18,7 @@ permalink: "{{ page.permalink }}"
       <section class="section--content" style="--delay: 0.15s">
 
         {{ page.content.rendered | extract: "projectContent" | sanitize | default: "No content available." }}
-        {{ page.content.rendered | extract: "projectTags" | sanitize }}
+        {{ page.content.rendered | extract: "projectTags" | sanitize | default: "No content available." }}
 
       </section>
     </div>

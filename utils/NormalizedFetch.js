@@ -8,7 +8,7 @@ const fetchBuilder = (options, page = 1) => {
   const defaultParams = {
     per_page: "100",
     status: "publish",
-    _fields: "id,title,slug,content,date,tags,categories,parent,acf",
+    _fields: "id,title,slug,content,date,tags,categories,parent,acf,template",
     page: page.toString(),
   };
 
@@ -134,7 +134,7 @@ export default async function NormalizedFetch(fetchSource, options = "") {
     }
 
     if (Array.isArray(finalCombinedData) && finalCombinedData.length === 1) {
-      finalCombinedData = finalCombinedData[0];
+      finalCombinedData = finalCombinedData[0]; 
     }
 
     return convertDatesToObjects(finalCombinedData);

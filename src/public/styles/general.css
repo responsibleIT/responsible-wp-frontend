@@ -1,3 +1,9 @@
+@property --chroma-shifter {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
 @view-transition {
   navigation: auto;
 }
@@ -22,6 +28,8 @@
 /********/
 
 html {
+  --max-chroma: 60deg;
+
   scrollbar-gutter: stable;
   background-color: var(--bg);
   scroll-behavior: smooth;
@@ -29,20 +37,24 @@ html {
   font-size: calc(1em * (1 + var(--setting-fontsize-factor)));
 }
 
-[data-reduced-motion="no-preference"] {
+html[data-reduced-motion="no-preference"] {
   transition: font-size 0.2s;
+  --max-chroma: 260deg;
 }
 
 body {
   container-type: inline-size;
   container-name: --container--body;
+  animation: shift-chroma both;
+  animation-timeline: scroll();
 
   margin: 0;
 
   font-size: clamp(1em, 0.75em + 0.75vw, 1.2em);
 }
 
-.hidden, .hiddem{
+.hidden,
+.hiddem {
   display: none !important;
   opacity: 0 !important;
 }
@@ -50,12 +62,12 @@ body {
 /* IMAGES */
 /********/
 
-figure{
+figure {
   padding: 0;
   margin: 0;
 }
 
-img{
+img {
   width: 100%;
 }
 
@@ -107,12 +119,15 @@ h3,
   font-size: clamp(1.5rem, 3vw, 1.875rem);
 }
 
-p, a, ul {
+p,
+a,
+ul {
   font-size: 1.625rem;
   line-height: 1.65;
 }
 
-span, li{
+span,
+li {
   font-size: inherit;
   color: inherit;
   line-height: inherit;
@@ -163,11 +178,13 @@ aside.sidebar .item-list:nth-child(2) {
   color: unset;
   text-decoration: none;
   padding: 2.125rem 1.125rem 1.625rem 1.125rem;
-  transition: color 0.2s ease-out, background 0.3s ease-in;
+  transition:
+    color 0.2s ease-out,
+    background 0.3s ease-in;
   font-weight: 500;
 }
 
-.item-list li a[data-selected="true"]{
+.item-list li a[data-selected="true"] {
   background: var(--clr);
   color: var(--bg);
 }
@@ -184,3 +201,10 @@ aside.sidebar .item-list:nth-child(2) {
   transition: 0s ease;
   background: var(--selection);
 }
+
+@keyframes shift-chroma {
+  to {
+    --chroma-shifter: var(--max-chroma);
+  }
+}
+

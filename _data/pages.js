@@ -1,4 +1,4 @@
-import NormalizedFetch from "../utils/NormalizedFetch.js";
+import NormalizedFetch from "../utils/normalizedFetch.js";
 
 // ! _data makes use of utils
 
@@ -23,16 +23,22 @@ export default async function (eleventyData) {
 
   // Configure parent IDs for sectioned collections
   // Extend this map to add more sections (e.g. onderzoek, onderwijs, etc.)
+
+  const projectTemplate = "project-detail-page";
   const SECTION_PARENTS = {
-    projecten: 27,
+    projecten: { parentId: 27, template: projectTemplate },
   };
 
   const sections = {};
-  const sectionParentIds = Object.values(SECTION_PARENTS);
+  const sectionParentIds = Object.values(SECTION_PARENTS).map(
+    (s) => s.parentId,
+  );
 
-  for (const [key, parentId] of Object.entries(SECTION_PARENTS)) {
+  for (const [key, { parentId, template }] of Object.entries(SECTION_PARENTS)) {
     const indexPage = pages.find((p) => p.id === parentId) || null;
-    const children = pages.filter((p) => p.parent === parentId);
+    const children = pages.filter(
+      (p) => p.parent === parentId && p.template === template,
+    );
 
     sections[key] = {
       index: indexPage,
@@ -46,12 +52,12 @@ export default async function (eleventyData) {
   );
 
   const taxonomyIds = {};
-  sections.projecten.items.forEach(item => {
+  sections.projecten.items.forEach((item) => {
     if (!item.acf) return;
     for (const [key, value] of Object.entries(item.acf)) {
       if (Array.isArray(value) && value.length) {
         if (!taxonomyIds[key]) taxonomyIds[key] = new Set();
-        value.forEach(id => taxonomyIds[key].add(id));
+        value.forEach((id) => taxonomyIds[key].add(id));
       }
     }
   });
@@ -60,31 +66,33 @@ export default async function (eleventyData) {
   const terms = {};
   for (const [taxonomy, ids] of Object.entries(taxonomyIds)) {
     const [raw, meta] = await Promise.all([
-      NormalizedFetch(taxonomy, '_fields=slug,name,id,taxonomy'),
-      NormalizedFetch(`taxonomies/${taxonomy}`, '_fields=name')
+      NormalizedFetch(taxonomy, "_fields=slug,name,id,taxonomy"),
+      NormalizedFetch(`taxonomies/${taxonomy}`, "_fields=name"),
     ]);
     const rawArray = Array.isArray(raw) ? raw : [raw];
     terms[taxonomy] = {
       label: meta.name,
-      items: rawArray.filter(term => ids.has(Number(term.id)))
+      items: rawArray.filter((term) => ids.has(Number(term.id))),
     };
   }
 
-  sections.projecten.items.forEach(item => {
+  sections.projecten.items.forEach((item) => {
     if (!item.acf) return;
     for (const [key, termData] of Object.entries(terms)) {
       if (Array.isArray(item.acf[key]) && Array.isArray(termData.items)) {
-        item.acf[key] = item.acf[key].map(id =>
-          termData.items.find(t => t.id === id)?.slug
-        ).filter(Boolean);
+        item.acf[key] = item.acf[key]
+          .map((id) => termData.items.find((t) => t.id === id)?.slug)
+          .filter(Boolean);
       }
     }
   });
 
   for (const [taxonomy, termData] of Object.entries(terms)) {
-    termData.items.forEach(term => {
-      term.count = sections.projecten.items.filter(item =>
-        Array.isArray(item.acf[taxonomy]) && item.acf[taxonomy].includes(term.slug)
+    termData.items.forEach((term) => {
+      term.count = sections.projecten.items.filter(
+        (item) =>
+          Array.isArray(item.acf[taxonomy]) &&
+          item.acf[taxonomy].includes(term.slug),
       ).length;
     });
   }
@@ -93,6 +101,6 @@ export default async function (eleventyData) {
     home,
     pages: nonSectionPages,
     sections,
-    terms
+    terms,
   };
 }

@@ -54,21 +54,36 @@ fetch("/api/projects.json")
   .then((res) => res.json())
   .then((data) => {
     allProjects = data;
+
+    // Sync checkboxes to current params first
+    const params = getParams();
+    document.querySelectorAll("[data-filter]").forEach((input) => {
+      if (input.type === "checkbox") {
+        const values = params.getAll(input.dataset.filter);
+        input.checked = values.includes(input.value);
+      } else {
+        input.value = params.get(input.dataset.filter) || "";
+      }
+    });
+
+    // Wire up change listeners
     document.querySelectorAll("[data-filter]").forEach((input) => {
       input.addEventListener("change", (e) => {
         setParam(e.target.dataset.filter, e.target.value, e.target.checked);
       });
     });
+
+    // Now filter with params applied
     filterItems();
   });
 
-// sync checkboxes to current params
-const params = getParams();
-document.querySelectorAll("[data-filter]").forEach((input) => {
-  if (input.type === "checkbox") {
-    const values = params.getAll(input.dataset.filter);
-    input.checked = values.includes(input.value);
-  } else {
-    input.value = params.get(input.dataset.filter) || "";
-  }
-});
+// // sync checkboxes to current params
+// const params = getParams();
+// document.querySelectorAll("[data-filter]").forEach((input) => {
+//   if (input.type === "checkbox") {
+//     const values = params.getAll(input.dataset.filter);
+//     input.checked = values.includes(input.value);
+//   } else {
+//     input.value = params.get(input.dataset.filter) || "";
+//   }
+// });

@@ -8,10 +8,7 @@
   },
   "scripts": {
     "dev": "rimraf dist && pnpm exec eleventy --serve",
-    "build": "rimraf dist && pnpm exec eleventy",
-    "server": "nodemon routing/server.js",
-    "server:fresh": "pnpm run build && pnpm run server",
-    "dock": "docker rm -f 11ty-app & docker build -t 11ty-hybrid-test . & docker run -p 5000:3000 --name 11ty-app 11ty-hybrid-test"
+    "build": "rimraf dist && pnpm exec eleventy"
   },
   "dependencies": {
     "@11ty/eleventy": "^3.1.2",

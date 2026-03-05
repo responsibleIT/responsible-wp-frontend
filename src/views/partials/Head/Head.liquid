@@ -14,7 +14,9 @@
     <link rel="stylesheet" href="/packages/lenis.css">
     <script type="module">
       import Lenis from '/packages/lenis.min.js';
-      const lenis = new Lenis();
+      const lenis = new Lenis({
+        easing: (t) => Math.min(1, 1 - Math.pow(1 - t, 4)),
+      });
 
       function raf(time) {
         lenis.raf(time);
