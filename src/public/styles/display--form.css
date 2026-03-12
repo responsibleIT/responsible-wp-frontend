@@ -1,3 +1,7 @@
+.form--container {
+  
+}
+
 .view-setter--form :is(fieldset, legend, input) {
   margin: 0;
   padding: 0;
@@ -8,9 +12,6 @@
   display: flex;
   justify-content: end;
   margin-bottom: 1rem;
-
-  /* ! temp */
-  display: none;
 }
 
 .view-setter--form svg {

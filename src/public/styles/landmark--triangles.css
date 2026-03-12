@@ -565,9 +565,6 @@
 /* TRIANGLES KEYFRAMES */
 /***********************/
 
-/* // check if Houdini Properties and Values API are supported */
-/* // https://web.dev/articles/at-property */
-/* The previous check does not work in a Docker environment, thus we opted for a simpler check */
 /* We do this because @property degrades gracefully if not supported */
 @supports (aspect-ratio: 1) {
   /* cust prop declarations */

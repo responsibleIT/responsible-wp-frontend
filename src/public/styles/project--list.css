@@ -1,0 +1,228 @@
+@property --pan {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+.project--list .project--item a {
+  color: #000;
+  font-weight: 600;
+
+  &:hover {
+    color: var(--link-hover);
+  }
+}
+
+.project--list {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 64px;
+}
+
+.project--list[data-list="list"] {
+  display: block;
+}
+
+.project--list[data-list="list"] .project--item {
+  background: none;
+  display: list-item;
+  border: none;
+  padding: 0;
+}
+
+.project--list[data-list="grid"] .project--item {
+  position: relative;
+  /* pre-defined colors */
+  --rgb-orange: var(--orange);
+  --rgb-orange-l: var(--orange--l);
+  --rgb-orange-d: var(--orange--d);
+
+  --rgb-blue: var(--blue);
+  --rgb-blue-l: var(--blue--l);
+  --rgb-blue-d: var(--blue--d);
+
+  --rgb-pink: var(--pink);
+  --rgb-pink-l: var(--pink--l);
+  --rgb-pink-d: var(--pink--d);
+
+  --rgb-yellow: var(--yellow);
+  --rgb-yellow-l: var(--yellow--l);
+  --rgb-yellow-d: var(--yellow--d);
+
+  --rgb-green: var(--green);
+  --rgb-green-l: var(--green--l);
+  --rgb-green-d: var(--green--d);
+
+  @supports (color: oklch(from red l c calc((h * 1deg) + 10deg))) {
+    --oklch-orange: oklch(from var(--rgb-orange) l c h);
+    --oklch-orange-l: oklch(from var(--rgb-orange-l) l c h);
+    --oklch-orange-d: oklch(from var(--rgb-orange-d) l c h);
+
+    --oklch-blue: oklch(from var(--rgb-blue) l c h);
+    --oklch-blue-l: oklch(from var(--rgb-blue-l) l c h);
+    --oklch-blue-d: oklch(from var(--rgb-blue-d) l c h);
+
+    --oklch-pink: oklch(from var(--rgb-pink) l c h);
+    --oklch-pink-l: oklch(from var(--rgb-pink-l) l c h);
+    --oklch-pink-d: oklch(from var(--rgb-pink-d) l c h);
+
+    --oklch-yellow: oklch(from var(--rgb-yellow) l c h);
+    --oklch-yellow-l: oklch(from var(--rgb-yellow-l) l c h);
+    --oklch-yellow-d: oklch(from var(--rgb-yellow-d) l c h);
+
+    --oklch-green: oklch(from var(--rgb-green) l c h);
+    --oklch-green-l: oklch(from var(--rgb-green-l) l c h);
+    --oklch-green-d: oklch(from var(--rgb-green-d) l c h);
+  }
+
+  /* guaranteed to resolve: falls back to rgb if oklch unsupported */
+  --pattern-orange: var(--oklch-orange, var(--rgb-orange));
+
+  --pattern-blue: var(--oklch-blue, var(--rgb-blue));
+
+  --pattern-pink: var(--oklch-pink, var(--rgb-pink));
+
+  --pattern-yellow: var(--oklch-yellow, var(--rgb-yellow));
+
+  --pattern-green: var(--oklch-green-l, var(--rgb-green));
+
+  --tile: 80px;
+
+  &::before {
+    animation: pan 30s linear infinite;
+  }
+}
+
+[data-primary="1"] {
+  --c-dark: var(--pattern-orange);
+}
+[data-primary="2"] {
+  --c-dark: var(--pattern-blue);
+}
+[data-primary="3"] {
+  --c-dark: var(--pattern-pink);
+}
+[data-primary="4"] {
+  --c-dark: var(--pattern-yellow);
+}
+[data-primary="5"] {
+  --c-dark: var(--pattern-green);
+}
+
+[data-secondary="1"] {
+  --c-light: var(--pattern-orange);
+}
+[data-secondary="2"] {
+  --c-light: var(--pattern-blue);
+}
+[data-secondary="3"] {
+  --c-light: var(--pattern-pink);
+}
+[data-secondary="4"] {
+  --c-light: var(--pattern-yellow);
+}
+[data-secondary="5"] {
+  --c-light: var(--pattern-green);
+}
+
+.project--list[data-list="grid"] .project--item::before {
+  content: "";
+  display: block;
+  aspect-ratio: 4/3; /* keep a nice rectangle */
+  border: 1px solid;
+  background: var(--bg-hsl);
+  background: var(--bg-oklch);
+  inset: 0;
+}
+/* MARK: PATTERNS
+  https://css-pattern.com/
+ */
+.project--list[data-list="grid"] .project--item.pattern-1::before {
+  --_g:
+    var(--c-dark) 6.1%, var(--c-light) 6.4% 18.6%, var(--c-dark) 18.9% 31.1%,
+    var(--c-light) 31.4% 43.6%, var(--c-dark) 43.9% 56.1%,
+    var(--c-light) 56.4% 68.6%, #0000 68.9%;
+  background:
+    radial-gradient(var(--tile) at 100% 0, var(--_g)),
+    radial-gradient(var(--tile) at 0 0, var(--_g)),
+    radial-gradient(var(--tile) at 0 100%, var(--_g)),
+    radial-gradient(var(--tile) at 100% 100%, var(--_g)) var(--c-dark);
+  background-size: var(--tile) var(--tile);
+  background-position: var(--pan) var(--pan);
+}
+
+@keyframes pan {
+  from {
+    --pan: 0px;
+  }
+  to {
+    --pan: var(--tile);
+  }
+}
+
+.project--list[data-list="grid"] .project--item.pattern-2::before {
+  --_g: #0000 40%, var(--c-dark) 41% 49%, #0000 50%;
+  background:
+    radial-gradient(farthest-side at -33.33% 50%, var(--_g)) 0
+      calc(var(--tile) / 2),
+    radial-gradient(farthest-side at 50% 133.33%, var(--_g))
+      calc(var(--tile) / 2) 0,
+    radial-gradient(farthest-side at 133.33% 50%, var(--_g)),
+    radial-gradient(farthest-side at 50% -33.33%, var(--_g)),
+    var(--c-light);
+  background-size:
+    calc(var(--tile) / 4.667) var(--tile),
+    var(--tile) calc(var(--tile) / 4.667);
+}
+
+.project--list[data-list="grid"] .project--item.pattern-3::before {
+  --c: #0000 71%, var(--c-light) 0 79%, #0000 0;
+  --_s: calc(var(--tile)/2)/calc(2 * var(--tile)) calc(2 * var(--tile));
+  background:
+    linear-gradient(45deg, var(--c)) calc(var(--tile) / -2) var(--_s),
+    linear-gradient(135deg, var(--c)) calc(var(--tile) / 2) var(--_s),
+    radial-gradient(var(--c-light) 35%, var(--c-dark) 37%) 0 0 / var(--tile)
+      var(--tile);
+}
+
+.project--list[data-list="grid"] .project--item.pattern-4::before {
+  --l: var(--c-dark) 20%, #0000 0;
+  --g: 35%, var(--c-light) 0 45%, var(--c-dark) 0;
+  background:
+    linear-gradient(45deg, var(--l) 45%, var(--c-dark) 0 70%, #0000 0),
+    linear-gradient(-45deg, var(--l) var(--g) 70%, #0000 0),
+    linear-gradient(45deg, var(--c-dark) var(--g));
+  background-size: var(--tile) var(--tile);
+}
+
+.project--list[data-list="grid"] .project--item.pattern-5::before {
+  --_g: radial-gradient(var(--c-dark) 49%, #0000 50%);
+  background:
+    var(--_g) calc(var(--tile) / -2) calc(var(--tile) / 2),
+    repeating-conic-gradient(from 45deg, var(--c-light) 0 25%, #0000 0 50%)
+      calc(var(--tile) / 2) calc(var(--tile) / 2),
+    var(--_g),
+    var(--_g) var(--tile) var(--tile) var(--c-light);
+  background-size: calc(2 * var(--tile)) calc(2 * var(--tile));
+}
+
+.project--list[data-list="grid"] .project--item a {
+  font-size: 1.375rem;
+  line-height: 1.45;
+}
+
+.project--list[data-list="grid"] .project--item a::before {
+  content: "";
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@keyframes hover_aligner {
+  to {
+    --hovered: 1;
+    --hovered-delayed: 1;
+  }
+}

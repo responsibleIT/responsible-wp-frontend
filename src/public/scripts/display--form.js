@@ -1,13 +1,15 @@
+const list = $("[data-list]");
 const items = $$("[name=weergave]");
-const list = $("[data-display]");
-// Check for has support; in case it is not supported we fallback to js
 const hasSupport = CSS.supports("selector(:has(*))");
 let initialItem;
 
 items.forEach((item) => {
   item.addEventListener("change", (e) => {
-    storeItem("view", e.target.value);
-    list.dataset.display = retrieveItem("view");
+    const view = e.target.value;
+    storeItem("view", view);
+    list.dataset.list = view;
+    list.setView?.(view);
+
     if (!hasSupport) {
       initialItem.parentElement.classList.toggle("selected");
       initialItem = e.target;
@@ -18,23 +20,21 @@ items.forEach((item) => {
 
 const initialView = () => {
   const currentView = retrieveItem("view");
-  if(currentView === null) return
+  if (currentView === null) return;
   initialItem = Array.from(items).find((item) => item.value === currentView);
-  console.log(initialItem);
 
-  // If no item is set yet, set the first value we find; as that is the default view
   if (!initialItem) {
     storeItem("view", items[0].value);
     initialItem = items[0];
   } else {
-    list.dataset.display = retrieveItem("view");
+    list.dataset.list = currentView;
+    list.setView?.(currentView);
   }
 
   if (!hasSupport) {
     initialItem.parentElement.classList.add("selected");
   } else {
     initialItem.checked = true;
-    console.log(initialItem, "selected");
   }
 };
 

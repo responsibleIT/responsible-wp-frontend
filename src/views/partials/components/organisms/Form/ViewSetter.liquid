@@ -1,0 +1,22 @@
+<form class="view-setter--form">
+  <fieldset>
+    <legend>Weergave</legend>
+    <label>
+      <span>list</span>
+      {% render 'partials/components/atoms/Icons/List-Icon.liquid' %}
+      <input
+        type="radio"
+        name="weergave"
+        checked
+        value="list" />
+    </label>
+    <label>
+      <span>grid</span>
+      {% render 'partials/components/atoms/Icons/Grid-Icon' %}
+      <input
+        type="radio"
+        name="weergave"
+        value="grid" />
+    </label>
+  </fieldset>
+</form>

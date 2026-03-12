@@ -142,3 +142,5 @@ list_pages_by_category.php
 list_pages_by_category.zip
 build/*
 build/
+
+.DS_Store

@@ -4,14 +4,14 @@ import { rm } from "fs/promises";
 import { existsSync } from "fs";
 import sanitize from "./lib/filters/sanitize.js";
 import extractElement from "./lib/filters/extractElement.js";
+import PRNG from "./lib/filters/PRNG.js";
 
 // ! .evelenty.js makes use of lib
 
 export default function (eleventyConfig) {
   // Copy everything from public/ to /
   eleventyConfig.addPassthroughCopy({ "src/public/": "/" });
-  eleventyConfig.addPassthroughCopy({ "utils": "/utils" });
-
+  eleventyConfig.addPassthroughCopy({ utils: "/utils" });
 
   // Ignore SSR-only templates; these are rendered by Express, not Eleventy
   // Paths are relative to the project root here
@@ -29,6 +29,23 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addLiquidFilter("sanitize", sanitize);
   eleventyConfig.addLiquidFilter("extract", extractElement);
+
+  /**
+   * Mulberry32 — seeded pseudo-random number generator (PRNG)
+   *
+   * Given a seed (e.g. item.id), returns a function that produces
+   * a deterministic sequence of floats between 0 and 1.
+   * Same seed always yields the same sequence — stable across builds.
+   *
+   * Not cryptographically secure, but perfect for deterministic UI assignments
+   * like colors and patterns where you just need good distribution.
+   *
+   * Usage:
+   *   const rand = rng(item.id);
+   *   rand(); // first value
+   *   rand(); // second value, etc.
+   */
+  eleventyConfig.addFilter("noRepeatPairs", PRNG)
 
   // Image generation shortcode
   eleventyConfig.addLiquidShortcode(

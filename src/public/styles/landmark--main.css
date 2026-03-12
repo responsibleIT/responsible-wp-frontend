@@ -11,13 +11,14 @@ main.grid-container {
 
 .main-content {
   grid-column: 1 / -1;
-
-  @media (min-width: 64rem) {
-    grid-column: 1 / 9;
-  }
-
-  @media (min-width: 75rem) {
-    grid-column: 2 / 9;
+  &:has(+ .sidebar) {
+    @media (min-width: 64rem) {
+      grid-column: 1 / 9;
+    }
+  
+    @media (min-width: 75rem) {
+      grid-column: 2 / 9;
+    }
   }
 }
 

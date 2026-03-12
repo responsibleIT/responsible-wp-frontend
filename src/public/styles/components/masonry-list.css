@@ -1,0 +1,60 @@
+masonry-list {
+  --masonry-item-width: 12rem;
+  --masonry-list-column-gap: 1rem;
+  /* when patch is active this is replaced by unitless pixel size, and row-gap forced to 1px */
+  --masonry-list-row-gap: 1rem;
+  /* maximum span seen in current items */
+  --masonry-item-max-span: 1;
+  /* fix unequal column widths when span to multiple columns is defined; without this adjustment there could be infinite ResizeObserver loop in smaller screen sizes due to the column widths varying */
+  --masonry-list-column-min-size: calc(
+    (100% - (var(--masonry-item-max-span) - 1) * var(--masonry-list-column-gap)) /
+      var(--masonry-item-max-span)
+  );
+
+
+@media (max-width: 900px) {
+
+    --masonry-item-width: 2;
+
+}
+
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(
+      min(var(--masonry-list-column-min-size), var(--masonry-item-width)),
+      1fr
+    )
+  );
+  grid-template-rows: masonry;
+  column-gap: var(--masonry-list-column-gap);
+  /* this row gap variable will be set to unitless value in JS, so you can't declare both gaps in a gap shorthand as then column-gap will break */
+  row-gap: var(--masonry-list-row-gap);
+  grid-auto-flow: dense;
+  /* correct last item adding extra size when masonry is patched */
+  margin-block-end: calc(
+    var(--masonry-list-row-gap) * -1px + var(--masonry-list-margin-bottom, 0px)
+  );
+}
+
+masonry-item {
+  align-self: start;
+  grid-column-end: span var(--masonry-item-span, 1);
+}
+
+/* Stylistic Purposes */
+
+masonry-item {
+  display: grid;
+  gap: 1rem;
+  border: 2px solid black;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: white;
+}
+
+img {
+  block-size: auto;
+  max-inline-size: 100%;
+  vertical-align: middle;
+}
