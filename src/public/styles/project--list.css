@@ -3,7 +3,13 @@
   inherits: false;
   initial-value: 0px;
 }
-
+.project--list .project--item {
+  color:var(--clr-button);
+  padding: 1rem;
+  border: var(--border-thick);
+  border-radius: .5em;
+  border-color: var(--clr);
+}
 .project--list .project--item a {
   color: var(--clr);
   font-weight: 600;
@@ -129,7 +135,6 @@
   content: "";
   display: block;
   aspect-ratio: 4/3; /* keep a nice rectangle */
-  border: 1px solid;
   background: var(--bg-hsl);
   background: var(--bg-oklch);
   inset: 0;

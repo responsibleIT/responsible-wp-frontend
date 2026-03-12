@@ -13,6 +13,7 @@ button, input, textarea, select {
 
 button,
 summary {
+  contain: paint;
   padding:.5em .67em;
   cursor: pointer;
   appearance:none;
