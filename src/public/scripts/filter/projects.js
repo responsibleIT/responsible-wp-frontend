@@ -100,13 +100,9 @@ const filterItems = () => {
       }
     }
 
-    // Apply filtering logic:
-    // - ALL exclusive filters must match (AND logic)
-    // - ALL inclusive filters must match (AND logic between fields, OR within field)
     const exclusiveResult =
       exclusiveMatches.length === 0 || exclusiveMatches.every((match) => match);
 
-    // For inclusive fields: each field must match (AND), but within a field it's OR
     const inclusiveFieldNames = Object.keys(inclusiveFieldResults);
     const inclusiveResult =
       inclusiveFieldNames.length === 0 ||
