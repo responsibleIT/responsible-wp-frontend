@@ -10,9 +10,7 @@ permalink: "/{{ pages.sections.projecten.index.slug }}/"
 
 {% block head %}
   <link rel="stylesheet" href="/styles/display--form.css">
-  <link rel="stylesheet" href="/styles/project--list.css">
-  <link rel="stylesheet" href="/styles/components/masonry-list.css">
-  <script src="/scripts/components/masonry-list.js" defer></script>
+  <link rel="stylesheet" href="/styles/components/project--list.css">
   <script src="/scripts/filter/projects.js" type="module"></script>
   <script src="/scripts/display--form.js" defer></script>
 {% endblock %}
@@ -30,59 +28,84 @@ permalink: "/{{ pages.sections.projecten.index.slug }}/"
         <form class="filter-list--form" action="/{{projecten.index.slug}}">
           <details>
             <summary>Filters</summary>
-            <div class="filter-div">
+            {% assign filter-count = pages.taxonomies.size | plus: pages.acfFields.size %}
+            <div class="filter-div" style="--filter-count: {{filter-count}}">
               {% for taxonomy in pages.taxonomies %}
-                <details name="filter">
+                <details class="inner-details" name="filter">
                   <summary>{{ taxonomy[1].label }}</summary>
-                  <div class="filter-div">
+                  <div class="inner-div">
                     {% for term in taxonomy[1].items %}
                       <label>
                         <input
                           type="checkbox"
                           data-filter="{{ taxonomy[0] }}"
                           value="{{ term.slug }}">
-                        {{ term.name }} ({{ term.count }})
+                        {{ term.name }}
+                        <span>[{{ term.count }}]</span>
                       </label>
                     {% endfor %}
+
                   </div>
                 </details>
               {% endfor %}
-            </div>
-          </details>
-          <details>
-            {% assign contributors = acfFields.contributors %}
-            {% assign contributors-sorted = contributors.items | sort %}
-            <summary>{{ contributors.label }}</summary>
-            <div class="filter-div">
-              <label>
-                <input
-                  type="radio"
-                  name="{{contributors.label | downcase}}"
-                  data-filter="{{contributors.label | downcase}}"
-                  value="all"
-                  checked>
-                all
-                <span>[{{ projecten.items.size }}]</span>
-              </label>
-              {% for item in contributors-sorted %}
-                <label>
-                  <input
-                    type="radio"
-                    name="{{contributors.label | downcase}}"
-                    data-filter="{{contributors.label | downcase}}"
-                    value="{{item.name}}">
-                  {{ item.name }}
-                  <span>[{{ item.count }}]</span>
-                </label>
+              <details class="inner-details" name="filter">
+                {% assign contributors = acfFields.contributors %}
+                {% assign contributors-sorted = contributors.items | sort %}
+                <summary>{{ contributors.label }}</summary>
+                <div class="inner-div full">
+                  <label>
+                    <input
+                      type="radio"
+                      name="{{contributors.label | downcase}}"
+                      data-filter="{{contributors.label | downcase}}"
+                      data-excluded
+                      value="all">
+                    all
+                    <span>[{{ projecten.items.size }}]</span>
+                  </label>
+                  {% for item in contributors-sorted %}
+                    <label>
+                      <input
+                        type="radio"
+                        name="{{contributors.label | downcase}}"
+                        data-filter="{{contributors.label | downcase}}"
+                        value="{{item.name}}">
+                      {{ item.name }}
+                      <span>[{{ item.count }}]</span>
+                    </label>
 
-              {% endfor %}
+                  {% endfor %}
+                </div>
+              </details>
+              {% assign education_level = acfFields.education_level %}
+              <details class="inner-details" name="filter">
+                <summary>{{ education_level.label }}</summary>
+                <div class="inner-div">
+                  {% for item in education_level.items %}
+                    <label>
+                      <input
+                        type="checkbox"
+                        name="{{education_level.label | downcase}}"
+                        data-filter="{{education_level.label | downcase}}"
+                        value="{{item.name}}">
+                      {{ item.name }}
+                      <span>[{{ item.count }}]</span>
+                    </label>
+
+                  {% endfor %}
+                </div>
+              </details>
             </div>
           </details>
+          <a
+            class="custom--button"
+            data-clear
+            href="/{{projecten.index.slug}}">Clear filters</a>
+
         </form>
 
         {% render 'partials/components/organisms/Form/ViewSetter.liquid' %}
       </section>
-
       <section class="section--content" style="--delay: .2s">
         {{ projecten.items.size }}
         total
@@ -99,15 +122,15 @@ permalink: "/{{ pages.sections.projecten.index.slug }}/"
         {% endif %}
 
         <template data-project-template="grid">
-          <masonry-item class="project--item" style="--masonry-item-span: 3;">
+          <li class="project--item" style="--masonry-item-span: 3;">
             <a data-permalink data-title></a>
-          </masonry-item>
+          </li>
         </template>
       {% comment %} <template data-project-template="list">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <li>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <a data-permalink data-title></a>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </li>
-                                                                                                                                                                                                                                                                                                                                                                    </template> {% endcomment %}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <a data-permalink data-title></a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </template> {% endcomment %}
       </section>
     </div>
   </main>

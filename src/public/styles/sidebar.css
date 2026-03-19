@@ -1,5 +1,5 @@
 aside.sidebar {
-  grid-column: -1 / 1;
+  grid-column: -2 / 2;
 }
 
 .wp-sidebar + .wp-sidebar {
@@ -22,7 +22,7 @@ aside.sidebar {
 
 @media (min-width: 64rem) {
   aside.sidebar {
-    grid-column: 10 / -1;
+    grid-column: 10 / -2;
   }
 }
 

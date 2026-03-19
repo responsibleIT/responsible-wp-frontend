@@ -1,6 +1,7 @@
 const container = document.querySelector("[data-list]");
 const initialView = container.innerHTML;
 const template = document.querySelector("[data-project-template='grid']");
+const clearButton = document.querySelector("[data-clear]");
 
 let allProjects = [];
 let projectColorMap = new Map();
@@ -10,10 +11,12 @@ const getParams = () => new URLSearchParams(window.location.search);
 const setParam = (key, value, checked) => {
   const params = getParams();
 
-  if (value === "all") {
+  if (key === null || key === "clear") {
+    params.forEach((_, k) => params.delete(k));
+    resetFilters()
+  } else if (value === "all") {
     params.delete(key);
-  }
-  else if (typeof checked === "boolean") {
+  } else if (typeof checked === "boolean") {
     if (checked) {
       params.append(key, value);
     } else {
@@ -21,12 +24,18 @@ const setParam = (key, value, checked) => {
       params.delete(key);
       existing.forEach((v) => params.append(key, v));
     }
-  }
-  else {
-    params.set(key, value);
+  } else {
+    if (!value && value !== 0) {
+      params.delete(key);
+    } else {
+      params.set(key, value);
+    }
   }
 
-  window.history.pushState({}, "", `?${params.toString()}`);
+  const newUrl = params.toString()
+    ? `?${params.toString()}`
+    : window.location.pathname;
+  window.history.pushState({}, "", newUrl);
   filterItems();
 };
 
@@ -55,19 +64,20 @@ const filterItems = () => {
   }
 
   const exclusiveFields = new Set();
-  document.querySelectorAll('[data-filter][data-exclusive]').forEach(input => {
-    exclusiveFields.add(input.dataset.filter);
-  });
+  document
+    .querySelectorAll("[data-filter][data-exclusive]")
+    .forEach((input) => {
+      exclusiveFields.add(input.dataset.filter);
+    });
 
   const filtered = allProjects.filter((item) => {
     const exclusiveMatches = [];
     const inclusiveFieldResults = {};
-    
+
     for (const key of new Set(params.keys())) {
       const values = params.getAll(key);
       const field = item.acf[key];
-      
-      
+
       if (!values.length || (values.length === 1 && !values[0])) {
         continue;
       }
@@ -75,11 +85,12 @@ const filterItems = () => {
       let fieldArray = [];
       if (Array.isArray(field)) {
         fieldArray = field;
-      } else if (field && field !== false && field !== null && field !== '') {
+      } else if (field && field !== false && field !== null && field !== "") {
         fieldArray = [String(field)];
       }
 
-      const matchesThisFilter = fieldArray.length > 0 &&
+      const matchesThisFilter =
+        fieldArray.length > 0 &&
         values.some((filterValue) => fieldArray.includes(filterValue));
 
       if (exclusiveFields.has(key)) {
@@ -92,15 +103,19 @@ const filterItems = () => {
     // Apply filtering logic:
     // - ALL exclusive filters must match (AND logic)
     // - ALL inclusive filters must match (AND logic between fields, OR within field)
-    const exclusiveResult = exclusiveMatches.length === 0 || exclusiveMatches.every(match => match);
-    
+    const exclusiveResult =
+      exclusiveMatches.length === 0 || exclusiveMatches.every((match) => match);
+
     // For inclusive fields: each field must match (AND), but within a field it's OR
     const inclusiveFieldNames = Object.keys(inclusiveFieldResults);
-    const inclusiveResult = inclusiveFieldNames.length === 0 || 
-                          inclusiveFieldNames.every(fieldName => inclusiveFieldResults[fieldName]);
-    
+    const inclusiveResult =
+      inclusiveFieldNames.length === 0 ||
+      inclusiveFieldNames.every(
+        (fieldName) => inclusiveFieldResults[fieldName],
+      );
+
     const finalResult = exclusiveResult && inclusiveResult;
-    
+
     return finalResult;
   });
 
@@ -159,8 +174,7 @@ fetch("/api/projects.json")
 
         if (target.type === "checkbox") {
           setParam(filter, value, target.checked);
-        }
-        else {
+        } else {
           setParam(filter, value);
         }
       });
@@ -168,3 +182,23 @@ fetch("/api/projects.json")
 
     filterItems();
   });
+
+clearButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  setParam("clear");
+  
+});
+
+const resetFilters = () => {
+  document.querySelectorAll('[data-filter][type="radio"]').forEach(radio => {
+    if (radio.value === "" || radio.value === "all") {
+      radio.checked = true;
+    } else {
+      radio.checked = false;
+    }
+  });
+
+  document.querySelectorAll('[data-filter][type="checkbox"]').forEach(checkbox => {
+    checkbox.checked = false;
+  });
+};

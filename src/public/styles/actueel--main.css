@@ -9,9 +9,11 @@ h1{
     grid-column: 1 / -1;
     display: inline;
 }
+
 .section--content{
     grid-column: 1 / -1;
 }
+
 .main--content{
     --header-height: 9.29rem;
     grid-column: 1 / 5;

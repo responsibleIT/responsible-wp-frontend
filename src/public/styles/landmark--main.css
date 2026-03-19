@@ -3,21 +3,22 @@ p:first-of-type {
   line-height: 1.33;
 }
 
-main.grid-container {
-  display: grid;
-  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-  gap: var(--grid-gap);
-}
-
 .main-content {
-  grid-column: 1 / -1;
+  grid-column: 2 / -2;
+  grid-template-columns: repeat(12, 1fr);
+  display: grid;
+  gap: 0 var(--grid-gap);
+
+  > * {
+    grid-column: 1 / -1;
+  }
   &:has(+ .sidebar) {
     @media (min-width: 64rem) {
-      grid-column: 1 / 9;
-    }
-  
-    @media (min-width: 75rem) {
       grid-column: 2 / 9;
+    }
+
+    @media (min-width: 75rem) {
+      grid-column: 3 / 9;
     }
   }
 }

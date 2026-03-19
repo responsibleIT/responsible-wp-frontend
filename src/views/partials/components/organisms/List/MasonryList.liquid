@@ -1,18 +1,17 @@
-<masonry-list
+<ul
   class="project--list"
   data-list="grid"
   style="--masonry-item-width: 10ch; --masonry-item-max-span: 2;">
   {% for project in projecten %}
     {% assign pair = colorPairs[forloop.index0] %}
 
-    <masonry-item
+    <li
       class="project--item pattern-{{ pair.pattern }}"
-      style="--masonry-item-span: 3;"
       data-primary="{{ pair.primary }}"
       data-secondary="{{ pair.secondary }}">
       <a href="./{{ project.slug }}">
         {{ project.title.rendered }}
       </a>
-    </masonry-item>
+    </li>
   {% endfor %}
-</masonry-list>
+</ul>

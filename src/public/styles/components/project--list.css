@@ -28,6 +28,10 @@
 
 .project--list[data-list="list"] {
   display: block;
+  column-count: 2;
+  .project--item {
+    vertical-align: top;
+  }
 }
 
 .project--list[data-list="list"] .project--item {
@@ -36,9 +40,37 @@
   border: none;
   padding: 0;
 }
+.project--list[data-list="grid"] {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  gap: var(--grid-gap);
+
+  --item-width: span 4;
+
+  @media (min-width: 700) {
+    --item-width: span 2;
+  }
+
+  @media (min-width: 768px) {
+    --item-width: span 6;
+  }
+
+  @media (min-width: 1200px) {
+    --item-width: span 4;
+  }
+  @media (min-width: 1600px) {
+    --item-width: span 3;
+  }
+
+  .project--item {
+    list-style: none;
+    grid-column: var(--item-width);
+  }
+}
 
 .project--list[data-list="grid"] .project--item {
   position: relative;
+
   /* pre-defined colors */
   --rgb-orange: var(--orange);
   --rgb-orange-l: var(--orange--l);
