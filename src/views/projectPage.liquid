@@ -7,7 +7,7 @@ pagination:
 permalink: "{{ page.permalink }}"
 ---
 
-{% layout './layouts/default-layout', title: page.title.rendered, current: page.slug | prepend: '/' %}
+{% layout 'layouts/default-layout', title: page.title.rendered, current: page.slug | prepend: '/' %}
 
 {% block %}
   <main class="grid-container" id="main">

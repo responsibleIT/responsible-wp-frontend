@@ -3,15 +3,16 @@
   inherits: false;
   initial-value: 0px;
 }
+
 .project--list .project--item {
-  color:var(--clr-button);
+  color: var(--clr-button);
   padding: 1rem;
   border: var(--border-thick);
-  border-radius: .5em;
+  border-radius: 0.5em;
   border-color: var(--clr);
 }
+
 .project--list .project--item a {
-  color: var(--clr);
   font-weight: 600;
 
   &:hover {
@@ -94,8 +95,10 @@
 
   --tile: 80px;
 
-  &::before {
-    animation: pan 30s linear infinite;
+  &:hover {
+    &::before {
+      filter: grayscale(0);
+    }
   }
 }
 
@@ -138,7 +141,10 @@
   background: var(--bg-hsl);
   background: var(--bg-oklch);
   inset: 0;
+  filter: grayscale(1);
+  transition: filter 0.2s ease-out;
 }
+
 /* MARK: PATTERNS
   https://css-pattern.com/
  */
@@ -154,15 +160,6 @@
     radial-gradient(var(--tile) at 100% 100%, var(--_g)) var(--c-dark);
   background-size: var(--tile) var(--tile);
   background-position: var(--pan) var(--pan);
-}
-
-@keyframes pan {
-  from {
-    --pan: 0px;
-  }
-  to {
-    --pan: var(--tile);
-  }
 }
 
 .project--list[data-list="grid"] .project--item.pattern-2::before {
@@ -214,15 +211,16 @@
 .project--list[data-list="grid"] .project--item a {
   font-size: 1.375rem;
   line-height: 1.45;
+  margin-top: 1rem;
 }
 
 .project--list[data-list="grid"] .project--item a::before {
   content: "";
-  height: 100%;
-  width: 100%;
+  height: calc(100% + 0.4em);
+  width: calc(100% + 0.4em);
   position: absolute;
-  top: 0;
-  left: 0;
+  top: -0.2em;
+  left: -0.2em;
 }
 
 @keyframes hover_aligner {

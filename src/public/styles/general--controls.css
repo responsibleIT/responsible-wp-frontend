@@ -21,7 +21,6 @@ summary {
   border:var(--border-thick);
   border-radius:.5em;
   outline:none;
-
   font-weight:600;
   color:var(--clr-button);
 }
@@ -58,7 +57,7 @@ summary:disabled {
 summary {
   display:inline-flex;
   gap:.33em;
-  align-items:baseline;
+  align-items:center;
   justify-content:center;
 }
 
@@ -81,7 +80,7 @@ summary::after {
 }
 
 .is-open .button--disclosure::after,
-[open] summary::after {
+[open] > summary::after {
   transform:rotate(180deg);
 }
 
