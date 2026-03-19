@@ -1,6 +1,6 @@
 const container = document.querySelector("[data-list]");
 const initialView = container.innerHTML;
-const template = document.querySelector("[data-project-template='grid']");
+const template = document.querySelector("[data-project-template]");
 const clearButton = document.querySelector("[data-clear]");
 
 let allProjects = [];
@@ -40,8 +40,8 @@ const setParam = (key, value, checked) => {
 };
 
 const extractInitialColorData = () => {
-  const initialMasonryItems = container.querySelectorAll("masonry-item");
-  initialMasonryItems.forEach((item) => {
+  const initialItems = container.querySelectorAll(".project--item");
+  initialItems.forEach((item) => {
     const link = item.querySelector("a");
     if (link && link.href) {
       const slug = link.href.split("/").pop();
@@ -122,21 +122,25 @@ const filterItems = () => {
   container.innerHTML = "";
   filtered.forEach((item) => {
     const clone = template.content.cloneNode(true);
-    const masonryItem = clone.querySelector("masonry-item");
+    const projectItem = clone.querySelector(".project--item") || clone.querySelector("li") || clone.firstElementChild;
     const link = clone.querySelector("a");
 
     const colorData = projectColorMap.get(item.slug);
 
-    if (colorData && colorData.pattern) {
-      masonryItem.className = `project--item pattern-${colorData.pattern}`;
-      masonryItem.setAttribute("data-primary", colorData.primary);
-      masonryItem.setAttribute("data-secondary", colorData.secondary);
-    } else {
-      masonryItem.className = "project--item";
+    if (projectItem && colorData && colorData.pattern) {
+      projectItem.className = `project--item pattern-${colorData.pattern}`;
+      projectItem.setAttribute("data-primary", colorData.primary);
+      projectItem.setAttribute("data-secondary", colorData.secondary);
+    } else if (projectItem) {
+      if (!projectItem.className.includes("project--item")) {
+        projectItem.className = (projectItem.className + " project--item").trim();
+      }
     }
 
-    link.href = `./${item.slug}`;
-    link.textContent = item.title.rendered;
+    if (link) {
+      link.href = `./${item.slug}`;
+      link.textContent = item.title.rendered;
+    }
 
     container.appendChild(clone);
   });
